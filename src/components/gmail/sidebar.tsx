@@ -3,16 +3,8 @@
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import { ComposeButton } from "./compose-button"
-
-const NAV_ITEMS = [
-  { icon: "inbox", label: "Inbox", count: 7, href: "/" },
-  { icon: "star", label: "Starred" },
-  { icon: "schedule", label: "Snoozed" },
-  { icon: "send", label: "Sent" },
-  { icon: "draft", label: "Drafts" },
-  { icon: "spam", label: "Spam", count: 2, href: "/spam" },
-  { icon: "label", label: "More" },
-]
+import { useReadStatus } from "@/lib/read-status-context"
+import { inboxSections, spamSections } from "@/content/sections"
 
 function NavIcon({ icon }: { icon: string }) {
   switch (icon) {
@@ -63,6 +55,20 @@ function NavIcon({ icon }: { icon: string }) {
 
 export function Sidebar() {
   const pathname = usePathname()
+  const { unreadSlugs } = useReadStatus()
+
+  const inboxUnread = unreadSlugs(inboxSections.map((s) => s.slug))
+  const spamUnread = unreadSlugs(spamSections.map((s) => s.slug))
+
+  const NAV_ITEMS = [
+    { icon: "inbox", label: "Inbox", count: inboxUnread || undefined, href: "/" },
+    { icon: "star", label: "Starred" },
+    { icon: "schedule", label: "Snoozed" },
+    { icon: "send", label: "Sent" },
+    { icon: "draft", label: "Drafts" },
+    { icon: "spam", label: "Spam", count: spamUnread || undefined, href: "/spam" },
+    { icon: "label", label: "More" },
+  ]
 
   return (
     <aside

@@ -64,7 +64,7 @@ export default function NewsletterPage() {
             }}
           >
             <img
-              src="/me.jpg"
+              src="/me-squared.png"
               alt="César Alberca"
               style={{
                 width: 40,

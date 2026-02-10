@@ -1,8 +1,8 @@
 import type { FC, PropsWithChildren, TableHTMLAttributes, TdHTMLAttributes, ThHTMLAttributes } from 'react'
 
 export const WebTable: FC<PropsWithChildren<TableHTMLAttributes<HTMLTableElement>>> = ({ children, ...props }) => (
-  <div className="my-6 w-full overflow-y-auto">
-    <table className="w-full border-collapse text-left text-sm" {...props}>
+  <div style={{ overflowX: 'auto', margin: '12px 0' }}>
+    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }} {...props}>
       {children}
     </table>
   </div>
@@ -12,7 +12,7 @@ export const WebTableHead: FC<PropsWithChildren<TableHTMLAttributes<HTMLTableSec
   children,
   ...props
 }) => (
-  <thead className="border-b border-border font-bold" {...props}>
+  <thead style={{ borderBottom: '2px solid var(--border-primary)' }} {...props}>
     {children}
   </thead>
 )
@@ -20,17 +20,13 @@ export const WebTableHead: FC<PropsWithChildren<TableHTMLAttributes<HTMLTableSec
 export const WebTableBody: FC<PropsWithChildren<TableHTMLAttributes<HTMLTableSectionElement>>> = ({
   children,
   ...props
-}) => (
-  <tbody className="divide-y divide-border" {...props}>
-    {children}
-  </tbody>
-)
+}) => <tbody {...props}>{children}</tbody>
 
 export const WebTableRow: FC<PropsWithChildren<TableHTMLAttributes<HTMLTableRowElement>>> = ({
   children,
   ...props
 }) => (
-  <tr className="border-b border-border transition-colors hover:bg-muted/50" {...props}>
+  <tr style={{ borderBottom: '1px solid var(--border-light)' }} {...props}>
     {children}
   </tr>
 )
@@ -40,7 +36,12 @@ export const WebTableHeader: FC<PropsWithChildren<ThHTMLAttributes<HTMLTableCell
   ...props
 }) => (
   <th
-    className="px-4 py-3 font-semibold text-foreground [&[align=center]]:text-center [&[align=right]]:text-right"
+    style={{
+      textAlign: 'left',
+      padding: '8px 12px',
+      fontWeight: 600,
+      color: 'var(--text-primary)',
+    }}
     {...props}
   >
     {children}
@@ -48,7 +49,14 @@ export const WebTableHeader: FC<PropsWithChildren<ThHTMLAttributes<HTMLTableCell
 )
 
 export const WebTableCell: FC<PropsWithChildren<TdHTMLAttributes<HTMLTableCellElement>>> = ({ children, ...props }) => (
-  <td className="px-4 py-3 text-foreground [&[align=center]]:text-center [&[align=right]]:text-right" {...props}>
+  <td
+    style={{
+      padding: '8px 12px',
+      borderBottom: '1px solid var(--border-light)',
+      color: 'var(--text-primary)',
+    }}
+    {...props}
+  >
     {children}
   </td>
 )

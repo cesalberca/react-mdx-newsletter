@@ -11,7 +11,7 @@ function hashCode(str: string) {
   return Math.abs(hash)
 }
 
-const CESAR_IMAGE = "/me.jpg"
+const CESAR_IMAGE = "/me-squared.png"
 
 export function Avatar({ name, size = 32, imageUrl }: { name: string; size?: number; imageUrl?: string }) {
   const resolvedImage = imageUrl ?? (name.startsWith("Cesar") ? CESAR_IMAGE : undefined)

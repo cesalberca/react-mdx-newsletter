@@ -13,7 +13,7 @@ function Signature() {
       <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
         {/* Avatar */}
         <img
-          src="/me.jpg"
+          src="/me-squared.png"
           alt="César Alberca Agelán"
           style={{
             width: 64,

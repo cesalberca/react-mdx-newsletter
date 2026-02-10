@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { ThemeProvider } from "@/lib/theme-context"
 import { ComposeProvider } from "@/lib/compose-context"
+import { ReadStatusProvider } from "@/lib/read-status-context"
 import { Sidebar } from "@/components/gmail/sidebar"
 import { SearchBar } from "@/components/gmail/search-bar"
 import { ComposeDialog } from "@/components/gmail/compose-dialog"
@@ -33,6 +34,7 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider>
+          <ReadStatusProvider>
           <ComposeProvider>
             <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
               <SearchBar />
@@ -46,6 +48,7 @@ export default function RootLayout({
             <ComposeDialog />
             <QrCodeWidget />
           </ComposeProvider>
+          </ReadStatusProvider>
         </ThemeProvider>
       </body>
     </html>

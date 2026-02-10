@@ -3,6 +3,7 @@ import { sections } from "@/content/sections"
 import type { Section } from "@/content/sections"
 import { ThreadHeader } from "./thread-header"
 import { ThreadMessages } from "./thread-messages"
+import { MarkAsRead } from "@/components/gmail/mark-as-read"
 
 import Welcome from "@/content/01-welcome.mdx"
 import Architecture from "@/content/02-architecture.mdx"
@@ -53,6 +54,7 @@ export default async function EmailThreadPage({ params }: { params: Promise<{ sl
 
   return (
     <div style={{ backgroundColor: "var(--bg-primary)", minHeight: "100%" }}>
+      <MarkAsRead slug={slug} />
       <ThreadHeader section={section} prevSlug={prevSlug} nextSlug={nextSlug} backHref={backHref} />
       <ThreadMessages section={section}>
         <MDXContent />

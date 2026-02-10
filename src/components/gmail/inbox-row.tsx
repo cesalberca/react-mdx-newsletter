@@ -1,8 +1,14 @@
+"use client"
+
 import Link from "next/link"
 import type { Section } from "@/content/sections"
 import { Avatar } from "./avatar"
+import { useReadStatus } from "@/lib/read-status-context"
 
 export function InboxRow({ section }: { section: Section }) {
+  const { isRead } = useReadStatus()
+  const unread = !isRead(section.slug)
+
   return (
     <Link
       href={`/emails/${section.slug}`}
@@ -13,7 +19,7 @@ export function InboxRow({ section }: { section: Section }) {
         padding: "8px 16px",
         textDecoration: "none",
         color: "inherit",
-        backgroundColor: section.unread
+        backgroundColor: unread
           ? "var(--bg-inbox-row-unread)"
           : "var(--bg-inbox-row-read)",
         borderBottom: "1px solid var(--border-light)",
@@ -38,7 +44,7 @@ export function InboxRow({ section }: { section: Section }) {
         style={{
           width: 180,
           flexShrink: 0,
-          fontWeight: section.unread ? 700 : 400,
+          fontWeight: unread ? 700 : 400,
           fontSize: 14,
           overflow: "hidden",
           textOverflow: "ellipsis",
@@ -50,7 +56,7 @@ export function InboxRow({ section }: { section: Section }) {
       <div style={{ flex: 1, overflow: "hidden", display: "flex", gap: 4, minWidth: 0 }}>
         <span
           style={{
-            fontWeight: section.unread ? 700 : 400,
+            fontWeight: unread ? 700 : 400,
             fontSize: 14,
             flexShrink: 0,
           }}
@@ -73,8 +79,8 @@ export function InboxRow({ section }: { section: Section }) {
         style={{
           flexShrink: 0,
           fontSize: 12,
-          color: section.unread ? "var(--text-primary)" : "var(--text-secondary)",
-          fontWeight: section.unread ? 700 : 400,
+          color: unread ? "var(--text-primary)" : "var(--text-secondary)",
+          fontWeight: unread ? 700 : 400,
         }}
       >
         {section.date}

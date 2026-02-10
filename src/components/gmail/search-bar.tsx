@@ -68,7 +68,7 @@ export function SearchBar() {
       </div>
       <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 8 }}>
         <ThemeToggle />
-        <Avatar name="César Alberca" size={32} imageUrl="/me.jpg" />
+        <Avatar name="César Alberca" size={32} imageUrl="/me-squared.png" />
       </div>
     </header>
   )

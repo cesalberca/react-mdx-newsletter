@@ -1,10 +1,10 @@
-import { Link as WebLink } from '@/core/components/link/link'
-import type { LinkHTMLAttributes, PropsWithChildren } from 'react'
+import type { AnchorHTMLAttributes, PropsWithChildren } from 'react'
 
-export function CustomWebLink(props: LinkHTMLAttributes<HTMLAnchorElement> & PropsWithChildren<{ href: string }>) {
+export function WebLink(props: AnchorHTMLAttributes<HTMLAnchorElement> & PropsWithChildren) {
   return (
-    <WebLink href={props.href} className={props.className ?? ''}>
-      {props.children}
-    </WebLink>
+    <a
+      style={{ color: 'var(--text-link)', textDecoration: 'none' }}
+      {...props}
+    />
   )
 }
