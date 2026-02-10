@@ -1,14 +1,16 @@
 "use client"
 
 import { usePathname } from "next/navigation"
+import Link from "next/link"
 import { ComposeButton } from "./compose-button"
 
 const NAV_ITEMS = [
-  { icon: "inbox", label: "Inbox", count: 7 },
+  { icon: "inbox", label: "Inbox", count: 7, href: "/" },
   { icon: "star", label: "Starred" },
   { icon: "schedule", label: "Snoozed" },
   { icon: "send", label: "Sent" },
   { icon: "draft", label: "Drafts" },
+  { icon: "spam", label: "Spam", count: 2, href: "/spam" },
   { icon: "label", label: "More" },
 ]
 
@@ -44,6 +46,12 @@ function NavIcon({ icon }: { icon: string }) {
           <path d="M21.99 8c0-.72-.37-1.35-.94-1.7L12 1 2.95 6.3C2.38 6.65 2 7.28 2 8v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2l-.01-10zM12 13L3.74 7.84 12 3l8.26 4.84L12 13z" />
         </svg>
       )
+    case "spam":
+      return (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
+        </svg>
+      )
     default:
       return (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -55,7 +63,6 @@ function NavIcon({ icon }: { icon: string }) {
 
 export function Sidebar() {
   const pathname = usePathname()
-  const isInbox = pathname === "/"
 
   return (
     <aside
@@ -69,30 +76,43 @@ export function Sidebar() {
       <ComposeButton />
       <nav>
         {NAV_ITEMS.map((item) => {
-          const active = item.label === "Inbox" && isInbox
-          return (
-            <div
-              key={item.label}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                padding: "0 12px",
-                height: 32,
-                borderRadius: 16,
-                fontSize: 14,
-                fontWeight: active ? 700 : 400,
-                color: active ? "var(--accent)" : "var(--text-primary)",
-                backgroundColor: active ? "var(--bg-active)" : "transparent",
-                cursor: "default",
-                marginBottom: 2,
-              }}
-            >
+          const active =
+            (item.label === "Inbox" && pathname === "/") ||
+            (item.href !== undefined && item.href !== "/" && pathname === item.href)
+          const style = {
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            padding: "0 12px",
+            height: 32,
+            borderRadius: 16,
+            fontSize: 14,
+            fontWeight: active ? 700 : 400,
+            color: active ? "var(--accent)" : "var(--text-primary)",
+            backgroundColor: active ? "var(--bg-active)" : "transparent",
+            cursor: item.href ? "pointer" : "default",
+            marginBottom: 2,
+            textDecoration: "none",
+          }
+          const content = (
+            <>
               <NavIcon icon={item.icon} />
               <span style={{ flex: 1 }}>{item.label}</span>
-              {item.count && (
+              {item.count != null && (
                 <span style={{ fontSize: 12, fontWeight: 700 }}>{item.count}</span>
               )}
+            </>
+          )
+          if (item.href) {
+            return (
+              <Link key={item.label} href={item.href} style={style}>
+                {content}
+              </Link>
+            )
+          }
+          return (
+            <div key={item.label} style={style}>
+              {content}
             </div>
           )
         })}

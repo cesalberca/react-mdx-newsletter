@@ -6,9 +6,11 @@ import { useRouter } from "next/navigation"
 export function useKeyboardNavigation({
   prevSlug,
   nextSlug,
+  backHref = "/",
 }: {
   prevSlug: string | null
   nextSlug: string | null
+  backHref?: string
 }) {
   const router = useRouter()
 
@@ -24,12 +26,12 @@ export function useKeyboardNavigation({
           if (nextSlug) router.push(`/emails/${nextSlug}`)
           break
         case "Escape":
-          router.push("/")
+          router.push(backHref)
           break
       }
     }
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [prevSlug, nextSlug, router])
+  }, [prevSlug, nextSlug, backHref, router])
 }

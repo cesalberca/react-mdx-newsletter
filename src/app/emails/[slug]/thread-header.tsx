@@ -8,14 +8,16 @@ export function ThreadHeader({
   section,
   prevSlug,
   nextSlug,
+  backHref = "/",
 }: {
   section: Section
   prevSlug: string | null
   nextSlug: string | null
+  backHref?: string
 }) {
   return (
     <>
-      <KeyboardNav prevSlug={prevSlug} nextSlug={nextSlug} />
+      <KeyboardNav prevSlug={prevSlug} nextSlug={nextSlug} backHref={backHref} />
       <div
         style={{
           display: "flex",
@@ -26,7 +28,7 @@ export function ThreadHeader({
         }}
       >
         <Link
-          href="/"
+          href={backHref}
           style={{
             display: "flex",
             alignItems: "center",

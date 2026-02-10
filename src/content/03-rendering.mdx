@@ -10,13 +10,11 @@ Your rendering diagnostics are complete. We found several compatibility issues a
 
 Unlike web browsers, email clients are **stuck in 2003**:
 
-| Client | Engine | CSS Support |
-|--------|--------|------------|
-| Gmail | Custom | Partial — strips `<style>`, no media queries in some contexts |
-| Outlook | Word | Yes, **Microsoft Word** renders your HTML |
-| Apple Mail | WebKit | Actually decent |
-| Yahoo | Custom | Surprisingly okay |
-| Outlook.com | Custom | Different from desktop Outlook |
+- **Gmail** (Custom engine) — Partial CSS support, strips `<style>` tags, no media queries in some contexts
+- **Outlook** (Word engine) — Yes, **Microsoft Word** renders your HTML
+- **Apple Mail** (WebKit) — Actually decent
+- **Yahoo** (Custom) — Surprisingly okay
+- **Outlook.com** (Custom) — Different from desktop Outlook
 
 > Outlook uses Microsoft Word's rendering engine. Let that sink in.
 

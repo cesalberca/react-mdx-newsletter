@@ -1,4 +1,4 @@
-import { sections } from "@/content/sections"
+import { inboxSections } from "@/content/sections"
 import { InboxRow } from "@/components/gmail/inbox-row"
 
 export default function InboxPage() {
@@ -22,7 +22,7 @@ export default function InboxPage() {
           <TabButton label="Social" />
         </div>
       </div>
-      {sections.map((section) => (
+      {inboxSections.map((section) => (
         <InboxRow key={section.slug} section={section} />
       ))}
     </div>

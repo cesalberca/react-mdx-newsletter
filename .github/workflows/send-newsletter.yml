@@ -1,0 +1,89 @@
+name: Send Newsletter
+
+on:
+  schedule:
+    - cron: '0 7 * * *' # Every day at 07:00 UTC
+  workflow_dispatch: # Allow manual trigger for testing
+
+
+env:
+  # Setting an environment variable with the value of a configuration variable
+  NEXT_PRODUCTION_URL: ${{ vars.NEXT_PRODUCTION_URL }}
+
+
+jobs:
+  send-newsletter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Find today's newsletter
+        id: find-newsletter
+        run: |
+          # Get today's date in YYYY-MM-DD format
+          TODAY=$(date +%Y-%m-%d)
+          echo "Today's date: $TODAY"
+
+          # Look for newsletter file with today's date prefix
+          NEWSLETTER_FILE=$(find src/emails/newsletter -name "${TODAY}_*.tsx" | head -1)
+
+          if [ -z "$NEWSLETTER_FILE" ]; then
+            echo "No newsletter found for today ($TODAY)"
+            echo "newsletter_found=false" >> $GITHUB_OUTPUT
+          else
+            # Extract slug from filename (remove path and .tsx extension)
+            NEWSLETTER_SLUG=$(basename "$NEWSLETTER_FILE" .tsx)
+            echo "Found newsletter: $NEWSLETTER_FILE"
+            echo "Newsletter slug: $NEWSLETTER_SLUG"
+            echo "newsletter_found=true" >> $GITHUB_OUTPUT
+            echo "newsletter_slug=$NEWSLETTER_SLUG" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Newsletter Broadcast
+        id: create-broadcast
+        if: steps.find-newsletter.outputs.newsletter_found == 'true'
+        run: |
+          echo "Creating broadcast for newsletter: ${{ steps.find-newsletter.outputs.newsletter_slug }}"
+
+          # Create the broadcast via Next.js API
+          URL=${{ vars.NEXT_PRODUCTION_URL }}/api/newsletter/broadcast
+          echo $URL
+          BROADCAST_RESPONSE=$(curl -s -L --max-redirs 5 -w "HTTPSTATUS:%{http_code}" -X POST $URL \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"newsletterSlug\": \"${{ steps.find-newsletter.outputs.newsletter_slug }}\",
+              \"token\": \"${{ secrets.NEWSLETTER_BROADCAST_TOKEN }}\"
+            }")
+
+          # Extract HTTP status and response body
+          HTTP_BODY=$(echo $BROADCAST_RESPONSE | sed -E 's/HTTPSTATUS\:[0-9]{3}$//')
+          HTTP_STATUS=$(echo $BROADCAST_RESPONSE | tr -d '\n' | sed -E 's/.*HTTPSTATUS:([0-9]{3})$/\1/')
+
+          echo "HTTP Status: $HTTP_STATUS"
+          echo "Response Body: $HTTP_BODY"
+
+          # Check if the request was successful
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "API request failed with status $HTTP_STATUS"
+            echo "Response: $HTTP_BODY"
+            exit 1
+          fi
+
+          # Extract broadcast ID if present (legacy path). If not present, consider success by HTTP 200 and message.
+          BROADCAST_ID=$(echo $HTTP_BODY | jq -r '.broadcastId // empty')
+          MESSAGE=$(echo $HTTP_BODY | jq -r '.message // empty')
+
+          if [ -n "$BROADCAST_ID" ] && [ "$BROADCAST_ID" != "null" ]; then
+            echo "Broadcast created with ID: $BROADCAST_ID"
+            echo "broadcast_id=$BROADCAST_ID" >> $GITHUB_OUTPUT
+          else
+            echo "Newsletter API responded with message: ${MESSAGE:-No message field}"
+            echo "Full response: $HTTP_BODY"
+          fi
+
+      - name: No newsletter found
+        if: steps.find-newsletter.outputs.newsletter_found == 'false'
+        run: |
+          echo "No newsletter scheduled for today. Skipping."

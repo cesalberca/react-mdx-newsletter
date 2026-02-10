@@ -7,6 +7,7 @@ export interface Section {
   date: string
   unread: boolean
   starred: boolean
+  folder: "inbox" | "spam"
 }
 
 export const sections: Section[] = [
@@ -19,6 +20,7 @@ export const sections: Section[] = [
     date: "Oct 15",
     unread: true,
     starred: true,
+    folder: "inbox",
   },
   {
     slug: "architecture",
@@ -29,6 +31,7 @@ export const sections: Section[] = [
     date: "Oct 15",
     unread: true,
     starred: false,
+    folder: "inbox",
   },
   {
     slug: "rendering",
@@ -39,6 +42,7 @@ export const sections: Section[] = [
     date: "Oct 15",
     unread: true,
     starred: false,
+    folder: "inbox",
   },
   {
     slug: "layout-traps",
@@ -49,6 +53,7 @@ export const sections: Section[] = [
     date: "Oct 15",
     unread: true,
     starred: false,
+    folder: "inbox",
   },
   {
     slug: "cicd",
@@ -59,6 +64,7 @@ export const sections: Section[] = [
     date: "Oct 15",
     unread: false,
     starred: false,
+    folder: "inbox",
   },
   {
     slug: "gotchas",
@@ -69,6 +75,7 @@ export const sections: Section[] = [
     date: "Oct 15",
     unread: true,
     starred: true,
+    folder: "inbox",
   },
   {
     slug: "closing",
@@ -79,5 +86,31 @@ export const sections: Section[] = [
     date: "Oct 15",
     unread: false,
     starred: false,
+    folder: "inbox",
+  },
+  {
+    slug: "newsletter-promo",
+    sender: "Cesar's Newsletter Bot",
+    senderEmail: "noreply@totally-not-spam.cesalberca.com",
+    subject: "🔥 YOU WON'T BELIEVE These Frontend Architecture Secrets — Subscribe NOW!!!",
+    preview: "CONGRATULATIONS! You've been selected to receive EXCLUSIVE frontend tips...",
+    date: "Oct 15",
+    unread: true,
+    starred: false,
+    folder: "spam",
+  },
+  {
+    slug: "services-promo",
+    sender: "Cesar's Consulting Agency",
+    senderEmail: "deals@definitely-legit-consulting.cesalberca.com",
+    subject: "⚡ LIMITED TIME: 10x Your Frontend Architecture — ACT FAST Before Offer Expires!!!",
+    preview: "Dear Lucky Developer, for a LIMITED TIME ONLY, world-renowned consultant...",
+    date: "Oct 15",
+    unread: true,
+    starred: false,
+    folder: "spam",
   },
 ]
+
+export const inboxSections = sections.filter((s) => s.folder === "inbox")
+export const spamSections = sections.filter((s) => s.folder === "spam")
