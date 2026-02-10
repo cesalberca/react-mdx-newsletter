@@ -7,10 +7,12 @@ export function useKeyboardNavigation({
   prevSlug,
   nextSlug,
   backHref = "/",
+  basePath = "/emails",
 }: {
   prevSlug: string | null
   nextSlug: string | null
   backHref?: string
+  basePath?: string
 }) {
   const router = useRouter()
 
@@ -20,10 +22,10 @@ export function useKeyboardNavigation({
 
       switch (e.key) {
         case "ArrowLeft":
-          if (prevSlug) router.push(`/emails/${prevSlug}`)
+          if (prevSlug) router.push(`${basePath}/${prevSlug}`)
           break
         case "ArrowRight":
-          if (nextSlug) router.push(`/emails/${nextSlug}`)
+          if (nextSlug) router.push(`${basePath}/${nextSlug}`)
           break
         case "Escape":
           router.push(backHref)
@@ -33,5 +35,5 @@ export function useKeyboardNavigation({
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [prevSlug, nextSlug, backHref, router])
+  }, [prevSlug, nextSlug, backHref, basePath, router])
 }

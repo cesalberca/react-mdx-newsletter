@@ -33,7 +33,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
     await resend.emails.send({
       from: env.RESEND_EMAIL_FROM,
       to: email,
-      subject: "Confirm the Frontend Architecture Newsletter Subscription",
+      subject: "Confirm your Build Your Own Newsletter subscription",
       replyTo: env.RESEND_EMAIL_FROM,
       headers: {
         "X-Entity-Ref-ID": uuid(),

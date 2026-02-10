@@ -1,9 +1,13 @@
 "use client"
 
+import { useCompose } from "@/lib/compose-context"
+
 export function ComposeButton() {
+  const { setComposeOpen } = useCompose()
+
   return (
     <button
-      onClick={() => alert("Composing newsletters is not yet supported in this demo.")}
+      onClick={() => setComposeOpen(true)}
       style={{
         display: "flex",
         alignItems: "center",

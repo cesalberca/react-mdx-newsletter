@@ -19,6 +19,7 @@
     "@types/mdx": "^2.0.13",
     "jsonwebtoken": "^9.0.3",
     "next": "16.1.6",
+    "qrcode.react": "^4.2.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-email": "^5.2.8",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
+    "@react-email/preview-server": "^5.2.8",
     "@tailwindcss/postcss": "^4",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20",

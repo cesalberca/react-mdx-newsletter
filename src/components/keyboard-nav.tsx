@@ -6,11 +6,13 @@ export function KeyboardNav({
   prevSlug,
   nextSlug,
   backHref = "/",
+  basePath = "/emails",
 }: {
   prevSlug: string | null
   nextSlug: string | null
   backHref?: string
+  basePath?: string
 }) {
-  useKeyboardNavigation({ prevSlug, nextSlug, backHref })
+  useKeyboardNavigation({ prevSlug, nextSlug, backHref, basePath })
   return null
 }

@@ -1,8 +1,11 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { ThemeProvider } from "@/lib/theme-context"
+import { ComposeProvider } from "@/lib/compose-context"
 import { Sidebar } from "@/components/gmail/sidebar"
 import { SearchBar } from "@/components/gmail/search-bar"
+import { ComposeDialog } from "@/components/gmail/compose-dialog"
+import { QrCodeWidget } from "@/components/gmail/qr-code-widget"
 
 export const metadata: Metadata = {
   title: "FWD: Urgent Opportunity to Claim Your React + MDX Newsletter Inheritance",
@@ -30,15 +33,19 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider>
-          <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
-            <SearchBar />
-            <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
-              <Sidebar />
-              <main style={{ flex: 1, overflow: "auto" }}>
-                {children}
-              </main>
+          <ComposeProvider>
+            <div style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+              <SearchBar />
+              <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
+                <Sidebar />
+                <main style={{ flex: 1, overflow: "auto" }}>
+                  {children}
+                </main>
+              </div>
             </div>
-          </div>
+            <ComposeDialog />
+            <QrCodeWidget />
+          </ComposeProvider>
         </ThemeProvider>
       </body>
     </html>

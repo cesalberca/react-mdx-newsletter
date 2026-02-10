@@ -117,6 +117,56 @@ export function Sidebar() {
           )
         })}
       </nav>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "16px 12px 4px",
+          fontSize: 13,
+          fontWeight: 500,
+          color: "var(--text-secondary)",
+        }}
+      >
+        <span>Labels</span>
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          style={{ cursor: "default" }}
+        >
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+        </svg>
+      </div>
+      <nav>
+        {(() => {
+          const newsletterActive = pathname.startsWith("/newsletters")
+          const style = {
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            padding: "0 12px",
+            height: 32,
+            borderRadius: 16,
+            fontSize: 14,
+            fontWeight: newsletterActive ? 700 : 400,
+            color: newsletterActive ? "var(--accent)" : "var(--text-primary)",
+            backgroundColor: newsletterActive ? "var(--bg-active)" : "transparent",
+            cursor: "pointer",
+            marginBottom: 2,
+            textDecoration: "none",
+          }
+          return (
+            <Link href="/newsletters" style={style}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20 6H12l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" />
+              </svg>
+              <span style={{ flex: 1 }}>Newsletter</span>
+            </Link>
+          )
+        })()}
+      </nav>
     </aside>
   )
 }

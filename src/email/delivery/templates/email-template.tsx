@@ -55,7 +55,7 @@ export const EmailTemplate: FC<PropsWithChildren<EmailTemplateProps>> = ({
                 style={{ width: 45, height: "auto", margin: "0 auto" }}
               />
               <Text style={{ color: "#0a0a0a", fontSize: 14, margin: 0, fontWeight: 500 }}>
-                Cesar Alberca
+                César Alberca
               </Text>
               <Text style={{ color: "#737373", fontSize: 12, marginTop: 8, margin: 0, fontStyle: "italic" }}>
                 Helping You Build Scalable, AI-Ready Frontend Architecture
@@ -77,7 +77,7 @@ export const EmailTemplate: FC<PropsWithChildren<EmailTemplateProps>> = ({
                 src={emailImageBaseUrl("signature.png")}
                 width="501"
                 height="161"
-                alt="Handwritten Cesar Alberca"
+                alt="Handwritten César Alberca"
                 style={{ margin: "0 auto", maxWidth: "100%", height: "auto", width: 400 }}
               />
               <Text style={{ color: "#737373", fontSize: 12, textAlign: "center", margin: 0 }}>

@@ -86,7 +86,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<ConfirmRe
       await resend.emails.send({
         from: env.RESEND_EMAIL_FROM,
         to: email,
-        subject: "Welcome to the Frontend Architecture Newsletter!",
+        subject: "Welcome to Build Your Own Newsletter!",
         react: NewsletterWelcomeEmail({}) as ReactElement,
       })
     } catch (err) {

@@ -11,7 +11,26 @@ function hashCode(str: string) {
   return Math.abs(hash)
 }
 
-export function Avatar({ name, size = 32 }: { name: string; size?: number }) {
+const CESAR_IMAGE = "/me.jpg"
+
+export function Avatar({ name, size = 32, imageUrl }: { name: string; size?: number; imageUrl?: string }) {
+  const resolvedImage = imageUrl ?? (name.startsWith("Cesar") ? CESAR_IMAGE : undefined)
+  if (resolvedImage) {
+    return (
+      <img
+        src={resolvedImage}
+        alt={name}
+        style={{
+          width: size,
+          height: size,
+          borderRadius: "50%",
+          objectFit: "cover",
+          flexShrink: 0,
+        }}
+      />
+    )
+  }
+
   const initials = name
     .split(" ")
     .map((w) => w[0])

@@ -63,25 +63,19 @@ export default function NewsletterPage() {
               gap: 12,
             }}
           >
-            <div
+            <img
+              src="/me.jpg"
+              alt="César Alberca"
               style={{
                 width: 40,
                 height: 40,
                 borderRadius: "50%",
-                backgroundColor: "#1a73e8",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#fff",
-                fontSize: 16,
-                fontWeight: 500,
+                objectFit: "cover" as const,
                 flexShrink: 0,
               }}
-            >
-              CA
-            </div>
+            />
             <div>
-              <div style={{ fontWeight: 600, fontSize: 14 }}>Cesar Alberca</div>
+              <div style={{ fontWeight: 600, fontSize: 14 }}>César Alberca</div>
               <div style={{ color: "var(--text-tertiary)", fontSize: 12 }}>
                 &lt;newsletter@cesalberca.com&gt;
               </div>
@@ -91,16 +85,17 @@ export default function NewsletterPage() {
           {/* Email body */}
           <div style={{ padding: 24 }}>
             <h1 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 16px 0" }}>
-              Subscribe to the Frontend Architecture Newsletter
+              Build Your Own Newsletter with React &amp; MDX
             </h1>
 
             <p style={{ color: "var(--text-secondary)", lineHeight: 1.7, margin: "0 0 16px 0" }}>
-              Get biweekly insights on building scalable, maintainable frontend applications.
-              Topics include design patterns, architecture decisions, React best practices, and more.
+              A step-by-step series on building a complete newsletter system from scratch.
+              Learn how to write content with MDX, design email templates with React Email,
+              deliver emails with Resend, and wrap it all in a polished UI.
             </p>
 
             <p style={{ color: "var(--text-secondary)", lineHeight: 1.7, margin: "0 0 24px 0" }}>
-              Join developers who are leveling up their frontend architecture skills.
+              Follow along and ship your own newsletter by the end of the series.
               Enter your email below to subscribe:
             </p>
 

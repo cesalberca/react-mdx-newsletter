@@ -79,7 +79,7 @@ export const sections: Section[] = [
   },
   {
     slug: "closing",
-    sender: "Cesar Alberca",
+    sender: "César Alberca",
     senderEmail: "cesar@cesaralberca.com",
     subject: "My Newsletter + Thank You",
     preview: "Thanks for attending! Here's where to find my newsletter and resources...",

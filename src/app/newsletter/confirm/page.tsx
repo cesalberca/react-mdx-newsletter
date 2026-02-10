@@ -127,7 +127,7 @@ function ConfirmContent() {
                 Subscription Confirmed!
               </h1>
               <p style={{ color: "var(--text-secondary)", lineHeight: 1.6 }}>
-                Welcome to the Frontend Architecture Newsletter. Check your inbox for a welcome email.
+                Welcome aboard! You&apos;ll receive each issue of the Build Your Own Newsletter series as it goes out.
               </p>
               <Link
                 href="/"

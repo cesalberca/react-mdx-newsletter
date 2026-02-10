@@ -16,7 +16,7 @@ export const NewsletterTemplate: FC<PropsWithChildren<NewsletterEmailProps>> = (
   browserUrl,
 }) => {
   const baseUrl = process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000"
-  const urlToShare = `${baseUrl}/newsletter/${browserUrl}`
+  const urlToShare = `${baseUrl}/newsletters/${browserUrl}`
   const encodedTitle = encodeURIComponent(title)
   const encodedUrl = encodeURIComponent(urlToShare)
 
