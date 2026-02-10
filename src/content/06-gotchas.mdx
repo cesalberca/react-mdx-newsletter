@@ -1,0 +1,131 @@
+<Slide sender="Bankruptcy Prevention Bureau" timestamp="Oct 15, 2024, 2:00 PM">
+
+# URGENT: Critical Issues Found in Your Email System
+
+Dear Newsletter Operator,
+
+Our routine audit has revealed **critical issues** that may cause total system failure. Please address these immediately to avoid newsletter bankruptcy.
+
+## Gotcha #1: The Spam Folder Trap
+
+Your emails will land in spam if you don't:
+
+1. **Set up SPF** — tells receiving servers your domain is legit
+2. **Configure DKIM** — cryptographic signature proving you sent it
+3. **Add DMARC** — policy for handling auth failures
+4. **Warm up your domain** — don't send 10,000 emails on day one
+
+```
+// DNS records you need:
+TXT  _dmarc.yourdomain.com  "v=DMARC1; p=quarantine"
+TXT  yourdomain.com          "v=spf1 include:resend.com ~all"
+CNAME resend._domainkey      // Provided by Resend
+```
+
+</Slide>
+
+<Slide sender="Bankruptcy Prevention Bureau" timestamp="Oct 15, 2024, 2:05 PM">
+
+## Gotcha #2: The HTML Size Limit
+
+Gmail **clips emails** larger than **102KB** of HTML.
+
+This means:
+- Your beautifully rendered newsletter might get cut off
+- Users see "View entire message" link instead of your content
+
+### How to stay under 102KB:
+- Minimize inline styles (reuse patterns)
+- Compress images and use hosted URLs (don't base64 encode)
+- Keep content focused — nobody reads 10,000 word emails
+- Remove unnecessary whitespace in production builds
+
+```tsx
+// React Email's render function can minify
+import { render } from '@react-email/render'
+
+const html = await render(<YourEmail />, {
+  plainText: false, // set true for text version
+})
+```
+
+</Slide>
+
+<Slide sender="Bankruptcy Prevention Bureau" timestamp="Oct 15, 2024, 2:10 PM">
+
+## Gotcha #3: Unsubscribe Compliance
+
+**This is legally required.** CAN-SPAM, GDPR, and other regulations mandate:
+
+- Every email MUST have an **unsubscribe link**
+- Unsubscribe MUST work within **10 business days**
+- You MUST include your **physical mailing address**
+
+```tsx
+<Section style={{ textAlign: 'center', padding: '20px' }}>
+  <Text style={{ color: '#666', fontSize: '12px' }}>
+    You're receiving this because you subscribed at
+    yourdomain.com
+  </Text>
+  <Link
+    href="https://yourdomain.com/unsubscribe?token={token}"
+    style={{ color: '#999', fontSize: '12px' }}
+  >
+    Unsubscribe
+  </Link>
+  <Text style={{ color: '#999', fontSize: '11px' }}>
+    123 Newsletter Street, Madrid, Spain
+  </Text>
+</Section>
+```
+
+### List-Unsubscribe Header
+
+Modern email clients support one-click unsubscribe via headers:
+
+```typescript
+await resend.emails.send({
+  headers: {
+    'List-Unsubscribe': '<https://yourdomain.com/unsubscribe>',
+    'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+  },
+  // ...rest of email config
+})
+```
+
+</Slide>
+
+<Slide sender="Bankruptcy Prevention Bureau" timestamp="Oct 15, 2024, 2:15 PM">
+
+## Gotcha #4: Testing Is Not Optional
+
+Your testing checklist:
+
+- [ ] Preview in React Email dev server
+- [ ] Send test email to personal accounts (Gmail, Outlook, Yahoo)
+- [ ] Check dark mode rendering
+- [ ] Verify all links work
+- [ ] Test unsubscribe flow
+- [ ] Check on mobile devices
+- [ ] Validate HTML size is under 102KB
+- [ ] Confirm SPF/DKIM/DMARC are configured
+
+### The "Works on My Machine" Problem
+
+```
+Your browser:     ✅ Beautiful
+Gmail:            ⚠️ Mostly fine
+Apple Mail:       ✅ Great
+Outlook Desktop:  💀 Tables broken
+Outlook.com:      🤷 Different broken
+Yahoo:            ⚠️ Unexpected spacing
+Dark mode:        🌑 Logo disappeared
+Mobile Gmail:     📱 Font too small
+```
+
+This concludes our audit. Please take immediate action.
+
+**Bankruptcy Prevention Bureau**
+*Saving newsletters since 2024*
+
+</Slide>

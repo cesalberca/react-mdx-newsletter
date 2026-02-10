@@ -1,0 +1,122 @@
+<Slide sender="CSS Crimes Division" timestamp="Oct 15, 2024, 12:00 PM">
+
+# ALERT: Layout Violations Detected in Your Email
+
+**Case #: CSS-2024-0042**
+**Severity: Critical**
+
+Our automated scan has detected multiple layout violations in your email templates. Below is a detailed incident report.
+
+## Violation #1: Using CSS Grid in Email
+
+```css
+/* YOU COMMITTED THIS CRIME */
+.email-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+```
+
+**Verdict:** Guilty. Outlook will render this as a single column of sadness.
+
+**Sentence:** Use HTML tables. Yes, it's 2024. No, you can't use grid.
+
+</Slide>
+
+<Slide sender="CSS Crimes Division" timestamp="Oct 15, 2024, 12:05 PM">
+
+## Violation #2: The `<div>` Disaster
+
+Email clients handle `<div>` inconsistently. Some respect dimensions, others don't.
+
+**The fix:** Use `<table>` with `<tr>` and `<td>` for layout.
+
+```tsx
+// WRONG - will break in Outlook
+<div style={{ display: 'flex', gap: '16px' }}>
+  <div style={{ flex: 1 }}>Column 1</div>
+  <div style={{ flex: 1 }}>Column 2</div>
+</div>
+
+// RIGHT - works everywhere
+<Section>
+  <Row>
+    <Column style={{ width: '50%' }}>Column 1</Column>
+    <Column style={{ width: '50%' }}>Column 2</Column>
+  </Row>
+</Section>
+```
+
+React Email's `<Row>` and `<Column>` components handle this for you.
+
+</Slide>
+
+<Slide sender="CSS Crimes Division" timestamp="Oct 15, 2024, 12:10 PM">
+
+## Violation #3: Image Crimes
+
+Common image mistakes in email:
+
+1. **No `width` and `height` attributes** — images will be displayed at full size
+2. **Relative URLs** — email clients can't resolve them
+3. **SVG** — not supported in most email clients
+4. **Background images** — Outlook ignores CSS `background-image`
+
+```tsx
+// BAD
+<img src="/logo.png" />
+
+// GOOD
+<Img
+  src="https://yourdomain.com/logo.png"
+  width={200}
+  height={50}
+  alt="Company Logo"
+/>
+```
+
+### Dark Mode Gotcha
+
+Some email clients invert colors in dark mode. Your white logo on a transparent background? Now it's invisible on a white-turned-dark background.
+
+**Fix:** Always add a background color or padding behind logos.
+
+</Slide>
+
+<Slide sender="CSS Crimes Division" timestamp="Oct 15, 2024, 12:15 PM">
+
+## Violation #4: Font Crimes
+
+Email font support is limited:
+
+**Safe fonts:**
+- Arial, Helvetica
+- Georgia, Times New Roman
+- Courier New
+- Verdana, Trebuchet MS
+
+**Unsafe:**
+- Google Fonts (partially supported, fallback required)
+- System fonts (`-apple-system`, etc.)
+- Any `@font-face` import
+
+```tsx
+// React Email approach - always provide fallback
+<Text style={{
+  fontFamily: "'Georgia', 'Times New Roman', serif",
+  fontSize: '16px',
+  lineHeight: '1.5',
+}}>
+  Your newsletter content here.
+</Text>
+```
+
+> The CSS Crimes Division recommends you stay within the law. Web fonts in email are like jaywalking — sometimes you get away with it, sometimes a bus (Outlook) hits you.
+
+Case closed.
+
+**CSS Crimes Division**
+*Protecting inboxes since 1996*
+
+</Slide>

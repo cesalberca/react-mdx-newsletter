@@ -1,0 +1,139 @@
+<Slide sender="GitHub Actions Bot" timestamp="Oct 15, 2024, 1:00 PM">
+
+# Your Workflow Run Has Completed Successfully
+
+**Repository:** your-org/newsletter
+**Branch:** main
+**Workflow:** newsletter-pipeline
+**Status:** All jobs passed
+
+## The Newsletter CI/CD Pipeline
+
+Automate everything. Never manually send a newsletter again.
+
+```
+┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
+│  Push to  │───▶│  Build   │───▶│ Preview  │───▶│  Send    │
+│  main     │    │  & Test  │    │  Deploy  │    │  Email   │
+└──────────┘    └──────────┘    └──────────┘    └──────────┘
+```
+
+</Slide>
+
+<Slide sender="GitHub Actions Bot" timestamp="Oct 15, 2024, 1:05 PM">
+
+## The GitHub Action
+
+```yaml
+name: Send Newsletter
+on:
+  push:
+    branches: [main]
+    paths: ['emails/issues/**.mdx']
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - name: Build email HTML
+        run: npm run build:emails
+
+      - name: Preview URL
+        run: npm run deploy:preview
+        env:
+          VERCEL_TOKEN: $\{{ secrets.VERCEL_TOKEN }}
+
+      - name: Send via Resend
+        run: npm run send
+        env:
+          RESEND_API_KEY: $\{{ secrets.RESEND_API_KEY }}
+```
+
+</Slide>
+
+<Slide sender="GitHub Actions Bot" timestamp="Oct 15, 2024, 1:10 PM">
+
+## The Send Script
+
+```typescript
+// scripts/send.ts
+import { Resend } from 'resend'
+import { render } from '@react-email/render'
+import { getLatestIssue } from '../lib/issues'
+import { getSubscribers } from '../lib/subscribers'
+import { WeeklyEmail } from '../emails/templates/weekly'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
+
+async function main() {
+  const issue = await getLatestIssue()
+  const subscribers = await getSubscribers()
+
+  const html = await render(
+    <WeeklyEmail issue={issue} />
+  )
+
+  // Resend supports batch sending
+  const { data, error } = await resend.batch.send(
+    subscribers.map(sub => ({
+      from: 'Newsletter <news@yourdomain.com>',
+      to: sub.email,
+      subject: issue.subject,
+      html,
+    }))
+  )
+
+  console.log(`Sent to ${data?.length} subscribers`)
+  if (error) console.error('Errors:', error)
+}
+
+main()
+```
+
+</Slide>
+
+<Slide sender="GitHub Actions Bot" timestamp="Oct 15, 2024, 1:15 PM">
+
+## Resend API Basics
+
+Setting up Resend is straightforward:
+
+```typescript
+import { Resend } from 'resend'
+
+const resend = new Resend('re_123456789')
+
+// Send a single email
+await resend.emails.send({
+  from: 'you@yourdomain.com',
+  to: 'subscriber@example.com',
+  subject: 'Welcome!',
+  html: '<h1>Hello World</h1>',
+})
+```
+
+### Key features:
+- **Batch sending** — up to 100 emails per batch call
+- **Webhooks** — get notified on delivery, bounce, complaint
+- **Analytics** — open rates, click rates
+- **Domain verification** — SPF, DKIM, DMARC setup
+- **React Email integration** — first-class support
+
+### Pricing reality check:
+- Free tier: 100 emails/day, 3,000/month
+- Pro: $20/month for 50,000 emails
+
+---
+
+**Workflow run completed in 42s.**
+All 4 jobs passed. 0 warnings.
+
+</Slide>

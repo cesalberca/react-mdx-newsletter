@@ -1,0 +1,127 @@
+<Slide sender="React Email Support" timestamp="Oct 15, 2024, 11:00 AM">
+
+# Your Email Rendering Report Is Ready
+
+Hello Developer,
+
+Your rendering diagnostics are complete. We found several compatibility issues across email clients that you should be aware of.
+
+## The Email Rendering Problem
+
+Unlike web browsers, email clients are **stuck in 2003**:
+
+| Client | Engine | CSS Support |
+|--------|--------|------------|
+| Gmail | Custom | Partial — strips `<style>`, no media queries in some contexts |
+| Outlook | Word | Yes, **Microsoft Word** renders your HTML |
+| Apple Mail | WebKit | Actually decent |
+| Yahoo | Custom | Surprisingly okay |
+| Outlook.com | Custom | Different from desktop Outlook |
+
+> Outlook uses Microsoft Word's rendering engine. Let that sink in.
+
+</Slide>
+
+<Slide sender="React Email Support" timestamp="Oct 15, 2024, 11:05 AM">
+
+## What Works in Email
+
+**Safe to use:**
+- Inline styles (`style="..."`)
+- Tables for layout (yes, really)
+- Basic CSS: `color`, `font-size`, `padding`, `margin`, `background-color`
+- `<img>` with absolute URLs
+- `<a>` tags with `href`
+
+**Danger zone:**
+- `<div>` with flexbox or grid — Outlook will ignore it
+- `position: absolute/fixed` — nope
+- `box-shadow` — nope
+- CSS variables — nope
+- `@media` queries — limited support
+- External stylesheets — stripped by Gmail
+- JavaScript — obviously not
+
+</Slide>
+
+<Slide sender="React Email Support" timestamp="Oct 15, 2024, 11:10 AM">
+
+## How React Email Helps
+
+React Email abstracts away the pain. You write modern JSX, it outputs legacy-compatible HTML:
+
+```tsx
+// You write this:
+<Section style={{ padding: '20px' }}>
+  <Text style={{ fontSize: '16px', color: '#333' }}>
+    Hello subscriber!
+  </Text>
+  <Button
+    href="https://example.com"
+    style={{
+      backgroundColor: '#007bff',
+      color: '#fff',
+      padding: '12px 24px',
+    }}
+  >
+    Click me
+  </Button>
+</Section>
+```
+
+```html
+<!-- It outputs this: -->
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+    <td style="padding:20px">
+      <p style="font-size:16px;color:#333">
+        Hello subscriber!
+      </p>
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="background-color:#007bff;padding:12px 24px">
+            <a href="https://example.com"
+               style="color:#fff;text-decoration:none">
+              Click me
+            </a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+```
+
+Tables all the way down.
+
+</Slide>
+
+<Slide sender="React Email Support" timestamp="Oct 15, 2024, 11:15 AM">
+
+## Preview & Testing
+
+React Email includes a dev server for previewing:
+
+```bash
+npx react-email dev
+```
+
+This gives you:
+- **Live preview** of every email template
+- **Hot reload** as you edit
+- **Source view** of the generated HTML
+- **Send test emails** directly from the UI
+
+### Testing across clients
+
+For real-world testing, use services like:
+- **Litmus** — renders across 90+ email clients
+- **Email on Acid** — similar coverage
+- **Mailtrap** — catches emails in a sandbox
+
+> Remember: If it looks good in your browser, it probably looks terrible in Outlook.
+
+Regards,
+**React Email Support Team**
+
+</Slide>
