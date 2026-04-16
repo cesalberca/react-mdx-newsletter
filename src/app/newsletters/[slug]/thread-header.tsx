@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { KeyboardNav } from "@/components/keyboard-nav"
+import Link from "next/link";
+import { KeyboardNav } from "@/components/keyboard-nav";
 
 export function NewsletterThreadHeader({
   title,
   prevSlug,
   nextSlug,
 }: {
-  title: string
-  prevSlug: string | null
-  nextSlug: string | null
+  title: string;
+  prevSlug: string | null;
+  nextSlug: string | null;
 }) {
   return (
     <>
@@ -76,7 +76,12 @@ export function NewsletterThreadHeader({
               }}
               aria-label="Previous newsletter"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
                 <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
               </svg>
             </Link>
@@ -98,7 +103,12 @@ export function NewsletterThreadHeader({
               }}
               aria-label="Next newsletter"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
                 <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
               </svg>
             </Link>
@@ -108,5 +118,5 @@ export function NewsletterThreadHeader({
         </div>
       </div>
     </>
-  )
+  );
 }

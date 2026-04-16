@@ -1,34 +1,36 @@
-import { Resend } from "resend"
-import { type NextRequest, NextResponse } from "next/server"
-import type { ReactElement } from "react"
-import { sign } from "jsonwebtoken"
-import { v4 as uuid } from "uuid"
-import NewsletterConfirmationEmail from "@/emails/transactional/newsletter-confirmation-email"
-import { env } from "@/lib/env"
+import { Resend } from "resend";
+import { type NextRequest, NextResponse } from "next/server";
+import type { ReactElement } from "react";
+import { sign } from "jsonwebtoken";
+import { v4 as uuid } from "uuid";
+import NewsletterConfirmationEmail from "@/emails/transactional/newsletter-confirmation-email";
+import { env } from "@/lib/env";
 
-const resend = new Resend(env.RESEND_API_KEY)
+const resend = new Resend(env.RESEND_API_KEY);
 
 interface SubscribeRequest {
-  email: string
+  email: string;
 }
 
 interface SubscribeResponse {
-  message?: string
-  error?: string
+  message?: string;
+  error?: string;
 }
 
-export async function POST(request: NextRequest): Promise<NextResponse<SubscribeResponse>> {
+export async function POST(
+  request: NextRequest,
+): Promise<NextResponse<SubscribeResponse>> {
   try {
-    const body: SubscribeRequest = await request.json()
-    const { email } = body
+    const body: SubscribeRequest = await request.json();
+    const { email } = body;
 
     if (!email) {
-      return NextResponse.json({ error: "Email is required" }, { status: 400 })
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
     const confirmationToken = sign({ email }, env.JWT_SECRET, {
       expiresIn: "24h",
-    })
+    });
 
     await resend.emails.send({
       from: env.RESEND_EMAIL_FROM,
@@ -42,11 +44,17 @@ export async function POST(request: NextRequest): Promise<NextResponse<Subscribe
         confirmationToken,
         email,
       }) as ReactElement,
-    })
+    });
 
-    return NextResponse.json({ message: "Confirmation email sent successfully" }, { status: 200 })
+    return NextResponse.json(
+      { message: "Confirmation email sent successfully" },
+      { status: 200 },
+    );
   } catch (error) {
-    console.error("Newsletter subscribe error:", error)
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 })
+    console.error("Newsletter subscribe error:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

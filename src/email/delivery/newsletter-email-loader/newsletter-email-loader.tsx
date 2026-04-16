@@ -1,21 +1,22 @@
-import type { FC, PropsWithChildren } from "react"
-import { NewsletterTemplate } from "@/email/delivery/templates/newsletter-template"
+import type { FC, PropsWithChildren } from "react";
+import { NewsletterTemplate } from "@/email/delivery/templates/newsletter-template";
 
 interface NewsletterEmailLoaderProps {
-  slug: string
-  title: string
-  description: string
+  slug: string;
+  title: string;
+  description: string;
 }
 
-export const NewsletterEmailLoader: FC<PropsWithChildren<NewsletterEmailLoaderProps>> = ({
-  slug,
-  title,
-  description,
-  children,
-}) => {
+export const NewsletterEmailLoader: FC<
+  PropsWithChildren<NewsletterEmailLoaderProps>
+> = ({ slug, title, description, children }) => {
   return (
-    <NewsletterTemplate browserUrl={slug} title={title} description={description}>
+    <NewsletterTemplate
+      browserUrl={slug}
+      title={title}
+      description={description}
+    >
       {children}
     </NewsletterTemplate>
-  )
-}
+  );
+};

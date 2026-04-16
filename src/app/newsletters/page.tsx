@@ -1,6 +1,6 @@
-import Link from "next/link"
-import { newsletters } from "@/content/newsletters"
-import { Avatar } from "@/components/gmail/avatar"
+import Link from "next/link";
+import { newsletters } from "@/content/newsletters";
+import { Avatar } from "@/components/gmail/avatar";
 
 export default function NewslettersPage() {
   return (
@@ -15,7 +15,11 @@ export default function NewslettersPage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <input type="checkbox" style={{ width: 18, height: 18, accentColor: "var(--accent)" }} readOnly />
+          <input
+            type="checkbox"
+            style={{ width: 18, height: 18, accentColor: "var(--accent)" }}
+            readOnly
+          />
         </div>
         <div
           style={{
@@ -53,7 +57,14 @@ export default function NewslettersPage() {
             minHeight: 44,
           }}
         >
-          <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: 8 }}>
+          <div
+            style={{
+              flexShrink: 0,
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+            }}
+          >
             <svg
               width="20"
               height="20"
@@ -79,7 +90,15 @@ export default function NewslettersPage() {
           >
             César Alberca
           </div>
-          <div style={{ flex: 1, overflow: "hidden", display: "flex", gap: 4, minWidth: 0 }}>
+          <div
+            style={{
+              flex: 1,
+              overflow: "hidden",
+              display: "flex",
+              gap: 4,
+              minWidth: 0,
+            }}
+          >
             <span
               style={{
                 fontWeight: 700,
@@ -114,5 +133,5 @@ export default function NewslettersPage() {
         </Link>
       ))}
     </div>
-  )
+  );
 }

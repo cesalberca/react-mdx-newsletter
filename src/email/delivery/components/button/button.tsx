@@ -1,7 +1,9 @@
-import type { FC, PropsWithChildren } from "react"
-import { Button as EmailButton } from "@react-email/components"
+import type { FC, PropsWithChildren } from "react";
+import { Button as EmailButton } from "@react-email/components";
 
-export const Button: FC<PropsWithChildren<{ className?: string; link?: string }>> = ({ link, children }) => {
+export const Button: FC<
+  PropsWithChildren<{ className?: string; link?: string }>
+> = ({ link, children }) => {
   return (
     <EmailButton
       href={link}
@@ -18,5 +20,5 @@ export const Button: FC<PropsWithChildren<{ className?: string; link?: string }>
     >
       {children}
     </EmailButton>
-  )
-}
+  );
+};

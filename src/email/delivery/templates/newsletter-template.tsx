@@ -1,24 +1,29 @@
-import { EmailTemplate } from "./email-template"
-import { Column, Container, Img, Link, Row, Section, Text } from "@react-email/components"
-import type { FC, PropsWithChildren } from "react"
-import { emailImageBaseUrl } from "@/lib/email-image-base-url"
+import { EmailTemplate } from "./email-template";
+import {
+  Column,
+  Container,
+  Img,
+  Link,
+  Row,
+  Section,
+  Text,
+} from "@react-email/components";
+import type { FC, PropsWithChildren } from "react";
+import { emailImageBaseUrl } from "@/lib/email-image-base-url";
 
 interface NewsletterEmailProps {
-  title: string
-  description: string
-  browserUrl: string
+  title: string;
+  description: string;
+  browserUrl: string;
 }
 
-export const NewsletterTemplate: FC<PropsWithChildren<NewsletterEmailProps>> = ({
-  title,
-  description,
-  children,
-  browserUrl,
-}) => {
-  const baseUrl = process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000"
-  const urlToShare = `${baseUrl}/newsletters/${browserUrl}`
-  const encodedTitle = encodeURIComponent(title)
-  const encodedUrl = encodeURIComponent(urlToShare)
+export const NewsletterTemplate: FC<
+  PropsWithChildren<NewsletterEmailProps>
+> = ({ title, description, children, browserUrl }) => {
+  const baseUrl = process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000";
+  const urlToShare = `${baseUrl}/newsletters/${browserUrl}`;
+  const encodedTitle = encodeURIComponent(title);
+  const encodedUrl = encodeURIComponent(urlToShare);
 
   const socialMedia = [
     {
@@ -41,7 +46,7 @@ export const NewsletterTemplate: FC<PropsWithChildren<NewsletterEmailProps>> = (
       name: "Email",
       icon: "email.png",
     },
-  ]
+  ];
 
   return (
     <EmailTemplate
@@ -50,9 +55,17 @@ export const NewsletterTemplate: FC<PropsWithChildren<NewsletterEmailProps>> = (
       browserUrl={urlToShare}
       footer={
         <Container style={{ width: "66%", margin: "0 auto" }}>
-          <Text style={{ color: "#737373", fontSize: 12, marginBottom: 0, textAlign: "center", lineHeight: 1.6 }}>
-            You&apos;re receiving this email because you subscribed voluntarily and confirmed it by clicking a link in a
-            verification email.
+          <Text
+            style={{
+              color: "#737373",
+              fontSize: 12,
+              marginBottom: 0,
+              textAlign: "center",
+              lineHeight: 1.6,
+            }}
+          >
+            You&apos;re receiving this email because you subscribed voluntarily
+            and confirmed it by clicking a link in a verification email.
           </Text>
         </Container>
       }
@@ -60,7 +73,16 @@ export const NewsletterTemplate: FC<PropsWithChildren<NewsletterEmailProps>> = (
       {children}
 
       <Section style={{ marginTop: 48 }}>
-        <Text style={{ color: "#0a0a0a", marginBottom: 16, marginTop: 0, textAlign: "center", fontSize: 18, fontWeight: 500 }}>
+        <Text
+          style={{
+            color: "#0a0a0a",
+            marginBottom: 16,
+            marginTop: 0,
+            textAlign: "center",
+            fontSize: 18,
+            fontWeight: 500,
+          }}
+        >
           Help me by sharing this newsletter
         </Text>
 
@@ -74,7 +96,15 @@ export const NewsletterTemplate: FC<PropsWithChildren<NewsletterEmailProps>> = (
                 height="32"
                 style={{ display: "inline-block", margin: "0 auto" }}
               />
-              <Link href={x.href} style={{ color: "#737373", fontSize: 12, textDecoration: "none", display: "block" }}>
+              <Link
+                href={x.href}
+                style={{
+                  color: "#737373",
+                  fontSize: 12,
+                  textDecoration: "none",
+                  display: "block",
+                }}
+              >
                 {x.name}
               </Link>
             </Column>
@@ -83,12 +113,14 @@ export const NewsletterTemplate: FC<PropsWithChildren<NewsletterEmailProps>> = (
 
         <Container style={{ marginTop: 32 }}>
           <Text style={{ fontSize: 12, textAlign: "center" }}>
-            Found a <em>typo</em>? The email doesn&apos;t render <em>correctly</em> in your email client? Have{" "}
-            <em>any</em> feedback? Please, <strong>feel free to reply to this email</strong> and I&apos;ll get back to
-            you <strong>as soon as I can</strong>. <span style={{ textDecoration: "underline" }}>Thank you!</span>
+            Found a <em>typo</em>? The email doesn&apos;t render{" "}
+            <em>correctly</em> in your email client? Have <em>any</em> feedback?
+            Please, <strong>feel free to reply to this email</strong> and
+            I&apos;ll get back to you <strong>as soon as I can</strong>.{" "}
+            <span style={{ textDecoration: "underline" }}>Thank you!</span>
           </Text>
         </Container>
       </Section>
     </EmailTemplate>
-  )
-}
+  );
+};

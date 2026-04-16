@@ -1,5 +1,5 @@
-import { Text, CodeBlock, dracula } from "@react-email/components"
-import { NewsletterEmailLoader } from "@/email/delivery/newsletter-email-loader/newsletter-email-loader"
+import { Text, CodeBlock, dracula } from "@react-email/components";
+import { NewsletterEmailLoader } from "@/email/delivery/newsletter-email-loader/newsletter-email-loader";
 
 const AddingAGmailStyleUi = () => {
   return (
@@ -9,14 +9,17 @@ const AddingAGmailStyleUi = () => {
       description="Wrap your newsletter in a Gmail-inspired interface with a sidebar, inbox, and compose dialog"
     >
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        The final touch: a presentation layer. We&apos;ll build a Gmail-inspired interface so readers can
-        browse newsletter issues in a familiar inbox-style layout.
+        The final touch: a presentation layer. We&apos;ll build a Gmail-inspired
+        interface so readers can browse newsletter issues in a familiar
+        inbox-style layout.
       </Text>
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        The architecture is simple — a sidebar with navigation, a list of issues pulled from a
-        <strong> newsletters.ts</strong> config, and MDX-rendered content for each issue:
+        The architecture is simple — a sidebar with navigation, a list of issues
+        pulled from a<strong> newsletters.ts</strong> config, and MDX-rendered
+        content for each issue:
       </Text>
-      <CodeBlock code={`// src/content/newsletters.ts
+      <CodeBlock
+        code={`// src/content/newsletters.ts
 export const newsletters = [
   {
     slug: "welcome-and-project-setup",
@@ -37,20 +40,24 @@ export default async function NewsletterPage({ params }) {
     \`@/app/newsletters/\${newsletter.filename}.mdx\`
   )
   return <Content />
-}`} language="tsx" theme={dracula} />
+}`}
+        language="tsx"
+        theme={dracula}
+      />
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        Add a Compose dialog that calls your broadcast API, a QR code widget so audience members can subscribe
-        on the spot, and dark mode support with CSS custom properties. You now have a complete, end-to-end
-        newsletter system built entirely with React, MDX, and Resend.
+        Add a Compose dialog that calls your broadcast API, a QR code widget so
+        audience members can subscribe on the spot, and dark mode support with
+        CSS custom properties. You now have a complete, end-to-end newsletter
+        system built entirely with React, MDX, and Resend.
       </Text>
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        That&apos;s a wrap! You&apos;ve gone from zero to a fully functional newsletter.
-        Fork the repo, swap in your own content, and start shipping.
+        That&apos;s a wrap! You&apos;ve gone from zero to a fully functional
+        newsletter. Fork the repo, swap in your own content, and start shipping.
       </Text>
     </NewsletterEmailLoader>
-  )
-}
+  );
+};
 
-AddingAGmailStyleUi.title = "Adding a Gmail-Style Presentation UI"
+AddingAGmailStyleUi.title = "Adding a Gmail-Style Presentation UI";
 
-export default AddingAGmailStyleUi
+export default AddingAGmailStyleUi;

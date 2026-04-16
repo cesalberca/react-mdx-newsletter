@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useTheme } from "@/lib/theme-context"
+import { useTheme } from "@/lib/theme-context";
 
 export function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme()
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <button
@@ -23,10 +23,10 @@ export function ThemeToggle() {
         transition: "background-color 0.2s",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.backgroundColor = "var(--bg-hover)"
+        e.currentTarget.style.backgroundColor = "var(--bg-hover)";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.backgroundColor = "transparent"
+        e.currentTarget.style.backgroundColor = "transparent";
       }}
     >
       {theme === "light" ? (
@@ -39,5 +39,5 @@ export function ThemeToggle() {
         </svg>
       )}
     </button>
-  )
+  );
 }

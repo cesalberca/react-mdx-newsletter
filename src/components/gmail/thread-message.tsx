@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Avatar } from "./avatar"
+import { useState } from "react";
+import { Avatar } from "./avatar";
 
 export function ThreadMessage({
   sender,
@@ -10,13 +10,13 @@ export function ThreadMessage({
   children,
   defaultExpanded = false,
 }: {
-  sender: string
-  senderEmail: string
-  timestamp: string
-  children: React.ReactNode
-  defaultExpanded?: boolean
+  sender: string;
+  senderEmail: string;
+  timestamp: string;
+  children: React.ReactNode;
+  defaultExpanded?: boolean;
 }) {
-  const [expanded, setExpanded] = useState(defaultExpanded)
+  const [expanded, setExpanded] = useState(defaultExpanded);
 
   return (
     <div
@@ -57,7 +57,9 @@ export function ThreadMessage({
             </div>
           )}
         </div>
-        <div style={{ color: "var(--text-tertiary)", fontSize: 12, flexShrink: 0 }}>
+        <div
+          style={{ color: "var(--text-tertiary)", fontSize: 12, flexShrink: 0 }}
+        >
           {timestamp}
         </div>
         <svg
@@ -88,5 +90,5 @@ export function ThreadMessage({
         </div>
       )}
     </div>
-  )
+  );
 }

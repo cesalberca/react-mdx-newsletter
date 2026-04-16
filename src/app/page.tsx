@@ -1,5 +1,5 @@
-import { inboxSections } from "@/content/sections"
-import { InboxRow } from "@/components/gmail/inbox-row"
+import { inboxSections } from "@/content/sections";
+import { InboxRow } from "@/components/gmail/inbox-row";
 
 export default function InboxPage() {
   return (
@@ -14,7 +14,11 @@ export default function InboxPage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <input type="checkbox" style={{ width: 18, height: 18, accentColor: "var(--accent)" }} readOnly />
+          <input
+            type="checkbox"
+            style={{ width: 18, height: 18, accentColor: "var(--accent)" }}
+            readOnly
+          />
         </div>
         <div style={{ display: "flex", gap: 8 }}>
           <TabButton label="Primary" active />
@@ -26,10 +30,16 @@ export default function InboxPage() {
         <InboxRow key={section.slug} section={section} />
       ))}
     </div>
-  )
+  );
 }
 
-function TabButton({ label, active = false }: { label: string; active?: boolean }) {
+function TabButton({
+  label,
+  active = false,
+}: {
+  label: string;
+  active?: boolean;
+}) {
   return (
     <div
       style={{
@@ -37,11 +47,13 @@ function TabButton({ label, active = false }: { label: string; active?: boolean 
         fontSize: 14,
         fontWeight: active ? 700 : 400,
         color: active ? "var(--accent)" : "var(--text-secondary)",
-        borderBottom: active ? "3px solid var(--accent)" : "3px solid transparent",
+        borderBottom: active
+          ? "3px solid var(--accent)"
+          : "3px solid transparent",
         cursor: "default",
       }}
     >
       {label}
     </div>
-  )
+  );
 }

@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { QRCodeSVG } from "qrcode.react"
-import { useCompose } from "@/lib/compose-context"
+import { QRCodeSVG } from "qrcode.react";
+import { useCompose } from "@/lib/compose-context";
 
 export function QrCodeWidget() {
-  const { isComposeOpen } = useCompose()
+  const { isComposeOpen } = useCompose();
 
-  if (isComposeOpen) return null
+  if (isComposeOpen) return null;
 
   return (
     <div
@@ -36,5 +36,5 @@ export function QrCodeWidget() {
         Scan to subscribe
       </span>
     </div>
-  )
+  );
 }

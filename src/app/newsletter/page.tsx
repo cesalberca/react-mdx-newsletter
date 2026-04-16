@@ -1,36 +1,38 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 
 export default function NewsletterPage() {
-  const [email, setEmail] = useState("")
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
-  const [message, setMessage] = useState("")
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [message, setMessage] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    if (!email) return
+    e.preventDefault();
+    if (!email) return;
 
-    setStatus("loading")
+    setStatus("loading");
     try {
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
-      })
-      const data = await res.json()
+      });
+      const data = await res.json();
 
       if (res.ok) {
-        setStatus("success")
-        setMessage("Check your inbox for a confirmation email!")
-        setEmail("")
+        setStatus("success");
+        setMessage("Check your inbox for a confirmation email!");
+        setEmail("");
       } else {
-        setStatus("error")
-        setMessage(data.error || "Something went wrong")
+        setStatus("error");
+        setMessage(data.error || "Something went wrong");
       }
     } catch {
-      setStatus("error")
-      setMessage("Something went wrong. Please try again.")
+      setStatus("error");
+      setMessage("Something went wrong. Please try again.");
     }
   }
 
@@ -88,18 +90,34 @@ export default function NewsletterPage() {
               Build Your Own Newsletter with React &amp; MDX
             </h1>
 
-            <p style={{ color: "var(--text-secondary)", lineHeight: 1.7, margin: "0 0 16px 0" }}>
-              A step-by-step series on building a complete newsletter system from scratch.
-              Learn how to write content with MDX, design email templates with React Email,
-              deliver emails with Resend, and wrap it all in a polished UI.
+            <p
+              style={{
+                color: "var(--text-secondary)",
+                lineHeight: 1.7,
+                margin: "0 0 16px 0",
+              }}
+            >
+              A step-by-step series on building a complete newsletter system
+              from scratch. Learn how to write content with MDX, design email
+              templates with React Email, deliver emails with Resend, and wrap
+              it all in a polished UI.
             </p>
 
-            <p style={{ color: "var(--text-secondary)", lineHeight: 1.7, margin: "0 0 24px 0" }}>
-              Follow along and ship your own newsletter by the end of the series.
-              Enter your email below to subscribe:
+            <p
+              style={{
+                color: "var(--text-secondary)",
+                lineHeight: 1.7,
+                margin: "0 0 24px 0",
+              }}
+            >
+              Follow along and ship your own newsletter by the end of the
+              series. Enter your email below to subscribe:
             </p>
 
-            <form onSubmit={handleSubmit} style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+            <form
+              onSubmit={handleSubmit}
+              style={{ display: "flex", gap: 8, marginBottom: 16 }}
+            >
               <input
                 type="email"
                 value={email}
@@ -166,12 +184,20 @@ export default function NewsletterPage() {
               </div>
             )}
 
-            <p style={{ color: "var(--text-tertiary)", fontSize: 12, marginTop: 16, marginBottom: 0 }}>
-              You&apos;ll receive a confirmation email. No spam, unsubscribe anytime.
+            <p
+              style={{
+                color: "var(--text-tertiary)",
+                fontSize: 12,
+                marginTop: 16,
+                marginBottom: 0,
+              }}
+            >
+              You&apos;ll receive a confirmation email. No spam, unsubscribe
+              anytime.
             </p>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }

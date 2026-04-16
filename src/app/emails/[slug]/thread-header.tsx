@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import type { Section } from "@/content/sections"
-import { KeyboardNav } from "@/components/keyboard-nav"
+import Link from "next/link";
+import type { Section } from "@/content/sections";
+import { KeyboardNav } from "@/components/keyboard-nav";
 
 export function ThreadHeader({
   section,
@@ -10,14 +10,18 @@ export function ThreadHeader({
   nextSlug,
   backHref = "/",
 }: {
-  section: Section
-  prevSlug: string | null
-  nextSlug: string | null
-  backHref?: string
+  section: Section;
+  prevSlug: string | null;
+  nextSlug: string | null;
+  backHref?: string;
 }) {
   return (
     <>
-      <KeyboardNav prevSlug={prevSlug} nextSlug={nextSlug} backHref={backHref} />
+      <KeyboardNav
+        prevSlug={prevSlug}
+        nextSlug={nextSlug}
+        backHref={backHref}
+      />
       <div
         style={{
           display: "flex",
@@ -74,7 +78,12 @@ export function ThreadHeader({
               }}
               aria-label="Previous email"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
                 <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
               </svg>
             </Link>
@@ -96,7 +105,12 @@ export function ThreadHeader({
               }}
               aria-label="Next email"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
                 <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
               </svg>
             </Link>
@@ -106,5 +120,5 @@ export function ThreadHeader({
         </div>
       </div>
     </>
-  )
+  );
 }

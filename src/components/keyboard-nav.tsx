@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useKeyboardNavigation } from "@/lib/use-keyboard-navigation"
+import { useKeyboardNavigation } from "@/lib/use-keyboard-navigation";
 
 export function KeyboardNav({
   prevSlug,
@@ -8,11 +8,11 @@ export function KeyboardNav({
   backHref = "/",
   basePath = "/emails",
 }: {
-  prevSlug: string | null
-  nextSlug: string | null
-  backHref?: string
-  basePath?: string
+  prevSlug: string | null;
+  nextSlug: string | null;
+  backHref?: string;
+  basePath?: string;
 }) {
-  useKeyboardNavigation({ prevSlug, nextSlug, backHref, basePath })
-  return null
+  useKeyboardNavigation({ prevSlug, nextSlug, backHref, basePath });
+  return null;
 }

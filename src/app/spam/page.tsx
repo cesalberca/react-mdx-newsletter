@@ -1,5 +1,5 @@
-import { spamSections } from "@/content/sections"
-import { InboxRow } from "@/components/gmail/inbox-row"
+import { spamSections } from "@/content/sections";
+import { InboxRow } from "@/components/gmail/inbox-row";
 
 export default function SpamPage() {
   return (
@@ -18,17 +18,23 @@ export default function SpamPage() {
           border: "1px solid #ffc107",
         }}
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#e6a200" style={{ flexShrink: 0 }}>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="#e6a200"
+          style={{ flexShrink: 0 }}
+        >
           <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
         </svg>
         <span>
-          <strong>Warning:</strong> Messages in this folder have been identified as spam. Be careful
-          with links and attachments.
+          <strong>Warning:</strong> Messages in this folder have been identified
+          as spam. Be careful with links and attachments.
         </span>
       </div>
       {spamSections.map((section) => (
         <InboxRow key={section.slug} section={section} />
       ))}
     </div>
-  )
+  );
 }

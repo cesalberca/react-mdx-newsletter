@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { Suspense, useEffect, useState } from "react"
-import { useSearchParams } from "next/navigation"
-import Link from "next/link"
-import type { ConfirmResponse } from "@/app/api/newsletter/confirm/route"
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
+import type { ConfirmResponse } from "@/app/api/newsletter/confirm/route";
 
-type ConfirmationState = "loading" | "success" | "already" | "error"
+type ConfirmationState = "loading" | "success" | "already" | "error";
 
 export default function NewsletterConfirmPage() {
   return (
     <Suspense fallback={<ConfirmLoading />}>
       <ConfirmContent />
     </Suspense>
-  )
+  );
 }
 
 function ConfirmLoading() {
@@ -43,23 +43,23 @@ function ConfirmLoading() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function ConfirmContent() {
-  const searchParams = useSearchParams()
-  const [state, setState] = useState<ConfirmationState>("loading")
-  const [errorMessage, setErrorMessage] = useState("")
+  const searchParams = useSearchParams();
+  const [state, setState] = useState<ConfirmationState>("loading");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     async function confirm() {
-      const token = searchParams.get("token")
-      const email = searchParams.get("email")
+      const token = searchParams.get("token");
+      const email = searchParams.get("email");
 
       if (!token || !email) {
-        setState("error")
-        setErrorMessage("Missing confirmation token or email")
-        return
+        setState("error");
+        setErrorMessage("Missing confirmation token or email");
+        return;
       }
 
       try {
@@ -67,28 +67,28 @@ function ConfirmContent() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ token, email }),
-        })
+        });
 
-        const data: ConfirmResponse = await res.json()
+        const data: ConfirmResponse = await res.json();
 
         if (data.success) {
           if (data.alreadyConfirmed || data.alreadySubscribed) {
-            setState("already")
+            setState("already");
           } else {
-            setState("success")
+            setState("success");
           }
         } else {
-          setState("error")
-          setErrorMessage(data.error)
+          setState("error");
+          setErrorMessage(data.error);
         }
       } catch {
-        setState("error")
-        setErrorMessage("An unexpected error occurred")
+        setState("error");
+        setErrorMessage("An unexpected error occurred");
       }
     }
 
-    confirm()
-  }, [searchParams])
+    confirm();
+  }, [searchParams]);
 
   return (
     <div
@@ -113,7 +113,9 @@ function ConfirmContent() {
           {state === "loading" && (
             <>
               <div style={{ fontSize: 48, marginBottom: 16 }}>&#9203;</div>
-              <h1 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px 0" }}>
+              <h1
+                style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px 0" }}
+              >
                 Confirming your subscription...
               </h1>
               <p style={{ color: "var(--text-secondary)" }}>Please wait.</p>
@@ -122,12 +124,23 @@ function ConfirmContent() {
 
           {state === "success" && (
             <>
-              <div style={{ fontSize: 48, marginBottom: 16, color: "var(--green)" }}>&#10003;</div>
-              <h1 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px 0" }}>
+              <div
+                style={{
+                  fontSize: 48,
+                  marginBottom: 16,
+                  color: "var(--green)",
+                }}
+              >
+                &#10003;
+              </div>
+              <h1
+                style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px 0" }}
+              >
                 Subscription Confirmed!
               </h1>
               <p style={{ color: "var(--text-secondary)", lineHeight: 1.6 }}>
-                Welcome aboard! You&apos;ll receive each issue of the Build Your Own Newsletter series as it goes out.
+                Welcome aboard! You&apos;ll receive each issue of the Build Your
+                Own Newsletter series as it goes out.
               </p>
               <Link
                 href="/"
@@ -151,7 +164,9 @@ function ConfirmContent() {
           {state === "already" && (
             <>
               <div style={{ fontSize: 48, marginBottom: 16 }}>&#9993;</div>
-              <h1 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px 0" }}>
+              <h1
+                style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px 0" }}
+              >
                 Already Subscribed
               </h1>
               <p style={{ color: "var(--text-secondary)", lineHeight: 1.6 }}>
@@ -178,14 +193,27 @@ function ConfirmContent() {
 
           {state === "error" && (
             <>
-              <div style={{ fontSize: 48, marginBottom: 16, color: "var(--red)" }}>&#10007;</div>
-              <h1 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px 0" }}>
+              <div
+                style={{ fontSize: 48, marginBottom: 16, color: "var(--red)" }}
+              >
+                &#10007;
+              </div>
+              <h1
+                style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px 0" }}
+              >
                 Confirmation Failed
               </h1>
               <p style={{ color: "var(--text-secondary)", lineHeight: 1.6 }}>
                 {errorMessage || "The link may be expired or invalid."}
               </p>
-              <div style={{ display: "flex", gap: 8, justifyContent: "center", marginTop: 16 }}>
+              <div
+                style={{
+                  display: "flex",
+                  gap: 8,
+                  justifyContent: "center",
+                  marginTop: 16,
+                }}
+              >
                 <Link
                   href="/newsletter"
                   style={{
@@ -222,5 +250,5 @@ function ConfirmContent() {
         </div>
       </div>
     </div>
-  )
+  );
 }

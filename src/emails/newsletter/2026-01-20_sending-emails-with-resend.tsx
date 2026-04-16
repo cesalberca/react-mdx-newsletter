@@ -1,5 +1,5 @@
-import { Text, CodeBlock, dracula } from "@react-email/components"
-import { NewsletterEmailLoader } from "@/email/delivery/newsletter-email-loader/newsletter-email-loader"
+import { Text, CodeBlock, dracula } from "@react-email/components";
+import { NewsletterEmailLoader } from "@/email/delivery/newsletter-email-loader/newsletter-email-loader";
 
 const SendingEmailsWithResend = () => {
   return (
@@ -9,16 +9,21 @@ const SendingEmailsWithResend = () => {
       description="Integrate Resend to deliver your newsletter emails reliably — API keys, audiences, and your first send"
     >
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        Resend is a modern email API built for developers. Sign up at resend.com, grab your API key,
-        and add it to your environment:
+        Resend is a modern email API built for developers. Sign up at
+        resend.com, grab your API key, and add it to your environment:
       </Text>
-      <CodeBlock code={`# .env.local
+      <CodeBlock
+        code={`# .env.local
 RESEND_API_KEY=re_your_api_key_here
-RESEND_EMAIL_FROM="Your Name <newsletter@yourdomain.com>"`} language="bash" theme={dracula} />
+RESEND_EMAIL_FROM="Your Name <newsletter@yourdomain.com>"`}
+        language="bash"
+        theme={dracula}
+      />
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
         Sending an email is just a few lines in a Next.js API route:
       </Text>
-      <CodeBlock code={`import { Resend } from "resend"
+      <CodeBlock
+        code={`import { Resend } from "resend"
 import { render } from "@react-email/render"
 import NewsletterEmail from "@/emails/newsletter-email"
 
@@ -36,16 +41,20 @@ export async function POST(request: Request) {
 
   if (error) return Response.json({ error }, { status: 400 })
   return Response.json({ id: data?.id })
-}`} language="tsx" theme={dracula} />
+}`}
+        language="tsx"
+        theme={dracula}
+      />
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        That&apos;s the core loop: write content in MDX, render it with React Email, and deliver it via Resend.
-        But sending to one person isn&apos;t a newsletter — next issue, we&apos;ll build a proper subscription
-        system with double opt-in.
+        That&apos;s the core loop: write content in MDX, render it with React
+        Email, and deliver it via Resend. But sending to one person isn&apos;t a
+        newsletter — next issue, we&apos;ll build a proper subscription system
+        with double opt-in.
       </Text>
     </NewsletterEmailLoader>
-  )
-}
+  );
+};
 
-SendingEmailsWithResend.title = "Sending Emails with the Resend API"
+SendingEmailsWithResend.title = "Sending Emails with the Resend API";
 
-export default SendingEmailsWithResend
+export default SendingEmailsWithResend;

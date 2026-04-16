@@ -1,36 +1,43 @@
-import { EmailTemplate } from "@/email/delivery/templates/email-template"
-import { Button } from "@/email/delivery/components/button/button"
-import { Link } from "@/email/delivery/components/link/link"
-import { Container, Text } from "@react-email/components"
+import { EmailTemplate } from "@/email/delivery/templates/email-template";
+import { Button } from "@/email/delivery/components/button/button";
+import { Link } from "@/email/delivery/components/link/link";
+import { Container, Text } from "@react-email/components";
 
 interface ConfirmationEmailProps {
-  confirmationToken: string
-  email: string
+  confirmationToken: string;
+  email: string;
 }
 
-export default function NewsletterConfirmationEmail({ confirmationToken, email }: ConfirmationEmailProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000"
-  const confirmationUrl = `${baseUrl}/newsletter/confirm?token=${confirmationToken}&email=${encodeURIComponent(email)}`
+export default function NewsletterConfirmationEmail({
+  confirmationToken,
+  email,
+}: ConfirmationEmailProps) {
+  const baseUrl = process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000";
+  const confirmationUrl = `${baseUrl}/newsletter/confirm?token=${confirmationToken}&email=${encodeURIComponent(email)}`;
 
   return (
     <EmailTemplate
       title="Confirm your newsletter subscription"
       description="Just one click away from joining the Frontend Architecture newsletter community!"
     >
-      <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>Hey!</Text>
-
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        <strong>Why you got this email</strong>: Your email has been submitted in the signup form.
+        Hey!
       </Text>
 
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        If you didn&apos;t sign up, you don&apos;t need to worry at all, feel free to ignore this email and you
-        won&apos;t get another email from me.
+        <strong>Why you got this email</strong>: Your email has been submitted
+        in the signup form.
       </Text>
 
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        <strong>What you need to do</strong>: If you <em>did</em> sign up and want to join the Frontend Architecture
-        Newsletter, just click the button below to confirm.
+        If you didn&apos;t sign up, you don&apos;t need to worry at all, feel
+        free to ignore this email and you won&apos;t get another email from me.
+      </Text>
+
+      <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
+        <strong>What you need to do</strong>: If you <em>did</em> sign up and
+        want to join the Frontend Architecture Newsletter, just click the button
+        below to confirm.
       </Text>
 
       <Container style={{ textAlign: "center", width: "66%" }}>
@@ -43,13 +50,14 @@ export default function NewsletterConfirmationEmail({ confirmationToken, email }
       </Container>
 
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        Looking forward to sharing some <em>great</em> <strong>frontend architecture</strong> insights with you!
+        Looking forward to sharing some <em>great</em>{" "}
+        <strong>frontend architecture</strong> insights with you!
       </Text>
     </EmailTemplate>
-  )
+  );
 }
 
 NewsletterConfirmationEmail.PreviewProps = {
   confirmationToken: "tkasnaAdfsaA",
   email: "cesar@cesalberca.com",
-} satisfies ConfirmationEmailProps
+} satisfies ConfirmationEmailProps;

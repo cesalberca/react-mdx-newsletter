@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import type { Section } from "@/content/sections"
-import { Avatar } from "./avatar"
-import { useReadStatus } from "@/lib/read-status-context"
+import Link from "next/link";
+import type { Section } from "@/content/sections";
+import { Avatar } from "./avatar";
+import { useReadStatus } from "@/lib/read-status-context";
 
 export function InboxRow({ section }: { section: Section }) {
-  const { isRead } = useReadStatus()
-  const unread = !isRead(section.slug)
+  const { isRead } = useReadStatus();
+  const unread = !isRead(section.slug);
 
   return (
     <Link
@@ -27,7 +27,9 @@ export function InboxRow({ section }: { section: Section }) {
         minHeight: 44,
       }}
     >
-      <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: 8 }}>
+      <div
+        style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: 8 }}
+      >
         <svg
           width="20"
           height="20"
@@ -53,7 +55,15 @@ export function InboxRow({ section }: { section: Section }) {
       >
         {section.sender}
       </div>
-      <div style={{ flex: 1, overflow: "hidden", display: "flex", gap: 4, minWidth: 0 }}>
+      <div
+        style={{
+          flex: 1,
+          overflow: "hidden",
+          display: "flex",
+          gap: 4,
+          minWidth: 0,
+        }}
+      >
         <span
           style={{
             fontWeight: unread ? 700 : 400,
@@ -86,5 +96,5 @@ export function InboxRow({ section }: { section: Section }) {
         {section.date}
       </div>
     </Link>
-  )
+  );
 }

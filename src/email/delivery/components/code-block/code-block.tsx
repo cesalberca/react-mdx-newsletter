@@ -1,12 +1,18 @@
-import type { FC, PropsWithChildren } from "react"
-import { CodeBlock as EmailCodeBlock, type PrismLanguage } from "@react-email/code-block"
-import { Column, Row, Section } from "@react-email/components"
-import { lightSynthwave84 } from "./light-synthwave84"
+import type { FC, PropsWithChildren } from "react";
+import {
+  CodeBlock as EmailCodeBlock,
+  type PrismLanguage,
+} from "@react-email/code-block";
+import { Column, Row, Section } from "@react-email/components";
+import { lightSynthwave84 } from "./light-synthwave84";
 
-export const CodeBlock: FC<PropsWithChildren<{ className?: string; code: string; language: PrismLanguage }>> = ({
-  code,
-  language,
-}) => {
+export const CodeBlock: FC<
+  PropsWithChildren<{
+    className?: string;
+    code: string;
+    language: PrismLanguage;
+  }>
+> = ({ code, language }) => {
   return (
     <Section style={{ width: "100%" }}>
       <Row style={{ width: "100%" }}>
@@ -20,5 +26,5 @@ export const CodeBlock: FC<PropsWithChildren<{ className?: string; code: string;
         </Column>
       </Row>
     </Section>
-  )
-}
+  );
+};
