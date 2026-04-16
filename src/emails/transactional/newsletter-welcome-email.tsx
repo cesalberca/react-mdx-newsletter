@@ -1,7 +1,7 @@
-import type { FC } from "react";
 import { Text } from "@react-email/components";
-import { EmailTemplate } from "@/email/delivery/templates/email-template";
-import { Link } from "@/email/delivery/components/link/link";
+import type { FC } from "react";
+import { EmailLink } from "@/core/mdx/email/email-link";
+import { EmailTemplate } from "@/features/email/delivery/templates/email-template";
 
 export const NewsletterWelcomeEmail: FC = () => {
   return (
@@ -33,11 +33,11 @@ export const NewsletterWelcomeEmail: FC = () => {
         Great, thank you very much! You&apos;ll now be receiving recurrent
         emails from me about <strong>Frontend Architecture</strong>. While I
         type away the next newsletter, you can read previous{" "}
-        <Link
+        <EmailLink
           href={`${process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000"}/newsletter`}
         >
           newsletters here
-        </Link>
+        </EmailLink>
         .
       </Text>
     </EmailTemplate>

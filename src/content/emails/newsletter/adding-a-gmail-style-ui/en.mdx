@@ -1,0 +1,36 @@
+export const metadata = {
+  slug: "adding-a-gmail-style-ui",
+  title: "Adding a Gmail-Style Presentation UI",
+  description:
+    "Wrap your newsletter in a Gmail-inspired interface with a sidebar, inbox, and compose dialog",
+  date: new Date("2026-03-03"),
+};
+
+The final touch: a presentation layer. We'll build a Gmail-inspired interface so readers can browse newsletter issues in a familiar inbox-style layout.
+
+The architecture is simple — a sidebar with navigation, a list of issues pulled from a **newsletters.ts** config, and MDX-rendered content for each issue:
+
+```tsx
+// src/content/newsletters.ts
+export const newsletters = [
+  {
+    slug: "welcome-and-project-setup",
+    title: "Welcome! Let's Build a Newsletter from Scratch",
+    date: "Dec 9",
+    filename: "2025-12-09_welcome-and-project-setup",
+  },
+  // ...more issues
+]
+
+// src/app/newsletters/[slug]/page.tsx
+export default async function NewsletterPage({ params }) {
+  const { slug } = await params
+  const Component = componentMap[slug]
+  const html = await render(<Component />)
+  return <div dangerouslySetInnerHTML={{ __html: html }} />
+}
+```
+
+Add a Compose dialog that calls your broadcast API, a QR code widget so audience members can subscribe on the spot, and dark mode support with CSS custom properties.
+
+You now have a complete, end-to-end newsletter system built entirely with React, MDX, and Resend. Fork the repo, swap in your own content, and start shipping!

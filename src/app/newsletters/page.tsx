@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { newsletters } from "@/content/newsletters";
-import { Avatar } from "@/components/gmail/avatar";
+import { Avatar } from "@/core/components/gmail/avatar";
 
 export default function NewslettersPage() {
   return (
@@ -34,7 +34,13 @@ export default function NewslettersPage() {
             fontWeight: 500,
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <svg
+            aria-hidden="true"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
             <path d="M20 6H12l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" />
           </svg>
           Newsletter
@@ -66,6 +72,7 @@ export default function NewslettersPage() {
             }}
           >
             <svg
+              aria-hidden="true"
               width="20"
               height="20"
               viewBox="0 0 24 24"

@@ -1,9 +1,9 @@
-import { type NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
-import type { ReactElement } from "react";
 import { render } from "@react-email/render";
-import { env } from "@/lib/env";
+import { type NextRequest, NextResponse } from "next/server";
+import type { ReactElement } from "react";
+import { Resend } from "resend";
 import { NEWSLETTER_CONFIG } from "@/app/api/newsletter/newsletter.config";
+import { env } from "@/lib/env";
 
 const resend = new Resend(env.RESEND_API_KEY);
 
@@ -68,13 +68,20 @@ export async function POST(
         );
       }
 
-      await resend.broadcasts.send(broadcast.data!.id, {
+      if (!broadcast.data) {
+        return NextResponse.json(
+          { error: "Failed to create broadcast" },
+          { status: 500 },
+        );
+      }
+
+      await resend.broadcasts.send(broadcast.data.id, {
         scheduledAt: "today 15:00 UTC",
       });
 
       return NextResponse.json(
         {
-          broadcastId: broadcast.data!.id,
+          broadcastId: broadcast.data.id,
           message: "Broadcast created successfully",
         },
         { status: 200 },

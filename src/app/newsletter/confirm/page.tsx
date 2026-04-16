@@ -1,8 +1,8 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 import type { ConfirmResponse } from "@/app/api/newsletter/confirm/route";
 
 type ConfirmationState = "loading" | "success" | "already" | "error";

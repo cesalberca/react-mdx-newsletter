@@ -1,0 +1,40 @@
+export const metadata = {
+  slug: "broadcasting-to-your-audience",
+  title: "Broadcasting Newsletters to Your Audience",
+  description:
+    "Build a broadcast API that renders MDX content into HTML and sends it to all confirmed subscribers",
+  date: new Date("2026-02-17"),
+};
+
+Sending one-off emails is fine, but a newsletter needs broadcasts — a single send that goes to your entire audience. Resend's Broadcasts API handles this elegantly.
+
+Here's the broadcast API route. It dynamically imports a newsletter template by slug, renders it to HTML, and creates a broadcast:
+
+```tsx
+// app/api/newsletter/broadcast/route.ts
+export async function POST(request: Request) {
+  const { newsletterSlug, token } = await request.json()
+
+  if (token !== process.env.NEWSLETTER_BROADCAST_TOKEN) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
+  const mod = await import(`@/emails/newsletter/${newsletterSlug}.tsx`)
+  const Newsletter = mod.default
+  const html = await render(<Newsletter />)
+
+  const broadcast = await resend.broadcasts.create({
+    audienceId: AUDIENCE_ID,
+    from: process.env.RESEND_EMAIL_FROM,
+    subject: Newsletter.title,
+    html,
+  })
+
+  await resend.broadcasts.send(broadcast.data.id)
+  return Response.json({ broadcastId: broadcast.data.id })
+}
+```
+
+The dynamic import means you can add new newsletter issues as files and broadcast them without changing any code. Protect this endpoint with a secret token so only you can trigger sends.
+
+In the final issue, we'll build a Gmail-style UI to tie everything together with a polished frontend.

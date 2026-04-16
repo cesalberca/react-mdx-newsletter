@@ -1,9 +1,9 @@
-import { Resend } from "resend";
-import { type NextRequest, NextResponse } from "next/server";
 import { verify } from "jsonwebtoken";
+import { type NextRequest, NextResponse } from "next/server";
 import type { ReactElement } from "react";
-import { env } from "@/lib/env";
+import { Resend } from "resend";
 import { NewsletterWelcomeEmail } from "@/emails/transactional/newsletter-welcome-email";
+import { env } from "@/lib/env";
 
 const resend = new Resend(env.RESEND_API_KEY);
 

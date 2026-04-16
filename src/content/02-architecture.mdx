@@ -25,58 +25,24 @@ Each stage transforms the content from human-friendly to email-deliverable.
 ## Project Structure
 
 ```
-newsletter/
-├── emails/
-│   ├── components/
-│   │   ├── Header.tsx       # Shared email header
-│   │   ├── Footer.tsx       # Unsubscribe link, etc.
-│   │   ├── Button.tsx       # CTA buttons
-│   │   └── CodeBlock.tsx    # Syntax highlighted code
-│   ├── templates/
-│   │   └── weekly.tsx       # Base email template
-│   └── issues/
-│       ├── 001-welcome.mdx
-│       ├── 002-hooks.mdx
-│       └── 003-patterns.mdx
-├── lib/
-│   ├── resend.ts            # Resend client
-│   ├── render.ts            # MDX → HTML pipeline
-│   └── subscribers.ts       # Subscriber management
-└── app/
-    ├── preview/[slug]/      # Preview in browser
-    └── api/send/            # Send endpoint
+  core/mdx
+  emails
+
+generate new arch
 ```
 
 </Slide>
 
 <Slide sender="Dr. Archi Tecture" timestamp="Oct 15, 2024, 10:10 AM">
 
-## The MDX → Email Pipeline
+## The newsletter architecture
 
 Step by step, here's what happens when you hit "send":
 
-1. **Read** the `.mdx` file from disk
-2. **Parse** MDX into an AST (Abstract Syntax Tree)
-3. **Transform** — apply rehype/remark plugins (syntax highlighting, etc.)
-4. **Render** — React Email components produce email-safe HTML
-5. **Inline** — CSS gets inlined (email clients hate `<style>` tags)
-6. **Send** — Resend API delivers the email
-
-```tsx
-import { render } from '@react-email/render'
-import { Resend } from 'resend'
-import { WeeklyEmail } from './templates/weekly'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
-const html = await render(<WeeklyEmail issue={latestIssue} />)
-
-await resend.emails.send({
-  from: 'newsletter@yourdomain.com',
-  to: subscribers,
-  subject: latestIssue.subject,
-  html,
-})
-```
+1. Create an MDX content under content
+2. Create an email in /emails/2026-045.tsx
+3. Load using newsletter-email-loader
+4. Use NewsletterTemplate, underneath uses EmailTemplate
 
 </Slide>
 
@@ -89,8 +55,8 @@ React Email gives you email-safe primitives:
 ```tsx
 import {
   Html, Head, Body, Container,
-  Section, Text, Button, Img, Hr,
-  Preview, Heading, Link,
+  Section, Text, EmailButton, Img, Hr,
+  Preview, Heading, EmailLink,
 } from '@react-email/components'
 
 export function WeeklyEmail({ issue }) {
@@ -112,7 +78,7 @@ export function WeeklyEmail({ issue }) {
 }
 ```
 
-These components compile down to battle-tested HTML tables and inline styles. No CSS grid. No flexbox. Just like the old days.
+These components compile to HTML tables and inline styles.
 
 Best regards,
 **Dr. Archi Tecture**, PhD in Over-Engineering

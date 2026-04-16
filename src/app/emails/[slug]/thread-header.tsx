@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import type { Section } from "@/content/sections";
-import { KeyboardNav } from "@/components/keyboard-nav";
+import { KeyboardNav } from "@/core/components/keyboard-nav";
 
 export function ThreadHeader({
   section,
@@ -45,7 +45,13 @@ export function ThreadHeader({
           }}
           aria-label="Back to inbox"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <svg
+            aria-hidden="true"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
             <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
           </svg>
         </Link>
@@ -79,6 +85,7 @@ export function ThreadHeader({
               aria-label="Previous email"
             >
               <svg
+                aria-hidden="true"
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"
@@ -106,6 +113,7 @@ export function ThreadHeader({
               aria-label="Next email"
             >
               <svg
+                aria-hidden="true"
                 width="20"
                 height="20"
                 viewBox="0 0 24 24"

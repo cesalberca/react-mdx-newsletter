@@ -1,0 +1,21 @@
+export const metadata = {
+  slug: "welcome-and-project-setup",
+  title: "Welcome! Let's Build a Newsletter from Scratch",
+  description:
+    "Setting up a Next.js project with MDX, React Email, and Resend — everything you need to ship your own newsletter",
+  date: new Date("2025-12-09"),
+};
+
+Welcome to the first issue! Over the next seven issues, you'll build a complete newsletter system — from writing content in MDX all the way to sending beautifully rendered emails to your subscribers.
+
+Let's start by scaffolding the project. We'll use Next.js as the foundation since it gives us server-side rendering, API routes, and a great developer experience out of the box:
+
+```bash
+npx create-next-app@latest my-newsletter --typescript --app
+cd my-newsletter
+npm install @react-email/components resend
+```
+
+That's three packages doing the heavy lifting: Next.js for the web app, **@react-email/components** for building email templates with React, and **resend** for actually delivering the emails.
+
+Next issue, we'll dive into MDX and see how mixing Markdown with React components lets you write rich newsletter content without leaving your editor.

@@ -1,9 +1,4 @@
 import { notFound } from "next/navigation";
-import { sections } from "@/content/sections";
-import { ThreadHeader } from "./thread-header";
-import { ThreadMessages } from "./thread-messages";
-import { MarkAsRead } from "@/components/gmail/mark-as-read";
-
 import Welcome from "@/content/01-welcome.mdx";
 import Architecture from "@/content/02-architecture.mdx";
 import Rendering from "@/content/03-rendering.mdx";
@@ -13,6 +8,10 @@ import Gotchas from "@/content/06-gotchas.mdx";
 import Closing from "@/content/07-closing.mdx";
 import NewsletterPromo from "@/content/08-newsletter-promo.mdx";
 import ServicesPromo from "@/content/09-services-promo.mdx";
+import { sections } from "@/content/sections";
+import { MarkAsRead } from "@/core/components/gmail/mark-as-read";
+import { ThreadHeader } from "./thread-header";
+import { ThreadMessages } from "./thread-messages";
 
 const mdxMap: Record<string, React.ComponentType> = {
   welcome: Welcome,

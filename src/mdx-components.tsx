@@ -1,9 +1,9 @@
 import type { MDXComponents } from "mdx/types";
-import { MdxComponentsFactory } from "@/core/mdx/mdx-components-factory";
+import { getMdxComponents } from "@/core/mdx/mdx-components-factory";
 
 // This file needs to be here
 
-const customComponents = MdxComponentsFactory.get("web");
+const customComponents = getMdxComponents("web");
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {

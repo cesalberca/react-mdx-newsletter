@@ -1,8 +1,6 @@
-import { notFound } from "next/navigation";
 import { render } from "@react-email/render";
+import { notFound } from "next/navigation";
 import { newsletters } from "@/content/newsletters";
-import { NewsletterThreadHeader } from "./thread-header";
-
 import WelcomeAndProjectSetup from "@/emails/newsletter/2025-12-09_welcome-and-project-setup";
 import WritingContentWithMdx from "@/emails/newsletter/2025-12-23_writing-content-with-mdx";
 import DesigningEmailTemplates from "@/emails/newsletter/2026-01-06_designing-email-templates";
@@ -10,6 +8,7 @@ import SendingEmailsWithResend from "@/emails/newsletter/2026-01-20_sending-emai
 import BuildingASubscriptionSystem from "@/emails/newsletter/2026-02-03_building-a-subscription-system";
 import BroadcastingToYourAudience from "@/emails/newsletter/2026-02-17_broadcasting-to-your-audience";
 import AddingAGmailStyleUi from "@/emails/newsletter/2026-03-03_adding-a-gmail-style-ui";
+import { NewsletterThreadHeader } from "./thread-header";
 
 const componentMap: Record<string, React.ComponentType> = {
   "welcome-and-project-setup": WelcomeAndProjectSetup,
@@ -77,6 +76,7 @@ export default async function NewsletterPage({
             borderRadius: 8,
             overflow: "hidden",
           }}
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted HTML rendered from React Email template
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>

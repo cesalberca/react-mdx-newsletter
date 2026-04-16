@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ThemeProvider } from "@/lib/theme-context";
-import { ComposeProvider } from "@/lib/compose-context";
-import { ReadStatusProvider } from "@/lib/read-status-context";
-import { Sidebar } from "@/components/gmail/sidebar";
-import { SearchBar } from "@/components/gmail/search-bar";
-import { ComposeDialog } from "@/components/gmail/compose-dialog";
-import { QrCodeWidget } from "@/components/gmail/qr-code-widget";
+import { ComposeDialog } from "@/core/components/gmail/compose-dialog";
+import { QrCodeWidget } from "@/core/components/gmail/qr-code-widget";
+import { SearchBar } from "@/core/components/gmail/search-bar";
+import { Sidebar } from "@/core/components/gmail/sidebar";
+import { ComposeProvider } from "@/core/context/compose-context";
+import { ReadStatusProvider } from "@/core/context/read-status-context";
+import { ThemeProvider } from "@/core/context/theme-context";
 
 export const metadata: Metadata = {
   title:
@@ -32,6 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: inline script to prevent flash of unstyled content before hydration */}
         <script dangerouslySetInnerHTML={{ __html: ANTI_FOUC_SCRIPT }} />
       </head>
       <body>

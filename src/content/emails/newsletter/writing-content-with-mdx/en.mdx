@@ -1,0 +1,24 @@
+export const metadata = {
+  slug: "writing-content-with-mdx",
+  title: "Writing Newsletter Content with MDX",
+  description:
+    "How MDX lets you mix Markdown and React components to create rich, interactive newsletter content",
+  date: new Date("2025-12-23"),
+};
+
+MDX is Markdown on steroids — you write prose in Markdown and drop in React components wherever you need something richer. Here's what a simple newsletter issue looks like as an MDX file:
+
+```markdown
+# Welcome to Issue 2
+
+Regular **Markdown** works as expected.
+You can also embed custom React components inline.
+```
+
+To make this work, install the MDX packages and configure Next.js:
+
+```bash
+npm install @next/mdx @mdx-js/loader @mdx-js/react
+```
+
+The real power comes from custom components. You can map any HTML element to a styled React component and reuse them across all your newsletter issues. Next time, we'll turn this MDX content into actual email templates using React Email.

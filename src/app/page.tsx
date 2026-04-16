@@ -1,5 +1,5 @@
 import { inboxSections } from "@/content/sections";
-import { InboxRow } from "@/components/gmail/inbox-row";
+import { InboxRow } from "@/core/components/gmail/inbox-row";
 
 export default function InboxPage() {
   return (

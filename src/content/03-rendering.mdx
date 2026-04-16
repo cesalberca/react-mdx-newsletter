@@ -33,9 +33,9 @@ Unlike web browsers, email clients are **stuck in 2003**:
 
 **Danger zone:**
 - `<div>` with flexbox or grid — Outlook will ignore it
-- `position: absolute/fixed` — nope
-- `box-shadow` — nope
-- CSS variables — nope
+- `position: absolute/fixed` — ❌
+- `box-shadow` — ❌
+- CSS variables — ❌
 - `@media` queries — limited support
 - External stylesheets — stripped by Gmail
 - JavaScript — obviously not
@@ -106,16 +106,9 @@ npx react-email dev
 
 This gives you:
 - **Live preview** of every email template
-- **Hot reload** as you edit
+- **Hot reload** as you edit (sometimes it breaks with MDX files 😭)
 - **Source view** of the generated HTML
-- **Send test emails** directly from the UI
-
-### Testing across clients
-
-For real-world testing, use services like:
-- **Litmus** — renders across 90+ email clients
-- **Email on Acid** — similar coverage
-- **Mailtrap** — catches emails in a sandbox
+- **Send test emails** directly from the UI (the **only way** to test emails
 
 > Remember: If it looks good in your browser, it probably looks terrible in Outlook.
 

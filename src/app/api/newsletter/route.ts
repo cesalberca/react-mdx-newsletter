@@ -1,7 +1,7 @@
-import { Resend } from "resend";
+import { sign } from "jsonwebtoken";
 import { type NextRequest, NextResponse } from "next/server";
 import type { ReactElement } from "react";
-import { sign } from "jsonwebtoken";
+import { Resend } from "resend";
 import { v4 as uuid } from "uuid";
 import NewsletterConfirmationEmail from "@/emails/transactional/newsletter-confirmation-email";
 import { env } from "@/lib/env";

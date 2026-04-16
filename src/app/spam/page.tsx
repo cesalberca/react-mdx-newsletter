@@ -1,5 +1,5 @@
 import { spamSections } from "@/content/sections";
-import { InboxRow } from "@/components/gmail/inbox-row";
+import { InboxRow } from "@/core/components/gmail/inbox-row";
 
 export default function SpamPage() {
   return (
@@ -19,6 +19,7 @@ export default function SpamPage() {
         }}
       >
         <svg
+          aria-hidden="true"
           width="20"
           height="20"
           viewBox="0 0 24 24"

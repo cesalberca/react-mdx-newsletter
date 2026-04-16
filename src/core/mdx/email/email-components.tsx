@@ -1,16 +1,16 @@
+import type { PrismLanguage } from "@react-email/code-block";
+import { CodeInline, Text } from "@react-email/components";
 import type {
   HTMLAttributes,
   JSX,
   LinkHTMLAttributes,
   PropsWithChildren,
 } from "react";
-import { createEmailHeading } from "@/core/mdx/email/email-headings";
-import { Link as EmailLink } from "@/email/delivery/components/link/link";
-import { CodeInline, Text } from "@react-email/components";
-import { CodeBlock } from "@/email/delivery/components/code-block/code-block";
-import type { PrismLanguage } from "@react-email/code-block";
 import type { MdxComponentsMap } from "@/core/mdx/components";
 import { EmailAlert } from "@/core/mdx/email/email-alert";
+import { EmailCodeBlock } from "@/core/mdx/email/email-code-block/email-code-block";
+import { createEmailHeading } from "@/core/mdx/email/email-headings";
+import { EmailLink } from "@/core/mdx/email/email-link";
 import {
   EmailTable,
   EmailTableBody,
@@ -43,7 +43,7 @@ export function getEmailMdxComponents(): MdxComponentsMap {
     ) => {
       let href = props.href as string;
       if (href?.startsWith("/")) {
-        href = (process.env["NEXT_PUBLIC_URL"] ?? "") + href;
+        href = (process.env.NEXT_PUBLIC_URL ?? "") + href;
       }
       return <EmailLink href={href}>{props.children}</EmailLink>;
     },
@@ -71,7 +71,10 @@ export function getEmailMdxComponents(): MdxComponentsMap {
         ? className.replace("language-", "")
         : "typescript";
       return (
-        <CodeBlock code={codeContent} language={language as PrismLanguage} />
+        <EmailCodeBlock
+          code={codeContent}
+          language={language as PrismLanguage}
+        />
       );
     },
     table: EmailTable,

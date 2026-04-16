@@ -1,7 +1,7 @@
-import { EmailTemplate } from "@/email/delivery/templates/email-template";
-import { Button } from "@/email/delivery/components/button/button";
-import { Link } from "@/email/delivery/components/link/link";
 import { Container, Text } from "@react-email/components";
+import { EmailLink } from "@/core/mdx/email/email-link";
+import { EmailButton } from "@/features/email/delivery/components/email-button/email-button";
+import { EmailTemplate } from "@/features/email/delivery/templates/email-template";
 
 interface ConfirmationEmailProps {
   confirmationToken: string;
@@ -41,11 +41,13 @@ export default function NewsletterConfirmationEmail({
       </Text>
 
       <Container style={{ textAlign: "center", width: "66%" }}>
-        <Button link={confirmationUrl}>Confirm the subscription</Button>
+        <EmailButton link={confirmationUrl}>
+          Confirm the subscription
+        </EmailButton>
         <Text style={{ fontSize: 12 }}>
           Or copy and paste this link in your browser:
           <br />
-          <Link href={confirmationUrl}>{confirmationUrl}</Link>
+          <EmailLink href={confirmationUrl}>{confirmationUrl}</EmailLink>
         </Text>
       </Container>
 

@@ -1,8 +1,8 @@
 "use client";
 
 import { Children, isValidElement } from "react";
-import { ThreadMessage } from "@/components/gmail/thread-message";
 import type { Section } from "@/content/sections";
+import { ThreadMessage } from "@/core/components/gmail/thread-message";
 
 export function ThreadMessages({
   section,
