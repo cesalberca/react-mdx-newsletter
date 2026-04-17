@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "compile": "tsc --noEmit --incremental",
     "email": "email dev --dir src/newsletter/emails --port 3001",
     "start": "next start",
     "lint": "biome check",

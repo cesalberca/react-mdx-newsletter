@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import type { ReactNode } from "react";
 import { ComposeDialog } from "@/core/components/gmail/compose-dialog";
 import { QrCodeWidget } from "@/core/components/gmail/qr-code-widget";
 import { SearchBar } from "@/core/components/gmail/search-bar";
@@ -27,7 +28,7 @@ const ANTI_FOUC_SCRIPT = `
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>

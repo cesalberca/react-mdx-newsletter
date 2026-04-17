@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
-import { newsletters } from "@/content/newsletters";
+import { type CSSProperties, useCallback, useEffect, useState } from "react";
 import { useCompose } from "@/core/context/compose-context";
+import { newsletters } from "@/newsletter/content/newsletters";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -141,7 +141,7 @@ function Signature() {
 }
 
 function FormattingToolbar() {
-  const iconStyle: React.CSSProperties = {
+  const iconStyle: CSSProperties = {
     background: "none",
     border: "none",
     padding: 4,
@@ -301,7 +301,7 @@ export function ComposeDialog() {
     }
   }
 
-  const headerIconStyle: React.CSSProperties = {
+  const headerIconStyle: CSSProperties = {
     background: "none",
     border: "none",
     color: "#9aa0a6",
@@ -314,7 +314,7 @@ export function ComposeDialog() {
     alignItems: "center",
   };
 
-  const bottomIconStyle: React.CSSProperties = {
+  const bottomIconStyle: CSSProperties = {
     background: "none",
     border: "none",
     padding: 6,

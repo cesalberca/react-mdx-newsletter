@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { ComponentType } from "react";
 import Welcome from "@/content/01-welcome.mdx";
 import Architecture from "@/content/02-architecture.mdx";
 import Rendering from "@/content/03-rendering.mdx";
@@ -13,7 +14,7 @@ import { MarkAsRead } from "@/core/components/gmail/mark-as-read";
 import { ThreadHeader } from "./thread-header";
 import { ThreadMessages } from "./thread-messages";
 
-const mdxMap: Record<string, React.ComponentType> = {
+const mdxMap: Record<string, ComponentType> = {
   welcome: Welcome,
   architecture: Architecture,
   rendering: Rendering,
@@ -33,10 +34,14 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<{ title: string }> {
   const { slug } = await params;
   const section = sections.find((s) => s.slug === slug);
-  if (!section) return {};
+  if (!section) {
+    return {
+      title: "",
+    };
+  }
   return { title: section.subject };
 }
 

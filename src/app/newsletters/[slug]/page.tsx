@@ -1,20 +1,13 @@
 import { render } from "@react-email/render";
 import { notFound } from "next/navigation";
-import { newsletters } from "@/content/newsletters";
-import WelcomeAndProjectSetup from "@/newsletter/emails/newsletter/2025-12-09_welcome-and-project-setup";
-import WritingContentWithMdx from "@/newsletter/emails/newsletter/2025-12-23_writing-content-with-mdx";
-import DesigningEmailTemplates from "@/newsletter/emails/newsletter/2026-01-06_designing-email-templates";
-import SendingEmailsWithResend from "@/newsletter/emails/newsletter/2026-01-20_sending-emails-with-resend";
+import type { ComponentType } from "react";
+import { newsletters } from "@/newsletter/content/newsletters";
 import BuildingASubscriptionSystem from "@/newsletter/emails/newsletter/2026-02-03_building-a-subscription-system";
 import BroadcastingToYourAudience from "@/newsletter/emails/newsletter/2026-02-17_broadcasting-to-your-audience";
 import AddingAGmailStyleUi from "@/newsletter/emails/newsletter/2026-03-03_adding-a-gmail-style-ui";
 import { NewsletterThreadHeader } from "./thread-header";
 
-const componentMap: Record<string, React.ComponentType> = {
-  "welcome-and-project-setup": WelcomeAndProjectSetup,
-  "writing-content-with-mdx": WritingContentWithMdx,
-  "designing-email-templates": DesigningEmailTemplates,
-  "sending-emails-with-resend": SendingEmailsWithResend,
+const componentMap: Record<string, ComponentType> = {
   "building-a-subscription-system": BuildingASubscriptionSystem,
   "broadcasting-to-your-audience": BroadcastingToYourAudience,
   "adding-a-gmail-style-ui": AddingAGmailStyleUi,
@@ -28,10 +21,13 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}) {
+}): Promise<{ title: string }> {
   const { slug } = await params;
   const newsletter = newsletters.find((n) => n.slug === slug);
-  if (!newsletter) return {};
+  if (!newsletter)
+    return {
+      title: "",
+    };
   return { title: newsletter.title };
 }
 

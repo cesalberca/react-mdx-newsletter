@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 import { Avatar } from "./avatar";
 
 export function ThreadMessage({
@@ -13,7 +13,7 @@ export function ThreadMessage({
   sender: string;
   senderEmail: string;
   timestamp: string;
-  children: React.ReactNode;
+  children: ReactNode;
   defaultExpanded?: boolean;
 }) {
   const [expanded, setExpanded] = useState(defaultExpanded);

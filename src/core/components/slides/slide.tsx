@@ -1,9 +1,11 @@
+import type { ReactNode } from "react";
+
 export function Slide({
   children,
   sender,
   timestamp,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   sender?: string;
   timestamp?: string;
 }) {

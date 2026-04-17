@@ -1,6 +1,6 @@
 "use client";
 
-import { Children, isValidElement } from "react";
+import { Children, isValidElement, type ReactNode } from "react";
 import type { Section } from "@/content/sections";
 import { ThreadMessage } from "@/core/components/gmail/thread-message";
 
@@ -9,7 +9,7 @@ export function ThreadMessages({
   children,
 }: {
   section: Section;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const slides = extractSlides(children);
 
@@ -47,13 +47,13 @@ export function ThreadMessages({
 interface SlideData {
   sender?: string;
   timestamp?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-function extractSlides(node: React.ReactNode): SlideData[] {
+function extractSlides(node: ReactNode): SlideData[] {
   const slides: SlideData[] = [];
 
-  function walk(n: React.ReactNode) {
+  function walk(n: ReactNode) {
     if (!isValidElement(n)) return;
 
     const props = n.props as Record<string, unknown>;
@@ -62,13 +62,13 @@ function extractSlides(node: React.ReactNode): SlideData[] {
       slides.push({
         sender: props["data-sender"] as string | undefined,
         timestamp: props["data-timestamp"] as string | undefined,
-        children: props.children as React.ReactNode,
+        children: props.children as ReactNode,
       });
       return;
     }
 
     if (props.children) {
-      Children.forEach(props.children as React.ReactNode, walk);
+      Children.forEach(props.children as ReactNode, walk);
     }
   }
 
