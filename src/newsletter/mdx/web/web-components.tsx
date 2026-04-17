@@ -1,11 +1,11 @@
 import type { HTMLAttributes, PropsWithChildren } from "react";
 import { Slide } from "@/core/components/slides/slide";
-import type { MdxComponentsMap } from "@/core/mdx/components";
-import { WebAlert } from "@/core/mdx/web/web-alert";
-import { WebCode } from "@/core/mdx/web/web-code";
-import { createWebHeading } from "@/core/mdx/web/web-headings";
-import { WebLink } from "@/core/mdx/web/web-link";
-import { WebPre } from "@/core/mdx/web/web-pre";
+import type { MdxComponentsMap } from "@/newsletter/mdx/components";
+import { WebAlert } from "@/newsletter/mdx/web/web-alert";
+import { WebCode } from "@/newsletter/mdx/web/web-code";
+import { createWebHeading } from "@/newsletter/mdx/web/web-headings";
+import { WebLink } from "@/newsletter/mdx/web/web-link";
+import { WebPre } from "@/newsletter/mdx/web/web-pre";
 import {
   WebTable,
   WebTableBody,
@@ -13,7 +13,7 @@ import {
   WebTableHead,
   WebTableHeader,
   WebTableRow,
-} from "@/core/mdx/web/web-table";
+} from "@/newsletter/mdx/web/web-table";
 
 export function getWebMdxComponents(): MdxComponentsMap {
   return {

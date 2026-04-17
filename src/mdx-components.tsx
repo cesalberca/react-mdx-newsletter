@@ -1,5 +1,5 @@
 import type { MDXComponents } from "mdx/types";
-import { getMdxComponents } from "@/core/mdx/mdx-components-factory";
+import { getMdxComponents } from "@/newsletter/mdx/mdx-components-factory";
 
 // This file needs to be here
 

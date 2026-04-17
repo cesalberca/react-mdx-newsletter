@@ -2,8 +2,8 @@ import { verify } from "jsonwebtoken";
 import { type NextRequest, NextResponse } from "next/server";
 import type { ReactElement } from "react";
 import { Resend } from "resend";
-import { NewsletterWelcomeEmail } from "@/emails/transactional/newsletter-welcome-email";
 import { env } from "@/lib/env";
+import { NewsletterWelcomeEmail } from "@/newsletter/emails/transactional/newsletter-welcome-email";
 
 const resend = new Resend(env.RESEND_API_KEY);
 

@@ -6,11 +6,11 @@ import type {
   LinkHTMLAttributes,
   PropsWithChildren,
 } from "react";
-import type { MdxComponentsMap } from "@/core/mdx/components";
-import { EmailAlert } from "@/core/mdx/email/email-alert";
-import { EmailCodeBlock } from "@/core/mdx/email/email-code-block/email-code-block";
-import { createEmailHeading } from "@/core/mdx/email/email-headings";
-import { EmailLink } from "@/core/mdx/email/email-link";
+import type { MdxComponentsMap } from "@/newsletter/mdx/components";
+import { EmailAlert } from "@/newsletter/mdx/email/email-alert";
+import { EmailCodeBlock } from "@/newsletter/mdx/email/email-code-block/email-code-block";
+import { createEmailHeading } from "@/newsletter/mdx/email/email-headings";
+import { EmailLink } from "@/newsletter/mdx/email/email-link";
 import {
   EmailTable,
   EmailTableBody,
@@ -18,7 +18,7 @@ import {
   EmailTableHead,
   EmailTableHeader,
   EmailTableRow,
-} from "@/core/mdx/email/email-table";
+} from "@/newsletter/mdx/email/email-table";
 
 export function getEmailMdxComponents(): MdxComponentsMap {
   return {

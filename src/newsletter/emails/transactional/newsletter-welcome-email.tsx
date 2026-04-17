@@ -1,7 +1,7 @@
 import { Text } from "@react-email/components";
 import type { FC } from "react";
-import { EmailLink } from "@/core/mdx/email/email-link";
-import { EmailTemplate } from "@/features/email/delivery/templates/email-template";
+import { EmailLink } from "@/newsletter/mdx/email/email-link";
+import { EmailTemplate } from "@/newsletter/templates/email-template";
 
 export const NewsletterWelcomeEmail: FC = () => {
   return (

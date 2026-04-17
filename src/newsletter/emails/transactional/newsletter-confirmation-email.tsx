@@ -1,7 +1,7 @@
 import { Container, Text } from "@react-email/components";
-import { EmailLink } from "@/core/mdx/email/email-link";
-import { EmailButton } from "@/features/email/delivery/components/email-button/email-button";
-import { EmailTemplate } from "@/features/email/delivery/templates/email-template";
+import { EmailButton } from "@/newsletter/components/email-button/email-button";
+import { EmailLink } from "@/newsletter/mdx/email/email-link";
+import { EmailTemplate } from "@/newsletter/templates/email-template";
 
 interface ConfirmationEmailProps {
   confirmationToken: string;

@@ -1,13 +1,13 @@
 import { render } from "@react-email/render";
 import { notFound } from "next/navigation";
 import { newsletters } from "@/content/newsletters";
-import WelcomeAndProjectSetup from "@/emails/newsletter/2025-12-09_welcome-and-project-setup";
-import WritingContentWithMdx from "@/emails/newsletter/2025-12-23_writing-content-with-mdx";
-import DesigningEmailTemplates from "@/emails/newsletter/2026-01-06_designing-email-templates";
-import SendingEmailsWithResend from "@/emails/newsletter/2026-01-20_sending-emails-with-resend";
-import BuildingASubscriptionSystem from "@/emails/newsletter/2026-02-03_building-a-subscription-system";
-import BroadcastingToYourAudience from "@/emails/newsletter/2026-02-17_broadcasting-to-your-audience";
-import AddingAGmailStyleUi from "@/emails/newsletter/2026-03-03_adding-a-gmail-style-ui";
+import WelcomeAndProjectSetup from "@/newsletter/emails/newsletter/2025-12-09_welcome-and-project-setup";
+import WritingContentWithMdx from "@/newsletter/emails/newsletter/2025-12-23_writing-content-with-mdx";
+import DesigningEmailTemplates from "@/newsletter/emails/newsletter/2026-01-06_designing-email-templates";
+import SendingEmailsWithResend from "@/newsletter/emails/newsletter/2026-01-20_sending-emails-with-resend";
+import BuildingASubscriptionSystem from "@/newsletter/emails/newsletter/2026-02-03_building-a-subscription-system";
+import BroadcastingToYourAudience from "@/newsletter/emails/newsletter/2026-02-17_broadcasting-to-your-audience";
+import AddingAGmailStyleUi from "@/newsletter/emails/newsletter/2026-03-03_adding-a-gmail-style-ui";
 import { NewsletterThreadHeader } from "./thread-header";
 
 const componentMap: Record<string, React.ComponentType> = {

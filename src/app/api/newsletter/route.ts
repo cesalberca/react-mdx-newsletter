@@ -3,8 +3,8 @@ import { type NextRequest, NextResponse } from "next/server";
 import type { ReactElement } from "react";
 import { Resend } from "resend";
 import { v4 as uuid } from "uuid";
-import NewsletterConfirmationEmail from "@/emails/transactional/newsletter-confirmation-email";
 import { env } from "@/lib/env";
+import NewsletterConfirmationEmail from "@/newsletter/emails/transactional/newsletter-confirmation-email";
 
 const resend = new Resend(env.RESEND_API_KEY);
 

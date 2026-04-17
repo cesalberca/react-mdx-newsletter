@@ -8,7 +8,7 @@ import {
   Text,
 } from "@react-email/components";
 import type { FC, PropsWithChildren } from "react";
-import { emailImageBaseUrl } from "@/lib/email-image-base-url";
+import { emailImageBaseUrl } from "@/newsletter/email-image-base-url";
 import { EmailTemplate } from "./email-template";
 
 interface NewsletterEmailProps {

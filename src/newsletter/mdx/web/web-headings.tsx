@@ -1,5 +1,5 @@
 import { createElement, type FC } from "react";
-import { slugify } from "@/core/mdx/web/slugify";
+import { slugify } from "@/newsletter/mdx/web/slugify";
 
 const SIZES: Record<number, { fontSize: number; margin: string }> = {
   1: { fontSize: 28, margin: "0 0 16px 0" },

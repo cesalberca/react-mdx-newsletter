@@ -1,16 +1,16 @@
-import type { MdxComponentsMap } from "@/core/mdx/components";
-import type { MdxComponentsProvider } from "@/core/mdx/mdx-components-provider";
+import type { MdxComponentsMap } from "@/newsletter/mdx/components";
+import type { MdxComponentsProvider } from "@/newsletter/mdx/mdx-components-provider";
 
 export function getMdxComponents(target: "web" | "email"): MdxComponentsMap {
   if (target === "web") {
     const { WebMdxComponentsProvider } =
-      require("./web/web-mdx-provider") as typeof import("@/core/mdx/web/web-mdx-provider");
+      require("./web/web-mdx-provider") as typeof import("@/newsletter/mdx/web/web-mdx-provider");
     const provider = new WebMdxComponentsProvider();
     return provider.getComponents();
   }
 
   const { EmailMdxComponentsProvider } =
-    require("./email/email-mdx-provider") as typeof import("@/core/mdx/email/email-mdx-provider");
+    require("./email/email-mdx-provider") as typeof import("@/newsletter/mdx/email/email-mdx-provider");
   const provider: MdxComponentsProvider = new EmailMdxComponentsProvider();
   return provider.getComponents();
 }

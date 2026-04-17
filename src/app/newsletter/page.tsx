@@ -1,7 +1,7 @@
 import { render } from "@react-email/render";
-import NewsletterConfirmationEmail from "@/emails/transactional/newsletter-confirmation-email";
-import { NewsletterWelcomeEmail } from "@/emails/transactional/newsletter-welcome-email";
-import { NewsletterEmailLoader } from "@/features/email/delivery/newsletter-email-loader/newsletter-email-loader";
+import { NewsletterEmailLoader } from "@/newsletter/components/newsletter-email-loader/newsletter-email-loader";
+import NewsletterConfirmationEmail from "@/newsletter/emails/transactional/newsletter-confirmation-email";
+import { NewsletterWelcomeEmail } from "@/newsletter/emails/transactional/newsletter-welcome-email";
 import { EmailPreviewCard } from "./email-preview-card";
 import { SubscribeForm } from "./subscribe-form";
 

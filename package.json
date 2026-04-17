@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "email": "email dev --dir src/emails --port 3001",
+    "email": "email dev --dir src/newsletter/emails --port 3001",
     "start": "next start",
     "lint": "biome check",
     "lint:fix": "biome check --fix",

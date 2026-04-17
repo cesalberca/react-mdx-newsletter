@@ -3,9 +3,9 @@ import path from "node:path";
 import { type EvaluateOptions, evaluateSync } from "@mdx-js/mdx";
 import type { FC } from "react";
 import * as runtime from "react/jsx-runtime";
-import { getMdxComponents } from "@/core/mdx/mdx-components-factory";
-import type { NewsletterMetadata } from "@/features/email/domain/newsletter-metadata";
-import { NewsletterTemplate } from "@/features/email/delivery/templates/newsletter-template";
+import { getMdxComponents } from "@/newsletter/mdx/mdx-components-factory";
+import type { NewsletterMetadata } from "@/newsletter/newsletter-metadata";
+import { NewsletterTemplate } from "@/newsletter/templates/newsletter-template";
 
 export const NewsletterEmailLoader: FC<{ slug: string }> = ({ slug }) => {
   const file = path.join(

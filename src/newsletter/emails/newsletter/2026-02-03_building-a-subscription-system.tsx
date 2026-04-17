@@ -1,4 +1,4 @@
-import { NewsletterEmailLoader } from "@/features/email/delivery/newsletter-email-loader/newsletter-email-loader";
+import { NewsletterEmailLoader } from "@/newsletter/components/newsletter-email-loader/newsletter-email-loader";
 
 const BuildingASubscriptionSystem = () => {
   return <NewsletterEmailLoader slug="building-a-subscription-system" />;
