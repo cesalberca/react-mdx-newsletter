@@ -19,9 +19,9 @@ export function WebPre({ children }: { children: ReactNode }) {
       ref={preRef}
       style={{
         padding: 0,
-        fontSize: 14,
-        fontFamily: '"Roboto Mono", ui-monospace, monospace',
         marginBottom: 16,
+        borderRadius: 8,
+        overflow: "hidden",
         position: "relative",
       }}
       className="group not-prose"
@@ -45,6 +45,7 @@ export function WebPre({ children }: { children: ReactNode }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          zIndex: 1,
         }}
         className="group-hover:!opacity-100"
       >

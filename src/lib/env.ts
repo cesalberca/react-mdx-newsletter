@@ -16,8 +16,8 @@ export const env = {
   get RESEND_TEST_EMAIL() {
     return getEnvVar("RESEND_TEST_EMAIL");
   },
-  get RESEND_AUDIENCE_ID() {
-    return getEnvVar("RESEND_AUDIENCE_ID");
+  get RESEND_SEGMENT_ID() {
+    return getEnvVar("RESEND_SEGMENT_ID");
   },
   get NEWSLETTER_BROADCAST_TOKEN() {
     return getEnvVar("NEWSLETTER_BROADCAST_TOKEN");

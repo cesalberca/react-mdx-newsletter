@@ -47,7 +47,7 @@ export async function confirm(
 
   const contactResult = await resend.contacts.create({
     email,
-    audienceId: env.RESEND_AUDIENCE_ID,
+    audienceId: env.RESEND_SEGMENT_ID,
   });
 
   if (contactResult.error) {

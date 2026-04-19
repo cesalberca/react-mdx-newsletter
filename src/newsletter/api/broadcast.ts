@@ -25,7 +25,7 @@ export async function broadcast(
   const html = await render(NewsletterComponent() as ReactElement);
 
   const result = await resend.broadcasts.create({
-    audienceId: env.RESEND_AUDIENCE_ID,
+    audienceId: env.RESEND_SEGMENT_ID,
     from: env.RESEND_EMAIL_FROM,
     subject: title,
     html,

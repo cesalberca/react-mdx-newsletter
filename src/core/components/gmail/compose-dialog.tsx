@@ -282,13 +282,10 @@ export function ComposeDialog() {
     setStatus("sending");
     setErrorMsg("");
     try {
-      const res = await fetch("/api/newsletter/broadcast", {
+      const res = await fetch("/api/newsletter/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          newsletterSlug: selected.filename,
-          token: process.env.NEXT_PUBLIC_NEWSLETTER_BROADCAST_TOKEN ?? "",
-        }),
+        body: JSON.stringify({ newsletterSlug: selected.filename }),
       });
       if (!res.ok) {
         const data = await res.json();

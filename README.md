@@ -60,7 +60,7 @@ cp .env.example .env
 # Resend (https://resend.com)
 RESEND_API_KEY=re_...
 RESEND_EMAIL_FROM=you@yourdomain.com
-RESEND_AUDIENCE_ID=...
+RESEND_SEGMENT_ID=...
 RESEND_TEST_EMAIL=you@yourdomain.com
 
 # Auth
@@ -76,7 +76,7 @@ NEXT_PUBLIC_URL=http://localhost:3000
 Where to find the Resend values:
 
 - `RESEND_API_KEY`: [resend.com/api-keys](https://resend.com/api-keys)
-- `RESEND_AUDIENCE_ID`: Resend dashboard > Audiences > your audience > copy the ID
+- `RESEND_SEGMENT_ID`: Resend dashboard > Audiences > your audience > copy the ID
 - `RESEND_EMAIL_FROM`: you must verify your domain or use a Resend-provided address first
 
 ### Start the development server

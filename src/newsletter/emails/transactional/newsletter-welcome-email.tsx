@@ -6,39 +6,38 @@ import { EmailTemplate } from "@/newsletter/templates/email-template";
 export const NewsletterWelcomeEmail: FC = () => {
   return (
     <EmailTemplate
-      title="Welcome to the Newsletter!"
-      description="I'm thrilled to welcome you to this newsletter."
+      title="The Inheritance Has Been Transferred"
+      description="Your identity has been verified. The vault is open."
     >
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        I&apos;m thrilled you&apos;ve decided to sign up to this newsletter to
-        learn about <strong>Frontend Architecture</strong> with me. With this
-        step you are creating a future for yourself where you&apos;ll learn:
+        Dear Esteemed Friend,
       </Text>
 
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        - Applying use cases to unlock the full potential of your architecture
-        <br />- Learning design patterns like Chain of Responsibility,
-        Decorator, Command and more
-        <br />- Integrating AI tools to maximize the quality of generated code
+        The transfer is complete. Your identity has been verified and your
+        rightful inheritance has been released from the vault. The first
+        dispatch will reach you shortly.
       </Text>
 
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        If you really want to make sure you get the newsletter, I kindly ask to
-        reply to this email with &quot;Hey César&quot; to make sure it
-        doesn&apos;t end up in Spam. It takes 10 seconds. Writing each
-        newsletter takes me ~4 hours.
+        To ensure the inheritance does not end up in the spam vault, I kindly
+        request you reply to this email with &quot;I accept the transfer&quot;.
+        It takes 10 seconds. Each issue takes me approximately 4 hours to
+        prepare.
       </Text>
 
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        Great, thank you very much! You&apos;ll now be receiving recurrent
-        emails from me about <strong>Frontend Architecture</strong>. While I
-        type away the next newsletter, you can read previous{" "}
+        While I prepare the next dispatch, you may review previous issues{" "}
         <EmailLink
-          href={`${process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000"}/newsletter`}
+          href={`${process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000"}/newsletters`}
         >
-          newsletters here
+          in the archive
         </EmailLink>
         .
+      </Text>
+
+      <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
+        I remain eternally grateful for your cooperation.
       </Text>
     </EmailTemplate>
   );

@@ -6,8 +6,11 @@ import {
   Html,
   Img,
   Link,
+  pixelBasedPreset,
   Preview,
   Section,
+  Tailwind,
+  type TailwindConfig,
   Text,
 } from "@react-email/components";
 import type { FC, PropsWithChildren, ReactElement } from "react";
@@ -20,6 +23,23 @@ interface EmailTemplateProps {
   footer?: ReactElement;
 }
 
+const config: TailwindConfig = {
+  presets: [pixelBasedPreset],
+  theme: {
+    extend: {
+      colors: {
+        primary: "#171717",
+        background: "#ffffff",
+        foreground: "#0a0a0a",
+        secondary: "#f5f5f5",
+        muted: "#f5f5f5",
+        "muted-foreground": "#737373",
+        border: "#e5e5e5",
+      },
+    },
+  },
+};
+
 export const EmailTemplate: FC<PropsWithChildren<EmailTemplateProps>> = ({
   description,
   title,
@@ -31,152 +51,85 @@ export const EmailTemplate: FC<PropsWithChildren<EmailTemplateProps>> = ({
 
   return (
     <Html>
-      <Head />
-      <Preview>{description}</Preview>
-      <Body
-        style={{
-          fontFamily: "Arial, Helvetica, sans-serif",
-          margin: "auto",
-          padding: 0,
-        }}
-      >
-        <Container style={{ maxWidth: 600, margin: "0 auto" }}>
-          {browserUrl && (
-            <Section
-              style={{
-                padding: "8px 24px",
-                textAlign: "center",
-                borderBottom: "1px solid #e5e5e5",
-              }}
-            >
-              <Text style={{ color: "#737373", fontSize: 12, margin: 0 }}>
-                <Link href={browserUrl} style={{ color: "#737373" }}>
-                  View this email in your browser
+      <Tailwind config={config}>
+        <Head />
+        <Preview>{description}</Preview>
+        <Body className="font-sans mx-auto my-auto m-0 p-0">
+          <Container className="mx-auto max-w-[600px]">
+            {browserUrl && (
+              <Section className="py-2 px-6 text-center border-b border-border">
+                <Text className="text-muted-foreground text-xs m-0">
+                  <Link href={browserUrl} className="text-muted-foreground">
+                    View this email in your browser
+                  </Link>
+                </Text>
+              </Section>
+            )}
+
+            <Section className="py-4 px-6 pb-0 text-center">
+              <Link href={baseUrl} className="no-underline">
+                <Img
+                  src={emailImageBaseUrl("logo.png")}
+                  width="45"
+                  height="30"
+                  alt="Logo"
+                  className="w-[45px] h-auto mx-auto"
+                />
+                <Text className="text-foreground text-sm m-0 font-medium tracking-wide">
+                  César Alberca
+                </Text>
+                <Text className="text-muted-foreground text-xs mt-2 m-0 italic">
+                  Sole Heir of Ancient Frontend Architecture Wisdom
+                </Text>
+              </Link>
+            </Section>
+
+            <Section className="p-2">
+              <Heading className="text-[42px] font-bold text-foreground text-left leading-tight my-2">
+                {title}
+              </Heading>
+
+              <Section className="text-muted-foreground text-xl leading-relaxed">
+                {children}
+              </Section>
+
+              <Section className="mt-4">
+                <Img
+                  src={emailImageBaseUrl("signature.png")}
+                  width="501"
+                  height="161"
+                  alt="Handwritten César Alberca"
+                  className="mx-auto max-w-full h-auto w-[400px]"
+                />
+                <Text className="text-muted-foreground text-xs text-center m-0 italic">
+                  Freelance Frontend Architect
+                </Text>
+              </Section>
+            </Section>
+
+            <Section className="bg-muted py-8 px-6 text-xs">
+              {footer}
+
+              <Text className="text-muted-foreground mb-4 text-center">
+                <Link
+                  href="{{{RESEND_UNSUBSCRIBE_URL}}}"
+                  className="text-muted-foreground"
+                >
+                  Unsubscribe
+                </Link>
+                {" / "}
+                <Link href={baseUrl} className="text-muted-foreground">
+                  Visit Website
                 </Link>
               </Text>
-            </Section>
-          )}
 
-          <Section style={{ padding: "16px 24px 0", textAlign: "center" }}>
-            <Link href={baseUrl} style={{ textDecoration: "none" }}>
-              <Img
-                src={emailImageBaseUrl("logo.png")}
-                width="45"
-                height="30"
-                alt="Logo"
-                style={{ width: 45, height: "auto", margin: "0 auto" }}
-              />
-              <Text
-                style={{
-                  color: "#0a0a0a",
-                  fontSize: 14,
-                  margin: 0,
-                  fontWeight: 500,
-                }}
-              >
-                César Alberca
-              </Text>
-              <Text
-                style={{
-                  color: "#737373",
-                  fontSize: 12,
-                  marginTop: 8,
-                  margin: 0,
-                  fontStyle: "italic",
-                }}
-              >
-                Helping You Build Scalable, AI-Ready Frontend Architecture
-              </Text>
-            </Link>
-          </Section>
-
-          <Section style={{ padding: 8 }}>
-            <Heading
-              style={{
-                fontSize: 42,
-                fontWeight: 700,
-                color: "#0a0a0a",
-                lineHeight: 1.2,
-                margin: "8px 0",
-              }}
-            >
-              {title}
-            </Heading>
-
-            <Section
-              style={{ color: "#737373", fontSize: 18, lineHeight: 1.6 }}
-            >
-              {children}
-            </Section>
-
-            <Section style={{ marginTop: 16 }}>
-              <Img
-                src={emailImageBaseUrl("signature.png")}
-                width="501"
-                height="161"
-                alt="Handwritten César Alberca"
-                style={{
-                  margin: "0 auto",
-                  maxWidth: "100%",
-                  height: "auto",
-                  width: 400,
-                }}
-              />
-              <Text
-                style={{
-                  color: "#737373",
-                  fontSize: 12,
-                  textAlign: "center",
-                  margin: 0,
-                }}
-              >
-                <em>Freelance Frontend Architect</em>
+              <Text className="text-muted-foreground text-xs text-center m-0 italic">
+                Copyright &copy; {new Date().getFullYear()} All Rights Reserved.
               </Text>
             </Section>
-          </Section>
-
-          <Section
-            style={{
-              backgroundColor: "#f5f5f5",
-              padding: "32px 24px",
-              fontSize: 12,
-            }}
-          >
-            {footer}
-
-            <Text
-              style={{
-                color: "#737373",
-                marginBottom: 16,
-                textAlign: "center",
-              }}
-            >
-              <Link
-                href="{{{RESEND_UNSUBSCRIBE_URL}}}"
-                style={{ color: "#737373" }}
-              >
-                Unsubscribe
-              </Link>
-              {" / "}
-              <Link href={baseUrl} style={{ color: "#737373" }}>
-                Visit Website
-              </Link>
-            </Text>
-
-            <Text
-              style={{
-                color: "#737373",
-                fontSize: 12,
-                textAlign: "center",
-                margin: 0,
-                fontStyle: "italic",
-              }}
-            >
-              Copyright &copy; {new Date().getFullYear()} All Rights Reserved.
-            </Text>
-          </Section>
-        </Container>
-      </Body>
+          </Container>
+        </Body>
+      </Tailwind>
     </Html>
   );
 };

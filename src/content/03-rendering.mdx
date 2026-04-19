@@ -52,48 +52,31 @@
 
   React Email abstracts away _some_ of the pain. You write modern JSX, it outputs legacy-compatible HTML:
 
-  ```tsx
-  // You write this:
-  <Tailwind>
-    <Body className="bg-white font-sans">
-      <Container className="mx-auto max-w-xl px-4 py-8">
-        <Section className="p-5">
-          <Text className="text-base text-[#333]">
-            Hello subscriber!
-          </Text>
-          <Button
-            href="https://example.com"
-            className="bg-blue-600 text-white px-6 py-3 rounded"
-          >
-            Click me
-          </Button>
-        </Section>
-      </Container>
-    </Body>
-  </Tailwind>
-
-  ```html
-  <!-- It outputs this: -->
-  <table width="100%" cellpadding="0" cellspacing="0">
-    <tr>
-      <td style="padding:20px">
-        <p style="font-size:16px;color:#333">
+```tsx
+// You write this:
+<Tailwind>
+  <Body className="bg-white font-sans">
+    <Container className="mx-auto max-w-xl px-4 py-8">
+      <Section className="p-5">
+        <Text className="text-base text-[#333]">
           Hello subscriber!
-        </p>
-        <table cellpadding="0" cellspacing="0">
-          <tr>
-            <td style="background-color:#007bff;padding:12px 24px">
-              <a href="https://example.com"
-                 style="color:#fff;text-decoration:none">
-                Click me
-              </a>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-  ```
+        </Text>
+        <Button
+          href="https://example.com"
+          className="bg-blue-600 text-white px-6 py-3 rounded"
+        >
+          Click me
+        </Button>
+      </Section>
+    </Container>
+  </Body>
+</Tailwind>
+```
+
+```html
+<!-- It outputs this: -->
+  <table border="0" width="100%" cellpadding="0" cellspacing="0" role="presentation" align="center"><tbody><tr><td><table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin-right:auto;margin-left:auto;max-width:37.5em;padding-right:16px;padding-left:16px;padding-bottom:32px;padding-top:32px"><tbody><tr style="width:100%"><td><table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="padding:20px"><tbody><tr><td><p style="font-size:14px;line-height:24px;color:rgb(51,51,51);margin-top:16px;margin-bottom:16px">Hello subscriber!</p><a href="https://example.com" style="background-color:rgb(21,93,252);color:rgb(255,255,255);border-radius:0.25rem;line-height:100%;text-decoration:none;display:inline-block;max-width:100%;mso-padding-alt:0px" target="_blank"><span><!--[if mso]><i style="mso-font-width:0%;mso-text-raise:0" hidden></i><![endif]--></span><span style="max-width:100%;display:inline-block;line-height:120%;mso-padding-alt:0px">Click me</span><span><!--[if mso]><i style="mso-font-width:0%" hidden>&#8203;</i><![endif]--></span></a></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
+```
 
 </Slide>
 

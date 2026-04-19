@@ -30,23 +30,22 @@ CNAME resend._domainkey      // Provided by Resend
 
 Gmail **clips emails** larger than **102KB** of HTML.
 
+![Message clipped](/messageclipped.png)
+
 This means:
 - Your beautifully rendered newsletter might get cut off
 - Users see "View entire message" link instead of your content
 
 ### How to stay under 102KB:
 - Minimize inline styles (reuse patterns)
-- Compress images and use hosted URLs (don't base64 encode)
+- Compress images and use hosted URLs (**don't base64 encode**)
 - Keep content focused (nobody reads 10,000 word emails)
-- Remove unnecessary whitespace in production builds
+- Remove unnecessary whitespace in production builds (React Email already handles this for you)
 
 ```tsx
-// React Email's render function can minify
-import { render } from '@react-email/render'
+import { render } from '@react-email'
 
-const html = await render(<YourEmail />, {
-  plainText: false, // set true for text version
-})
+const html = await render(<YourEmail />)
 ```
 
 </Slide>
@@ -55,25 +54,26 @@ const html = await render(<YourEmail />, {
 
 ## Gotcha #3: Unsubscribe Compliance
 
-**This is legally required.** CAN-SPAM, GDPR, and other regulations mandate:
+**This is legally required.** [CAN-SPAM](https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business), [GDPR](https://gdpr-info.eu/), and other regulations mandate:
 
-- Every email MUST have an **unsubscribe link**
+- Every email MUST have an **unsubscribe link** (except transactional and other legal emails)
 - Unsubscribe MUST work within **10 business days**
-- You MUST include your **physical mailing address**
+- You MUST include your **physical mailing address** (yeah...)
+
+![Unsubscribe](/unsubscribe.png)
 
 ```tsx
-<Section style={{ textAlign: 'center', padding: '20px' }}>
-  <Text style={{ color: '#666', fontSize: '12px' }}>
+<Section>
+  <Text>
     You're receiving this because you subscribed at
     yourdomain.com
   </Text>
   <Link
-    href="https://yourdomain.com/unsubscribe?token={token}"
-    style={{ color: '#999', fontSize: '12px' }}
+    href="{{{RESEND_UNSUBSCRIBE_URL}}}"
   >
     Unsubscribe
   </Link>
-  <Text style={{ color: '#999', fontSize: '11px' }}>
+  <Text>
     123 Newsletter Street, Madrid, Spain
   </Text>
 </Section>
@@ -81,7 +81,7 @@ const html = await render(<YourEmail />, {
 
 ### List-Unsubscribe Header
 
-Modern email clients support one-click unsubscribe via headers:
+Modern email clients support [one-click unsubscribe](https://www.valimail.com/blog/one-click-unsubscribe/) via headers:
 
 ```typescript
 await resend.emails.send({
@@ -107,6 +107,7 @@ Your testing checklist:
 - [ ] Verify all links work
 - [ ] Test unsubscribe flow
 - [ ] Check on mobile devices
+- [ ] Check View on Browser
 - [ ] Validate HTML size is under 102KB
 - [ ] Confirm SPF/DKIM/DMARC are configured
 
@@ -115,7 +116,7 @@ Your testing checklist:
 ```
 Your browser:     ✅ Beautiful
 Gmail:            ⚠️ Mostly fine
-Apple Mail:       ✅ Great
+Apple Mail:       🙏 Ok
 Outlook Desktop:  💀 Tables broken
 Outlook.com:      🤷 Different broken
 Yahoo:            ⚠️ Unexpected spacing

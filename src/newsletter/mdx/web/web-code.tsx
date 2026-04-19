@@ -11,21 +11,46 @@ export function WebCode({
 }) {
   const className = props?.className ?? "";
   const match = /language-(\w+)/.exec(className);
-  return match ? (
-    <SyntaxHighlighter
-      {...props}
-      language={match[1]}
-      CodeTag="div"
-      PreTag="div"
-      style={dark}
-      customStyle={{ margin: 0 }}
-      codeTagProps={{
-        className: "font-mono",
-      }}
-    >
-      {children}
-    </SyntaxHighlighter>
-  ) : (
+
+  if (match) {
+    return (
+      <SyntaxHighlighter
+        {...props}
+        language={match[1]}
+        CodeTag="div"
+        PreTag="div"
+        style={dark}
+        customStyle={{ margin: 0, borderRadius: 0 }}
+        codeTagProps={{ className: "font-mono" }}
+      >
+        {children}
+      </SyntaxHighlighter>
+    );
+  }
+
+  // Block plain code (inside <pre> via WebPre)
+  if (typeof children === "string" && children.includes("\n")) {
+    return (
+      <code
+        {...props}
+        style={{
+          display: "block",
+          padding: "16px",
+          backgroundColor: "var(--bg-tertiary, #f5f5f5)",
+          color: "var(--text-primary)",
+          fontSize: 13,
+          fontFamily: '"Roboto Mono", ui-monospace, monospace',
+          lineHeight: 1.6,
+          overflowX: "auto",
+        }}
+      >
+        {children}
+      </code>
+    );
+  }
+
+  // Inline code
+  return (
     <code
       {...props}
       className={cn(

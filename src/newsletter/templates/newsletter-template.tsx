@@ -54,16 +54,8 @@ export const NewsletterTemplate: FC<
       description={description}
       browserUrl={urlToShare}
       footer={
-        <Container style={{ width: "66%", margin: "0 auto" }}>
-          <Text
-            style={{
-              color: "#737373",
-              fontSize: 12,
-              marginBottom: 0,
-              textAlign: "center",
-              lineHeight: 1.6,
-            }}
-          >
+        <Container className="w-2/3 mx-auto">
+          <Text className="text-muted-foreground text-xs mb-0 text-center leading-relaxed">
             You&apos;re receiving this email because you subscribed voluntarily
             and confirmed it by clicking a link in a verification email.
           </Text>
@@ -72,38 +64,24 @@ export const NewsletterTemplate: FC<
     >
       {children}
 
-      <Section style={{ marginTop: 48 }}>
-        <Text
-          style={{
-            color: "#0a0a0a",
-            marginBottom: 16,
-            marginTop: 0,
-            textAlign: "center",
-            fontSize: 18,
-            fontWeight: 500,
-          }}
-        >
+      <Section className="mt-12">
+        <Text className="text-foreground mb-4 mt-0 text-center text-lg font-medium">
           Help me by sharing this newsletter
         </Text>
 
         <Row>
           {socialMedia.map((x) => (
-            <Column key={x.name} style={{ textAlign: "center" }}>
+            <Column key={x.name} className="text-center">
               <Img
                 alt={x.name}
                 src={emailImageBaseUrl(x.icon)}
                 width="32"
                 height="32"
-                style={{ display: "inline-block", margin: "0 auto" }}
+                className="inline-block mx-auto"
               />
               <Link
                 href={x.href}
-                style={{
-                  color: "#737373",
-                  fontSize: 12,
-                  textDecoration: "none",
-                  display: "block",
-                }}
+                className="text-muted-foreground text-xs no-underline block"
               >
                 {x.name}
               </Link>
@@ -111,13 +89,13 @@ export const NewsletterTemplate: FC<
           ))}
         </Row>
 
-        <Container style={{ marginTop: 32 }}>
-          <Text style={{ fontSize: 12, textAlign: "center" }}>
+        <Container className="mt-8">
+          <Text className="text-xs text-center">
             Found a <em>typo</em>? The email doesn&apos;t render{" "}
             <em>correctly</em> in your email client? Have <em>any</em> feedback?
             Please, <strong>feel free to reply to this email</strong> and
             I&apos;ll get back to you <strong>as soon as I can</strong>.{" "}
-            <span style={{ textDecoration: "underline" }}>Thank you!</span>
+            <span className="underline">Thank you!</span>
           </Text>
         </Container>
       </Section>

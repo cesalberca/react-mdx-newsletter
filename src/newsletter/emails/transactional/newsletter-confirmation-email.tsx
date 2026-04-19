@@ -17,33 +17,32 @@ export default function NewsletterConfirmationEmail({
 
   return (
     <EmailTemplate
-      title="Confirm your newsletter subscription"
-      description="Just one click away from joining the Frontend Architecture newsletter community!"
+      title="Your Inheritance Awaits: One Final Step Required"
+      description="To claim your React + MDX Newsletter Inheritance, you must first verify your identity."
     >
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        Hey!
+        Dear Esteemed Friend,
       </Text>
 
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        <strong>Why you got this email</strong>: Your email has been submitted
-        in the signup form.
+        I trust this message reaches you in excellent spirits. We have received
+        your request to claim your rightful inheritance. The vault is nearly
+        open.
       </Text>
 
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        If you didn&apos;t sign up, you don&apos;t need to worry at all, feel
-        free to ignore this email and you won&apos;t get another email from me.
+        Before the transfer of wisdom can proceed, our legal department requires
+        one final verification of your identity. Simply click the sacred button
+        below to confirm your cooperation.
       </Text>
 
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        <strong>What you need to do</strong>: If you <em>did</em> sign up and
-        want to join the Frontend Architecture Newsletter, just click the button
-        below to confirm.
+        Should you have no knowledge of this inheritance, you may disregard this
+        correspondence. No further contact shall be made.
       </Text>
 
       <Container style={{ textAlign: "center", width: "66%" }}>
-        <EmailButton link={confirmationUrl}>
-          Confirm the subscription
-        </EmailButton>
+        <EmailButton link={confirmationUrl}>Claim My Inheritance</EmailButton>
         <Text style={{ fontSize: 12 }}>
           Or copy and paste this link in your browser:
           <br />
@@ -52,8 +51,7 @@ export default function NewsletterConfirmationEmail({
       </Container>
 
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
-        Looking forward to sharing some <em>great</em>{" "}
-        <strong>frontend architecture</strong> insights with you!
+        I remain eternally grateful for your imminent cooperation.
       </Text>
     </EmailTemplate>
   );

@@ -2,6 +2,7 @@
 
 import { QRCodeSVG } from "qrcode.react";
 import { useCompose } from "@/core/context/compose-context";
+import { env } from "@/lib/env";
 
 export function QrCodeWidget() {
   const { isComposeOpen } = useCompose();
@@ -25,16 +26,20 @@ export function QrCodeWidget() {
         zIndex: 900,
       }}
     >
-      <QRCodeSVG value="http://localhost:3000/newsletter" size={100} />
-      <span
+      <a href="/newsletter" style={{ display: "contents" }}>
+        <QRCodeSVG value={`${env.NEXT_PUBLIC_URL}/newsletter`} size={100} />
+      </a>
+      <a
+        href="/newsletter"
         style={{
           fontSize: 11,
           color: "var(--text-secondary, #666)",
           fontWeight: 500,
+          textDecoration: "none",
         }}
       >
-        Scan to subscribe
-      </span>
+        Scan or click to subscribe
+      </a>
     </div>
   );
 }
