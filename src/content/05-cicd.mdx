@@ -2,31 +2,71 @@
 
 # Your Workflow Run Has Completed Successfully
 
-**Repository:** https://github.com/cesalberca/react-mdx-newsletter
-**Branch:** `main`
-**Workflow:** `send-newsletter.yml`
-**Status:** ✅ All jobs passed
+- **Repository:** https://github.com/cesalberca/react-mdx-newsletter
+- **Branch:** `main`
+- **Workflow:** `send-newsletter.yml`
+- **Status:** ✅ All jobs passed
 
 ## The Newsletter CI/CD Pipeline
 
 Automate everything. Never manually send a newsletter again.
 
-```
-┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
-│  Push to  │───▶│  Build   │───▶│ Preview  │───▶│  Send    │
-│  main     │    │  & Test  │    │  Deploy  │    │  Email   │
-└──────────┘    └──────────┘    └──────────┘    └──────────┘
+```txt
+       Cron (runs daily at 07:00 UTC)
+       │
+       ▼
+  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
+  │  Trigger │───▶│   Fetch  │───▶│  Create  │───▶│   Send   │
+  └──────────┘    └──────────┘    └──────────┘    └──────────┘
+                      │               │
+                      │               └─ POST /api/newsletter/broadcast
+                      │
+                      └─ Get today's newsletter
 ```
 
 </Slide>
 
 <Slide sender="GitHub Actions Bot" timestamp="Oct 15, 2024, 1:05 PM">
 
-## The GitHub Action
+## The Send Newsletter Action
 
-1. Cron everyday 07:00 UTC
-2. Find today's newsletter
-3. Create newsletter broadcast (`/api/newsletter/broadcast`)
+Runs daily at 07:00 UTC. If a newsletter file with today's date exists, it broadcasts it.
+
+```yaml
+on:
+  schedule:
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+jobs:
+  send-newsletter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Find today's newsletter
+        id: find
+        run: |
+          TODAY=$(date +%Y-%m-%d)
+          FILE=$(find src/newsletter/emails/newsletter -name "${TODAY}_*.tsx" | head -1)
+          if [ -z "$FILE" ]; then
+            echo "newsletter_found=false" >> $GITHUB_OUTPUT
+          else
+            SLUG=$(basename "$FILE" .tsx)
+            echo "newsletter_found=true" >> $GITHUB_OUTPUT
+            echo "newsletter_slug=$SLUG" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Broadcast
+        if: steps.find.outputs.newsletter_found == 'true'
+        run: |
+          curl -sf -X POST ${{ vars.NEXT_PRODUCTION_URL }}/api/newsletter/broadcast \
+            -H "Content-Type: application/json" \
+            -d '{
+              "newsletterSlug": "${{ steps.find.outputs.newsletter_slug }}",
+              "token": "${{ secrets.NEWSLETTER_BROADCAST_TOKEN }}"
+            }'
+```
 
 </Slide>
 

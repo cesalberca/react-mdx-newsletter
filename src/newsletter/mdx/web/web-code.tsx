@@ -33,7 +33,6 @@ export function WebCode({
         "bg-muted px-[4px] py-[2px] mx-[2px] rounded not-prose font-mono",
       )}
       style={{
-        backgroundColor: "var(--bg-tertiary)",
         borderRadius: 4,
         padding: "2px 6px",
         fontFamily: '"Roboto Mono", monospace',

@@ -31,7 +31,7 @@ Email clients handle `<div>` inconsistently. Some respect dimensions, others don
 **The fix:** Use `<table>` with `<tr>` and `<td>` for layout.
 
 ```tsx
-// WRONG - will break
+// WRONG - won't work
 <div style={{ display: 'flex', gap: '16px' }}>
   <div style={{ flex: 1 }}>Column 1</div>
   <div style={{ flex: 1 }}>Column 2</div>
@@ -56,10 +56,10 @@ React Email's `<Row>` and `<Column>` components handle this for you.
 
 Common image mistakes in email:
 
-1. **No `width` and `height` attributes** — images will be displayed at full size
-2. **Relative URLs** — email clients can't resolve them
-3. **SVG** — not supported in most email clients
-4. **Background images** — Outlook ignores CSS `background-image`
+1. **No `width` and `height` attributes**: images will be displayed at full size
+2. **Relative URLs**: email clients can't resolve them
+3. **SVG**: not supported in most email clients
+4. **Background images**: Outlook ignores CSS `background-image`
 
 ```tsx
 // BAD
@@ -74,6 +74,7 @@ Common image mistakes in email:
 />
 ```
 
+> [!NOTE]
 > Pro tip: create an utility function `emailImageBaseUrl` that adds the domain
 > ```typescript
 > const BASE_URL = process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000";
@@ -83,43 +84,23 @@ Common image mistakes in email:
 > }
 > ```
 
-### Dark Mode Gotcha
-
-Some email clients invert colors in dark mode. Your white logo on a transparent background? Now it's invisible on a white-turned-dark background.
-
-**Fix:** Always add a background color, padding or same color as the background shadow in logos.
-
-![Signature](/signature.png)
-
 </Slide>
 
 <Slide sender="CSS Crimes Division" timestamp="Oct 15, 2024, 12:15 PM">
 
-## Violation #4: Font Crimes
+## Dark Mode Gotcha
 
-Email font support is limited:
+Some email clients invert colors in dark mode. Your white logo on a transparent background becomes invisible once dark mode flips the background dark.
 
-**Safe fonts:**
-- Arial, Helvetica
-- Georgia, Times New Roman
-- Courier New
-- Verdana, Trebuchet MS
+**Fix:** Always add a background color, padding, or a shadow matching the background color to logos.
 
-**Unsafe:**
-- Google Fonts (partially supported, fallback required)
-- System fonts (`-apple-system`, etc.)
-- Any `@font-face` import
+![Signature](/signature.png)
 
-```tsx
-// React Email approach - always provide fallback
-<Text style={{
-  fontFamily: "'Georgia', 'Times New Roman', serif",
-  fontSize: '16px',
-  lineHeight: '1.5',
-}}>
-  Your newsletter content here.
-</Text>
-```
+Dark mode in email is notoriously inconsistent across clients. Gmail, Apple Mail, and Outlook each handle it differently.
+
+**Resources:**
+- [The Ultimate Guide to Dark Mode for Email Marketers](https://www.litmus.com/blog/the-ultimate-guide-to-dark-mode-for-email-marketers) (Litmus)
+- [Fixing Gmail Dark Mode with CSS Blend Modes](https://www.hteumeuleu.com/2021/fixing-gmail-dark-mode-css-blend-modes/) (HTeuMeuLeu)
 
 Case closed.
 

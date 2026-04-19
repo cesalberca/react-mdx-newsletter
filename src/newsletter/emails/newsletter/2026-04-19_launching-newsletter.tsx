@@ -5,6 +5,6 @@ const LaunchingNewsletter = () => (
 );
 
 LaunchingNewsletter.title =
-  "Build Your Own Newsletter — Talk Resources & Links";
+  "Build Your Own Newsletter: Talk Resources and Links";
 
 export default LaunchingNewsletter;

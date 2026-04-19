@@ -10,10 +10,10 @@ Our routine audit has revealed **critical issues** that may cause total system f
 
 Your emails will land in spam if you don't:
 
-1. **Set up SPF** — tells receiving servers your domain is legit
-2. **Configure DKIM** — cryptographic signature proving you sent it
-3. **Add DMARC** — policy for handling auth failures
-4. **Warm up your domain** — don't send 10.000 emails on day one
+1. **Set up SPF**: tells receiving servers your domain is legit
+2. **Configure DKIM**: cryptographic signature proving you sent it
+3. **Add DMARC**: policy for handling auth failures
+4. **Warm up your domain**: don't send 10.000 emails on day one
 
 ```
 // DNS records you need:
@@ -37,7 +37,7 @@ This means:
 ### How to stay under 102KB:
 - Minimize inline styles (reuse patterns)
 - Compress images and use hosted URLs (don't base64 encode)
-- Keep content focused — nobody reads 10,000 word emails
+- Keep content focused (nobody reads 10,000 word emails)
 - Remove unnecessary whitespace in production builds
 
 ```tsx

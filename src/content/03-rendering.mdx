@@ -18,7 +18,9 @@
     - **Yahoo** (Custom): Surprisingly okay
     - **Outlook.com** (Custom): Different from desktop Outlook
 
-    > Can I Email is your saviour: [caniemail.com](https://www.caniemail.com/)
+> [!TIP]
+> ![Can I email](/can-i-email.png)
+> [caniemail.com](https://www.caniemail.com/)
 
 </Slide>
 
@@ -26,22 +28,21 @@
 
   ## What Works in Email
 
-  **Safe to use:**
-  - Inline styles (`style="..."`)
-  - Tables for layout (yes, _really_)
-  - Basic CSS: `color`, `font-size`, `padding`, `margin`, `background-color`
-  - `<img>` with absolute URLs
-  - `<a>` tags with `href`
+**Safe to use:**
+- Inline styles (`style="..."`)
+- Tables for layout (yes, _really_)
+- Basic CSS: `color`, `font-size`, `padding`, `margin`, `background-color`
+- `<img>` with absolute URLs
+- `<a>` tags with `href`
 
-    **Danger zone:**
-    - `
-    <div>` with flexbox or grid: Gmail will ignore most properties.
-      - `position: absolute/fixed`: ❌
-      - `box-shadow`: ❌
-      - CSS variables: ❌
-      - `@media` queries: limited support
-      - External stylesheets: stripped by Gmail
-      - JavaScript: obviously not
+**Danger zone:**
+- `<div>` with flexbox or grid: Gmail will ignore most properties.
+- `position: absolute/fixed`: ❌
+- `box-shadow`: ❌
+- CSS variables: ❌
+- `@media` queries: limited support
+- External stylesheets: stripped by Gmail
+- JavaScript: **obviously not**. Well, actually [kind of](https://amp.dev/about/email.html)
 
 </Slide>
 
@@ -93,8 +94,6 @@
     </tr>
   </table>
   ```
-
-  Tables all the way down.
 
 </Slide>
 
