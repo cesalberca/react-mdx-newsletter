@@ -14,7 +14,7 @@ export default async function NewsletterPage() {
       />,
     ),
     render(<NewsletterWelcomeEmail />),
-    render(<NewsletterEmailLoader slug="welcome-and-project-setup" />),
+    render(<NewsletterEmailLoader slug="launching-newsletter" />),
   ]);
 
   return (
@@ -52,7 +52,7 @@ export default async function NewsletterPage() {
           <EmailPreviewCard
             from="César Alberca"
             fromEmail="newsletter@cesalberca.com"
-            subject="Please confirm your subscription"
+            subject="Confirm your subscription"
             preview="Just one click away from joining the Frontend Architecture newsletter community!"
             html={confirmationHtml}
           />
@@ -68,8 +68,8 @@ export default async function NewsletterPage() {
           <EmailPreviewCard
             from="César Alberca"
             fromEmail="newsletter@cesalberca.com"
-            subject="Welcome! Let's Build a Newsletter from Scratch"
-            preview="Setting up a Next.js project with MDX, React Email, and Resend — everything you need to ship your own newsletter"
+            subject="Build Your Own Newsletter — Talk Resources & Links"
+            preview="The slides, the repo, and everything else from the talk."
             html={newsletterHtml}
           />
         </div>

@@ -4,17 +4,15 @@ import type { ComponentType } from "react";
 import { newsletters } from "@/app/newsletters/newsletters";
 import BuildingASubscriptionSystem from "@/newsletter/emails/newsletter/2026-02-03_building-a-subscription-system";
 import BroadcastingToYourAudience from "@/newsletter/emails/newsletter/2026-02-17_broadcasting-to-your-audience";
-import AddingAGmailStyleUi from "@/newsletter/emails/newsletter/2026-03-03_adding-a-gmail-style-ui";
 import { NewsletterThreadHeader } from "./thread-header";
 
 const componentMap: Record<string, ComponentType> = {
   "building-a-subscription-system": BuildingASubscriptionSystem,
   "broadcasting-to-your-audience": BroadcastingToYourAudience,
-  "adding-a-gmail-style-ui": AddingAGmailStyleUi,
 };
 
 export function generateStaticParams() {
-  return newsletters.map((n) => ({ slug: n.slug }));
+  return Object.keys(componentMap).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({

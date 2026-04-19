@@ -8,8 +8,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
     await subscribe(email);
-    return NextResponse.json({ message: "Confirmation email sent successfully" });
+    return NextResponse.json({
+      message: "Confirmation email sent successfully",
+    });
   } catch {
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }

@@ -35,7 +35,10 @@ export function ThreadMessages({
     if (currentIndex < slides.length - 1) {
       const next = currentIndex + 1;
       setCurrentIndex(next);
-      slideRefs.current[next]?.scrollIntoView({ behavior: "smooth", block: "start" });
+      slideRefs.current[next]?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     } else if (nextSlug) {
       router.push(`/emails/${nextSlug}`);
     }
@@ -45,7 +48,10 @@ export function ThreadMessages({
     if (currentIndex > 0) {
       const prev = currentIndex - 1;
       setCurrentIndex(prev);
-      slideRefs.current[prev]?.scrollIntoView({ behavior: "smooth", block: "start" });
+      slideRefs.current[prev]?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     } else if (prevSlug) {
       router.push(`/emails/${prevSlug}`);
     } else {
@@ -86,7 +92,9 @@ export function ThreadMessages({
       {slides.map((slide, i) => (
         <div
           key={i} // biome-ignore lint/suspicious/noArrayIndexKey: no other key
-          ref={(el) => { slideRefs.current[i] = el; }}
+          ref={(el) => {
+            slideRefs.current[i] = el;
+          }}
         >
           <ThreadMessage
             sender={slide.sender ?? section.sender}

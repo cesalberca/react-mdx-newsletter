@@ -25,7 +25,8 @@ export async function POST(request: NextRequest) {
       ...result,
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Internal server error";
+    const message =
+      error instanceof Error ? error.message : "Internal server error";
     const isTokenError = message.includes("Invalid or expired");
     return NextResponse.json(
       { success: false, error: message },

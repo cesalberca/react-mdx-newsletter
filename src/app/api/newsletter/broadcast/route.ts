@@ -20,7 +20,8 @@ export async function POST(request: NextRequest) {
       message: "Broadcast created successfully",
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Internal server error";
+    const message =
+      error instanceof Error ? error.message : "Internal server error";
     const status = message.includes("not found") ? 404 : 500;
     return NextResponse.json({ error: message }, { status });
   }
