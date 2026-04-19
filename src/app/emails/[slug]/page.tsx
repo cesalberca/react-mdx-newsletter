@@ -76,7 +76,12 @@ export default async function EmailThreadPage({
         nextSlug={nextSlug}
         backHref={backHref}
       />
-      <ThreadMessages section={section}>
+      <ThreadMessages
+        section={section}
+        prevSlug={prevSlug}
+        nextSlug={nextSlug}
+        backHref={backHref}
+      >
         <MDXContent />
       </ThreadMessages>
     </div>

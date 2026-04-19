@@ -1,7 +1,7 @@
 import { render } from "@react-email/render";
 import { notFound } from "next/navigation";
 import type { ComponentType } from "react";
-import { newsletters } from "@/newsletter/content/newsletters";
+import { newsletters } from "@/app/newsletters/newsletters";
 import BuildingASubscriptionSystem from "@/newsletter/emails/newsletter/2026-02-03_building-a-subscription-system";
 import BroadcastingToYourAudience from "@/newsletter/emails/newsletter/2026-02-17_broadcasting-to-your-audience";
 import AddingAGmailStyleUi from "@/newsletter/emails/newsletter/2026-03-03_adding-a-gmail-style-ui";

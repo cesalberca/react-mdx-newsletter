@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { type CSSProperties, useCallback, useEffect, useState } from "react";
+import { newsletters } from "@/app/newsletters/newsletters";
 import { useCompose } from "@/core/context/compose-context";
-import { newsletters } from "@/newsletter/content/newsletters";
 
 type Status = "idle" | "sending" | "success" | "error";
 

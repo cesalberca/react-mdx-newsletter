@@ -109,6 +109,7 @@ pre {
   font-size: 14px;
   line-height: 1.6;
   background: var(--bg-secondary);
+  color: var(--text-primary);
   font-family: "Roboto Mono", ui-monospace, monospace;
 }
 

@@ -13,7 +13,7 @@ export function QrCodeWidget() {
       style={{
         position: "fixed",
         bottom: 16,
-        right: 16,
+        left: 16,
         backgroundColor: "var(--bg-surface, #fff)",
         borderRadius: 12,
         padding: 12,

@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { newsletters } from "@/app/newsletters/newsletters";
 import { Avatar } from "@/core/components/gmail/avatar";
-import { newsletters } from "@/newsletter/content/newsletters";
 
 export default function NewslettersPage() {
   return (

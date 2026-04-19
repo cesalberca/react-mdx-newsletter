@@ -1,103 +1,27 @@
-import { render } from "@react-email/render";
 import { type NextRequest, NextResponse } from "next/server";
-import type { ReactElement } from "react";
-import { Resend } from "resend";
-import { NEWSLETTER_CONFIG } from "@/app/api/newsletter/newsletter.config";
 import { env } from "@/lib/env";
+import { broadcast } from "@/newsletter/api/broadcast";
 
-const resend = new Resend(env.RESEND_API_KEY);
-
-interface BroadcastRequest {
-  newsletterSlug: string;
-  token: string;
-}
-
-interface BroadcastResponse {
-  broadcastId?: string;
-  message?: string;
-  error?: string;
-}
-
-export async function POST(
-  request: NextRequest,
-): Promise<NextResponse<BroadcastResponse>> {
+export async function POST(request: NextRequest) {
   try {
-    const body: BroadcastRequest = await request.json();
-    const { newsletterSlug, token } = body;
-
+    const { newsletterSlug, token } = await request.json();
     if (!newsletterSlug) {
       return NextResponse.json(
         { error: "Missing required fields: newsletterSlug" },
         { status: 400 },
       );
     }
-
-    if (token === undefined || token !== env.NEWSLETTER_BROADCAST_TOKEN) {
+    if (!token || token !== env.NEWSLETTER_BROADCAST_TOKEN) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-
-    try {
-      const newsletterModule = await import(
-        `@/emails/newsletter/${newsletterSlug}.tsx`
-      );
-      const NewsletterComponent = newsletterModule.default;
-      const { title } = NewsletterComponent;
-
-      if (!NewsletterComponent) {
-        return NextResponse.json(
-          { error: "Newsletter component not found" },
-          { status: 404 },
-        );
-      }
-
-      const html = await render(NewsletterComponent() as ReactElement);
-
-      const broadcast = await resend.broadcasts.create({
-        audienceId: NEWSLETTER_CONFIG.SEGMENT_ID,
-        from: env.RESEND_EMAIL_FROM,
-        subject: title,
-        html,
-        name: title,
-      });
-
-      if (broadcast.error) {
-        console.error("Resend broadcast creation error:", broadcast.error);
-        return NextResponse.json(
-          { error: broadcast.error.message },
-          { status: 400 },
-        );
-      }
-
-      if (!broadcast.data) {
-        return NextResponse.json(
-          { error: "Failed to create broadcast" },
-          { status: 500 },
-        );
-      }
-
-      await resend.broadcasts.send(broadcast.data.id, {
-        scheduledAt: "today 15:00 UTC",
-      });
-
-      return NextResponse.json(
-        {
-          broadcastId: broadcast.data.id,
-          message: "Broadcast created successfully",
-        },
-        { status: 200 },
-      );
-    } catch (importError) {
-      console.error("Newsletter import error:", importError);
-      return NextResponse.json(
-        { error: `Failed to load newsletter: ${newsletterSlug}` },
-        { status: 404 },
-      );
-    }
+    const result = await broadcast(newsletterSlug);
+    return NextResponse.json({
+      broadcastId: result.broadcastId,
+      message: "Broadcast created successfully",
+    });
   } catch (error) {
-    console.error("Newsletter broadcast error:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 },
-    );
+    const message = error instanceof Error ? error.message : "Internal server error";
+    const status = message.includes("not found") ? 404 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }

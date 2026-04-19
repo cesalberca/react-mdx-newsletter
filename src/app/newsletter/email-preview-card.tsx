@@ -59,7 +59,9 @@ export function EmailPreviewCard({
                 whiteSpace: "nowrap",
               }}
             >
-              <strong style={{ color: "var(--text-primary)" }}>{subject}</strong>
+              <strong style={{ color: "var(--text-primary)" }}>
+                {subject}
+              </strong>
               {" — "}
               {preview}
             </div>

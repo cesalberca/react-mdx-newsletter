@@ -8,9 +8,38 @@ I have completed the architectural analysis of your newsletter system. Please fi
 
 ## The Newsletter Pipeline
 
-
-
-
+```md
+  ┌─────────────────────┐
+  │   content/{slug}/   │
+  │      en.mdx         │  ← Write your newsletter here
+  └──────────┬──────────┘
+             │ fs.readFileSync + evaluateSync
+             ▼
+  ┌─────────────────────┐
+  │ NewsletterEmail     │
+  │    Loader           │  ← Turns MDX into React
+  └──────────┬──────────┘
+             │
+             ▼
+  ┌─────────────────────┐
+  │ NewsletterTemplate  │
+  │  └─ EmailTemplate   │  ← React Email layout
+  │     └─ <Html>...    │
+  └──────────┬──────────┘
+             │ render()
+             ▼
+  ┌─────────────────────┐
+  │    HTML string      │  ← Email-safe HTML + inline styles
+  └──────────┬──────────┘
+             │ resend.emails.send()
+             ▼
+  ┌─────────────────────┐
+  │       Resend        │  ← Delivery & analytics
+  └──────────┬──────────┘
+             │
+             ▼
+         📬 Inbox
+```
 
 </Slide>
 
@@ -18,91 +47,61 @@ I have completed the architectural analysis of your newsletter system. Please fi
 
 ## Project Structure
 
-```
-newsletter/
-├── components/ # Non-mdx components
-│   │   ├── email-button.tsx               # Shared email header
-│   │   └── newsletter-email-loader.tsx    # Loads emails from MDX
+```txt
+src/newsletter/
+├── api/
+│   ├── subscribe.ts          # Subscribe logic (sign token, send confirmation)
+│   ├── confirm.ts            # Confirm logic (verify token, add contact)
+│   └── broadcast.ts          # Broadcast logic (render MDX, send to audience)
+├── components/
+│   ├── email-button.tsx      # CTA button for emails
+│   └── newsletter-email-loader.tsx  # Reads MDX, wraps in template
 ├── content/
-│   ├── /
-│   │   └── Header.tsx       # Shared email header
-│   ├── templates/
-│   │   └── weekly.tsx       # Base email template
-│   └── issues/
-│       ├── 001-welcome.mdx
-│       ├── 002-hooks.mdx
-│       └── 003-patterns.mdx
+│   └── {slug}/en.mdx         # Newsletter content per issue
 ├── emails/
-│   ├── components/
-│   │   ├── Header.tsx       # Shared email header
-│   │   ├── Footer.tsx       # Unsubscribe link, etc.
-│   │   ├── Button.tsx       # CTA buttons
-│   │   └── CodeBlock.tsx    # Syntax highlighted code
-│   ├── templates/
-│   │   └── weekly.tsx       # Base email template
-│   └── issues/
-│       ├── 001-welcome.mdx
-│       ├── 002-hooks.mdx
-│       └── 003-patterns.mdx
-├── lib/
-│   ├── resend.ts            # Resend client
-│   ├── render.ts            # MDX → HTML pipeline
-│   └── subscribers.ts       # Subscriber management
-└── app/
-├── preview/[slug]/      # Preview in browser
-└── api/send/            # Send endpoint
+│   ├── newsletter/           # One .tsx per issue (thin wrappers)
+│   └── transactional/        # Confirmation & welcome emails
+├── mdx/
+│   ├── email/                # MDX components for email rendering
+│   └── web/                  # MDX components for web rendering
+├── templates/
+│   ├── email-template.tsx    # Base email layout
+│   └── newsletter-template.tsx  # Newsletter-specific layout
+└── domain/
+    └── newsletter-metadata.ts
 ```
 
 </Slide>
 
 <Slide sender="Dr. Archi Tecture" timestamp="Oct 15, 2024, 10:10 AM">
 
-## The newsletter architecture
+## Creating a new issue
 
-Step by step, here's what happens when you hit "send":
-
-1. Create an MDX content under content
-2. Create an email in /emails/2026-045.tsx
-3. Load using newsletter-email-loader
-4. Use NewsletterTemplate, underneath uses EmailTemplate
+1. Create a new issue in `/newsletter/content/{slug}/en.mdx`
+2. Create an email in `/newsletter/emails/{slug}.tsx`
+3. Push to `main`
 
 </Slide>
 
-<Slide sender="Dr. Archi Tecture" timestamp="Oct 15, 2024, 10:15 AM">
+<Slide sender="Dr. Archi Tecture" timestamp="Oct 15, 2024, 10:20 AM">
 
-## React Email Components
+## Required Environment Variables
 
-React Email gives you email-safe primitives:
+```bash
+# Resend — email delivery
+RESEND_API_KEY=re_...          # Your Resend API key
+RESEND_EMAIL_FROM=you@domain.com  # Verified sender address
+RESEND_AUDIENCE_ID=...         # Audience ID from Resend dashboard
+RESEND_TEST_EMAIL=you@domain.com  # Address for test sends
 
-```tsx
-import {
-  Html, Head, Body, Container,
-  Section, Text, EmailButton, Img, Hr,
-  Preview, Heading, EmailLink,
-} from '@react-email/components'
+# Auth
+JWT_SECRET=...                 # Secret for signing confirmation tokens
 
-export function WeeklyEmail({ issue }) {
-  return (
-    <Html>
-      <Head />
-      <Preview>{issue.preview}</Preview>
-      <Body style={main}>
-        <Container style={container}>
-          <Heading style={h1}>{issue.title}</Heading>
-          <Text style={text}>{issue.content}</Text>
-          <Button style={button} href={issue.url}>
-            Read More
-          </Button>
-        </Container>
-      </Body>
-    </Html>
-  )
-}
+# Broadcast protection
+NEWSLETTER_BROADCAST_TOKEN=... # Bearer token for the broadcast endpoint
+
+# App
+NEXT_PUBLIC_URL=https://yourdomain.com  # Public URL (used in email links)
 ```
-
-These components compile to HTML tables and inline styles.
-
-Best regards,
-**Dr. Archi Tecture**, PhD in Over-Engineering
 
 </Slide>

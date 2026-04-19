@@ -1,4 +1,0 @@
-export const NEWSLETTER_CONFIG = {
-  SEGMENT_ID: "a1fd1d4d-05d1-4084-b222-006e34066e8c",
-  TOPIC_ID: "61fdab32-7324-4d54-9e32-98a41922e840",
-} as const;

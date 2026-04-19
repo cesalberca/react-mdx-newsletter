@@ -11,9 +11,8 @@ export const NewsletterEmailLoader: FC<{ slug: string }> = ({ slug }) => {
   const file = path.join(
     process.cwd(),
     "src",
-    "content",
-    "emails",
     "newsletter",
+    "content",
     slug,
     "en.mdx",
   );

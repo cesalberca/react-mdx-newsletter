@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
-import type { ConfirmResponse } from "@/app/api/newsletter/confirm/route";
+import type { ConfirmResponse } from "@/newsletter/api/confirm";
 
 type ConfirmationState = "loading" | "success" | "already" | "error";
 

@@ -9,14 +9,20 @@ export function ThreadMessage({
   timestamp,
   children,
   defaultExpanded = false,
+  expanded: controlledExpanded,
+  onToggle,
 }: {
   sender: string;
   senderEmail: string;
   timestamp: string;
   children: ReactNode;
   defaultExpanded?: boolean;
+  expanded?: boolean;
+  onToggle?: () => void;
 }) {
-  const [expanded, setExpanded] = useState(defaultExpanded);
+  const [internalExpanded, setInternalExpanded] = useState(defaultExpanded);
+  const expanded = controlledExpanded ?? internalExpanded;
+  const toggle = onToggle ?? (() => setInternalExpanded((v) => !v));
 
   return (
     <div
@@ -40,7 +46,7 @@ export function ThreadMessage({
           fontFamily: "inherit",
           color: "inherit",
         }}
-        onClick={() => setExpanded(!expanded)}
+        onClick={toggle}
       >
         <Avatar name={sender} size={40} />
 

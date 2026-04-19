@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import type { Section } from "@/content/sections";
-import { KeyboardNav } from "@/core/components/keyboard-nav";
 
 export function ThreadHeader({
   section,
@@ -17,11 +16,6 @@ export function ThreadHeader({
 }) {
   return (
     <>
-      <KeyboardNav
-        prevSlug={prevSlug}
-        nextSlug={nextSlug}
-        backHref={backHref}
-      />
       <div
         style={{
           display: "flex",

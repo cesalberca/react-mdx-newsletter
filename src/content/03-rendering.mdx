@@ -1,118 +1,122 @@
 <Slide sender="React Email Support" timestamp="Oct 15, 2024, 11:00 AM">
 
-# Your Email Rendering Report Is Ready
+  # Your Email Rendering Report Is Ready
 
-Hello Developer,
+  Hello Developer,
 
-Your rendering diagnostics are complete. We found several compatibility issues across email clients that you should be aware of.
+  Your rendering diagnostics are complete. We found 65 compatibility issues across email clients that you should be
+  aware of.
 
-## The Email Rendering Problem
+  ## The Email Rendering Problem
 
-Unlike web browsers, email clients are **stuck in 2003**:
+  Unlike web browsers, email clients are **stuck literally in 2003**:
 
-- **Gmail** (Custom engine) — Partial CSS support, strips `<style>` tags, no media queries in some contexts
-- **Outlook** (Word engine) — Yes, **Microsoft Word** renders your HTML
-- **Apple Mail** (WebKit) — Actually decent
-- **Yahoo** (Custom) — Surprisingly okay
-- **Outlook.com** (Custom) — Different from desktop Outlook
+  - **Gmail** (Custom engine) — Partial CSS support, strips `
+  <style>` tags, no media queries in some contexts
+    - **Outlook** (Word engine) — Yes, **Microsoft Word** renders your HTML
+    - **Apple Mail** (WebKit) — Actually decent
+    - **Yahoo** (Custom) — Surprisingly okay
+    - **Outlook.com** (Custom) — Different from desktop Outlook
 
-> Outlook uses Microsoft Word's rendering engine. Let that sink in.
+    > Can I Email is your saviour: [caniemail.com](https://www.caniemail.com/)
 
 </Slide>
 
 <Slide sender="React Email Support" timestamp="Oct 15, 2024, 11:05 AM">
 
-## What Works in Email
+  ## What Works in Email
 
-**Safe to use:**
-- Inline styles (`style="..."`)
-- Tables for layout (yes, really)
-- Basic CSS: `color`, `font-size`, `padding`, `margin`, `background-color`
-- `<img>` with absolute URLs
-- `<a>` tags with `href`
+  **Safe to use:**
+  - Inline styles (`style="..."`)
+  - Tables for layout (yes, _really_)
+  - Basic CSS: `color`, `font-size`, `padding`, `margin`, `background-color`
+  - `<img>` with absolute URLs
+  - `<a>` tags with `href`
 
-**Danger zone:**
-- `<div>` with flexbox or grid — Outlook will ignore it
-- `position: absolute/fixed` — ❌
-- `box-shadow` — ❌
-- CSS variables — ❌
-- `@media` queries — limited support
-- External stylesheets — stripped by Gmail
-- JavaScript — obviously not
+    **Danger zone:**
+    - `
+    <div>` with flexbox or grid — Gmail will ignore most properties.
+      - `position: absolute/fixed` — ❌
+      - `box-shadow` — ❌
+      - CSS variables — ❌
+      - `@media` queries — limited support
+      - External stylesheets — stripped by Gmail
+      - JavaScript — obviously not
 
 </Slide>
 
 <Slide sender="React Email Support" timestamp="Oct 15, 2024, 11:10 AM">
 
-## How React Email Helps
+  ## How React Email Helps
 
-React Email abstracts away the pain. You write modern JSX, it outputs legacy-compatible HTML:
+  React Email abstracts away _some_ of the pain. You write modern JSX, it outputs legacy-compatible HTML:
 
-```tsx
-// You write this:
-<Section style={{ padding: '20px' }}>
-  <Text style={{ fontSize: '16px', color: '#333' }}>
-    Hello subscriber!
-  </Text>
-  <Button
-    href="https://example.com"
-    style={{
-      backgroundColor: '#007bff',
-      color: '#fff',
-      padding: '12px 24px',
-    }}
-  >
-    Click me
-  </Button>
-</Section>
-```
+  ```tsx
+  // You write this:
+  <Tailwind>
+    <Body className="bg-white font-sans">
+      <Container className="mx-auto max-w-xl px-4 py-8">
+        <Section className="p-5">
+          <Text className="text-base text-[#333]">
+            Hello subscriber!
+          </Text>
+          <Button
+            href="https://example.com"
+            className="bg-blue-600 text-white px-6 py-3 rounded"
+          >
+            Click me
+          </Button>
+        </Section>
+      </Container>
+    </Body>
+  </Tailwind>
 
-```html
-<!-- It outputs this: -->
-<table width="100%" cellpadding="0" cellspacing="0">
-  <tr>
-    <td style="padding:20px">
-      <p style="font-size:16px;color:#333">
-        Hello subscriber!
-      </p>
-      <table cellpadding="0" cellspacing="0">
-        <tr>
-          <td style="background-color:#007bff;padding:12px 24px">
-            <a href="https://example.com"
-               style="color:#fff;text-decoration:none">
-              Click me
-            </a>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-```
+  ```html
+  <!-- It outputs this: -->
+  <table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td style="padding:20px">
+        <p style="font-size:16px;color:#333">
+          Hello subscriber!
+        </p>
+        <table cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="background-color:#007bff;padding:12px 24px">
+              <a href="https://example.com"
+                 style="color:#fff;text-decoration:none">
+                Click me
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  ```
 
-Tables all the way down.
+  Tables all the way down.
 
 </Slide>
 
 <Slide sender="React Email Support" timestamp="Oct 15, 2024, 11:15 AM">
 
-## Preview & Testing
+  ## Preview & Testing
 
-React Email includes a dev server for previewing:
+  React Email includes a dev server for previewing:
 
-```bash
-npx react-email dev
-```
+  ```bash
+  npx react-email dev
+  ```
 
-This gives you:
-- **Live preview** of every email template
-- **Hot reload** as you edit (sometimes it breaks with MDX files 😭)
-- **Source view** of the generated HTML
-- **Send test emails** directly from the UI (the **only way** to test emails
+  This gives you:
+  - **Live preview** of every email template
+  - **Hot reload** as you edit (sometimes it breaks with MDX files 😭)
+  - **Source view** of the generated HTML
+  - **Send test emails** directly from the UI (the **only way** to test emails
 
-> Remember: If it looks good in your browser, it probably looks terrible in Outlook.
+  > Remember: If it looks good in your browser, it probably looks terrible in Outlook.
 
-Regards,
-**React Email Support Team**
+  Regards,
+  **React Email Support Team**
 
 </Slide>
