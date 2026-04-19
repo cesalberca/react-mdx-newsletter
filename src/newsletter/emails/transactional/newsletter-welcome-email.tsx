@@ -24,7 +24,7 @@ export const NewsletterWelcomeEmail: FC = () => {
 
       <Text style={{ color: "#0a0a0a", fontSize: 16, lineHeight: 1.6 }}>
         If you really want to make sure you get the newsletter, I kindly ask to
-        reply to this email with &quot;Hey Cesar&quot; to make sure it
+        reply to this email with &quot;Hey César&quot; to make sure it
         doesn&apos;t end up in Spam. It takes 10 seconds. Writing each
         newsletter takes me ~4 hours.
       </Text>

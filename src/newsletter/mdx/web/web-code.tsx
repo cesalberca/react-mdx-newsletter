@@ -18,6 +18,7 @@ export function WebCode({
       CodeTag="div"
       PreTag="div"
       style={dark}
+      customStyle={{ margin: 0 }}
       codeTagProps={{
         className: "font-mono",
       }}

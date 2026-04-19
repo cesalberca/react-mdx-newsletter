@@ -31,7 +31,7 @@ export function Avatar({
   imageUrl?: string;
 }) {
   const resolvedImage =
-    imageUrl ?? (name.startsWith("Cesar") ? CESAR_IMAGE : undefined);
+    imageUrl ?? (name.startsWith("César") ? CESAR_IMAGE : undefined);
   if (resolvedImage) {
     return (
       <Image

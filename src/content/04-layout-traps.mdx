@@ -7,20 +7,18 @@
 
 Our automated scan has detected multiple layout violations in your email templates. Below is a detailed incident report.
 
-## Violation #1: Using CSS Grid in Email
+## Violation #1: Using CSS Flexbox in Email
 
 ```css
 /* YOU COMMITTED THIS CRIME */
 .email-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  display: flex;
 }
 ```
 
-**Verdict:** Guilty. Outlook will render this as a single column of sadness.
+**Verdict:** Guilty. Email clients will render this incorrectly.
 
-**Sentence:** Use HTML tables. No, you can't use grid.
+**Sentence:** Use HTML tables. No, you can't use flexbox.
 
 </Slide>
 
@@ -33,7 +31,7 @@ Email clients handle `<div>` inconsistently. Some respect dimensions, others don
 **The fix:** Use `<table>` with `<tr>` and `<td>` for layout.
 
 ```tsx
-// WRONG - will break in Outlook
+// WRONG - will break
 <div style={{ display: 'flex', gap: '16px' }}>
   <div style={{ flex: 1 }}>Column 1</div>
   <div style={{ flex: 1 }}>Column 2</div>
@@ -42,8 +40,8 @@ Email clients handle `<div>` inconsistently. Some respect dimensions, others don
 // RIGHT - works everywhere
 <Section>
   <Row>
-    <Column style={{ width: '50%' }}>Column 1</Column>
-    <Column style={{ width: '50%' }}>Column 2</Column>
+    <Column className="w-1/2">Column 1</Column>
+    <Column className="w-1/2">Column 2</Column>
   </Row>
 </Section>
 ```
@@ -76,13 +74,22 @@ Common image mistakes in email:
 />
 ```
 
-> Pro tip>
+> Pro tip: create an utility function `emailImageBaseUrl` that adds the domain
+> ```typescript
+> const BASE_URL = process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000";
+>
+> export function emailImageBaseUrl(filename: string): string {
+>   return `${BASE_URL}/email-static/${filename}`;
+> }
+> ```
 
 ### Dark Mode Gotcha
 
 Some email clients invert colors in dark mode. Your white logo on a transparent background? Now it's invisible on a white-turned-dark background.
 
 **Fix:** Always add a background color, padding or same color as the background shadow in logos.
+
+![Signature](/signature.png)
 
 </Slide>
 

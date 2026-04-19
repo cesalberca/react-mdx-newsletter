@@ -2,13 +2,11 @@ import { render } from "@react-email/render";
 import { notFound } from "next/navigation";
 import type { ComponentType } from "react";
 import { newsletters } from "@/app/newsletters/newsletters";
-import BuildingASubscriptionSystem from "@/newsletter/emails/newsletter/2026-02-03_building-a-subscription-system";
-import BroadcastingToYourAudience from "@/newsletter/emails/newsletter/2026-02-17_broadcasting-to-your-audience";
+import LaunchingNewsletter from "@/newsletter/emails/newsletter/2026-04-19_launching-newsletter";
 import { NewsletterThreadHeader } from "./thread-header";
 
 const componentMap: Record<string, ComponentType> = {
-  "building-a-subscription-system": BuildingASubscriptionSystem,
-  "broadcasting-to-your-audience": BroadcastingToYourAudience,
+  "launching-newsletter": LaunchingNewsletter,
 };
 
 export function generateStaticParams() {

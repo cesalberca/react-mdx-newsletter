@@ -97,7 +97,7 @@ export const sections: Section[] = [
   },
   {
     slug: "newsletter-promo",
-    sender: "Cesar's Newsletter Bot",
+    sender: "César's Newsletter Bot",
     senderEmail: "noreply@totally-not-spam.cesalberca.com",
     subject:
       "🔥 YOU WON'T BELIEVE These Frontend Architecture Secrets — Subscribe NOW!!!",
@@ -110,7 +110,7 @@ export const sections: Section[] = [
   },
   {
     slug: "services-promo",
-    sender: "Cesar's Consulting Agency",
+    sender: "César's Consulting Agency",
     senderEmail: "deals@definitely-legit-consulting.cesalberca.com",
     subject:
       "⚡ LIMITED TIME: 10x Your Frontend Architecture — ACT FAST Before Offer Expires!!!",

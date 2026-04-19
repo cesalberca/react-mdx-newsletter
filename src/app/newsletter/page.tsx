@@ -46,7 +46,7 @@ export default async function NewsletterPage() {
               color: "var(--text-secondary)",
             }}
           >
-            What you&apos;ll receive — 3 emails in the journey
+            You&apos;ll receive 3 emails
           </div>
 
           <EmailPreviewCard
@@ -68,7 +68,7 @@ export default async function NewsletterPage() {
           <EmailPreviewCard
             from="César Alberca"
             fromEmail="newsletter@cesalberca.com"
-            subject="Build Your Own Newsletter — Talk Resources & Links"
+            subject="Build Your Own Newsletter: Talk Resources and Links"
             preview="The slides, the repo, and everything else from the talk."
             html={newsletterHtml}
           />
