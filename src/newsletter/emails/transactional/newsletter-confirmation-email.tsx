@@ -1,5 +1,5 @@
 import { Container, Text } from "@react-email/components";
-import { EmailButton } from "@/newsletter/components/email-button/email-button";
+import { EmailButton } from "@/newsletter/components/email-button";
 import { EmailLink } from "@/newsletter/mdx/email/email-link";
 import { EmailTemplate } from "@/newsletter/templates/email-template";
 

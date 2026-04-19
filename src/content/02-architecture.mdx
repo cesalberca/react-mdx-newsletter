@@ -8,15 +8,9 @@ I have completed the architectural analysis of your newsletter system. Please fi
 
 ## The Newsletter Pipeline
 
-```
-┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
-│  Author   │───▶│   MDX    │───▶│  React   │───▶│  Resend  │
-│  writes   │    │  Parser  │    │  Email   │    │   API    │
-│  .mdx     │    │          │    │ Render   │    │          │
-└──────────┘    └──────────┘    └──────────┘    └──────────┘
-```
 
-Each stage transforms the content from human-friendly to email-deliverable.
+
+
 
 </Slide>
 
@@ -25,10 +19,38 @@ Each stage transforms the content from human-friendly to email-deliverable.
 ## Project Structure
 
 ```
-  core/mdx
-  emails
-
-generate new arch
+newsletter/
+├── components/ # Non-mdx components
+│   │   ├── email-button.tsx               # Shared email header
+│   │   └── newsletter-email-loader.tsx    # Loads emails from MDX
+├── content/
+│   ├── /
+│   │   └── Header.tsx       # Shared email header
+│   ├── templates/
+│   │   └── weekly.tsx       # Base email template
+│   └── issues/
+│       ├── 001-welcome.mdx
+│       ├── 002-hooks.mdx
+│       └── 003-patterns.mdx
+├── emails/
+│   ├── components/
+│   │   ├── Header.tsx       # Shared email header
+│   │   ├── Footer.tsx       # Unsubscribe link, etc.
+│   │   ├── Button.tsx       # CTA buttons
+│   │   └── CodeBlock.tsx    # Syntax highlighted code
+│   ├── templates/
+│   │   └── weekly.tsx       # Base email template
+│   └── issues/
+│       ├── 001-welcome.mdx
+│       ├── 002-hooks.mdx
+│       └── 003-patterns.mdx
+├── lib/
+│   ├── resend.ts            # Resend client
+│   ├── render.ts            # MDX → HTML pipeline
+│   └── subscribers.ts       # Subscriber management
+└── app/
+├── preview/[slug]/      # Preview in browser
+└── api/send/            # Send endpoint
 ```
 
 </Slide>
