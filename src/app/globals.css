@@ -37,7 +37,7 @@
   --app-shadow-lg:
     0 4px 8px 0 rgba(60, 64, 67, 0.3), 0 8px 16px 4px rgba(60, 64, 67, 0.15);
 
-  --sidebar-width: 256px;
+  --sidebar-width: 280px;
   --header-height: 64px;
 
   color-scheme: light;
@@ -126,6 +126,7 @@
 
 body {
   margin: 0;
+  font-size: 16px;
   background: var(--bg-secondary);
   color: var(--text-primary);
   font-family: "Google Sans", Roboto, Arial, sans-serif;

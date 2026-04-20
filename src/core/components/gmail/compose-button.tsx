@@ -9,7 +9,7 @@ export function ComposeButton() {
     <button
       type="button"
       onClick={() => setComposeOpen(true)}
-      className="flex items-center gap-3 px-6 h-14 border-0 rounded-2xl bg-compose text-compose-foreground text-sm font-medium cursor-pointer shadow-sm transition-shadow duration-200 mb-4"
+      className="flex items-center gap-3 px-6 h-14 border-0 rounded-2xl bg-compose text-compose-foreground text-base font-medium cursor-pointer shadow-md hover:shadow-lg transition-shadow duration-200 mb-4"
     >
       <svg
         aria-hidden="true"

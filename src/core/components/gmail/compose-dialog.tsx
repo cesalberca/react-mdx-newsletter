@@ -368,9 +368,8 @@ export function ComposeDialog() {
             className={cn(
               "py-2 px-5 text-white border-0 rounded-l-[18px] text-sm font-medium font-[inherit]",
               status === "success" ? "bg-success" : "bg-[#1a73e8]",
-              status === "sending" || status === "success"
-                ? "cursor-default opacity-70"
-                : "cursor-pointer",
+              status === "sending" || status === "success" ? "cursor-default" : "cursor-pointer",
+              status === "sending" ? "opacity-70" : "opacity-100",
             )}
           >
             {status === "sending"

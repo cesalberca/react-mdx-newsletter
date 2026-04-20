@@ -6,8 +6,8 @@ import {
   Html,
   Img,
   Link,
-  pixelBasedPreset,
   Preview,
+  pixelBasedPreset,
   Section,
   Tailwind,
   type TailwindConfig,
@@ -76,10 +76,11 @@ export const EmailTemplate: FC<PropsWithChildren<EmailTemplateProps>> = ({
                   className="w-[45px] h-auto mx-auto"
                 />
                 <Text className="text-foreground text-sm m-0 font-medium tracking-wide">
-                  César Alberca
+                  FWD: Urgent Opportunity to Claim Your React + MDX Newsletter
+                  Inheritance
                 </Text>
                 <Text className="text-muted-foreground text-xs mt-2 m-0 italic">
-                  Sole Heir of Ancient Frontend Architecture Wisdom
+                  by César Alberca
                 </Text>
               </Link>
             </Section>

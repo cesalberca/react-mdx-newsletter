@@ -17,7 +17,7 @@ export function WebPre({ children }: { children: ReactNode }) {
   return (
     <pre
       ref={preRef}
-      className="group not-prose p-0 mb-4 rounded-lg overflow-hidden relative"
+      className="group not-prose p-0 mb-4 rounded-lg overflow-hidden relative border-0 bg-transparent"
     >
       <button
         type="button"

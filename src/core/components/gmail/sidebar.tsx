@@ -56,7 +56,7 @@ function NavIcon({ icon }: { icon: string }) {
 
 const navItemClass = (active: boolean, clickable: boolean) =>
   cn(
-    "flex items-center gap-3 px-3 h-8 rounded-2xl text-sm mb-0.5 no-underline",
+    "flex items-center gap-3 px-3 h-9 rounded-2xl text-[15px] mb-0.5 no-underline",
     active ? "font-bold text-accent bg-surface-active" : "font-normal text-foreground",
     clickable ? "cursor-pointer" : "cursor-default",
   );
