@@ -13,6 +13,7 @@ import {
   type ReactElement,
   type ReactNode,
 } from "react";
+import { cn } from "@/core/styles/cn";
 
 // --- types ---
 
@@ -102,40 +103,40 @@ const alertConfig: Record<
   AlertType,
   {
     icon: typeof Info;
-    borderColor: string;
-    bgColor: string;
-    iconColor: string;
+    borderClass: string;
+    bgClass: string;
+    iconClass: string;
   }
 > = {
   note: {
     icon: Info,
-    borderColor: "#3b82f6",
-    bgColor: "rgba(59,130,246,0.08)",
-    iconColor: "#3b82f6",
+    borderClass: "border-blue-500",
+    bgClass: "bg-blue-500/8",
+    iconClass: "text-blue-500",
   },
   tip: {
     icon: Lightbulb,
-    borderColor: "#10b981",
-    bgColor: "rgba(16,185,129,0.08)",
-    iconColor: "#10b981",
+    borderClass: "border-emerald-500",
+    bgClass: "bg-emerald-500/8",
+    iconClass: "text-emerald-500",
   },
   important: {
     icon: AlertCircle,
-    borderColor: "#a855f7",
-    bgColor: "rgba(168,85,247,0.08)",
-    iconColor: "#a855f7",
+    borderClass: "border-purple-500",
+    bgClass: "bg-purple-500/8",
+    iconClass: "text-purple-500",
   },
   warning: {
     icon: TriangleAlert,
-    borderColor: "#f59e0b",
-    bgColor: "rgba(245,158,11,0.08)",
-    iconColor: "#f59e0b",
+    borderClass: "border-amber-400",
+    bgClass: "bg-amber-400/8",
+    iconClass: "text-amber-400",
   },
   caution: {
     icon: OctagonAlert,
-    borderColor: "#ef4444",
-    bgColor: "rgba(239,68,68,0.08)",
-    iconColor: "#ef4444",
+    borderClass: "border-red-500",
+    bgClass: "bg-red-500/8",
+    iconClass: "text-red-500",
   },
 };
 
@@ -147,16 +148,7 @@ export function WebAlert({ children }: HTMLQuoteElement & PropsWithChildren) {
 
   if (!parsed) {
     return (
-      <blockquote
-        style={{
-          borderLeft: "4px solid var(--accent)",
-          margin: "12px 0",
-          padding: "8px 16px",
-          color: "var(--text-secondary)",
-          backgroundColor: "var(--bg-tertiary)",
-          borderRadius: "0 8px 8px 0",
-        }}
-      >
+      <blockquote className="border-l-4 border-accent my-3 py-2 px-4 text-muted-foreground bg-surface-raised rounded-r-lg">
         {children}
       </blockquote>
     );
@@ -166,36 +158,22 @@ export function WebAlert({ children }: HTMLQuoteElement & PropsWithChildren) {
   const Icon = cfg.icon;
 
   return (
-    <div style={{ position: "relative", marginTop: 24, marginBottom: 32 }}>
+    <div className="relative mt-6 mb-8">
       <div
-        style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          transform: "translateX(-50%)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: 40,
-          width: 40,
-          borderRadius: 8,
-          border: `2px solid ${cfg.borderColor}`,
-          backgroundColor: "var(--bg-primary, #fff)",
-          color: cfg.iconColor,
-        }}
+        className={cn(
+          "absolute left-0 top-0 -translate-x-1/2 flex items-center justify-center h-10 w-10 rounded-lg border-2 bg-background",
+          cfg.borderClass,
+          cfg.iconClass,
+        )}
       >
         <Icon size={18} />
       </div>
       <div
-        style={{
-          borderLeft: `2px solid ${cfg.borderColor}`,
-          borderRadius: 8,
-          padding: "16px 24px",
-          backgroundColor: cfg.bgColor,
-          fontSize: 14,
-          lineHeight: 1.6,
-          color: "var(--text-primary)",
-        }}
+        className={cn(
+          "border-l-2 rounded-lg py-4 px-6 text-sm leading-[1.6] text-foreground",
+          cfg.borderClass,
+          cfg.bgClass,
+        )}
       >
         {cleanPrefix(children)}
       </div>

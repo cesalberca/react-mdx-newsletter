@@ -18,34 +18,12 @@ export default async function NewsletterPage() {
   ]);
 
   return (
-    <div
-      style={{
-        backgroundColor: "var(--bg-primary)",
-        minHeight: "100%",
-        padding: 24,
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      <div style={{ maxWidth: 720, width: "100%" }}>
+    <div className="bg-background min-h-full p-6 flex justify-center">
+      <div className="max-w-[720px] w-full">
         <SubscribeForm />
 
-        <div
-          style={{
-            backgroundColor: "var(--bg-card)",
-            borderRadius: 8,
-            border: "1px solid var(--border-primary)",
-            overflow: "hidden",
-          }}
-        >
-          <div
-            style={{
-              padding: "12px 24px",
-              borderBottom: "1px solid var(--border-light)",
-              fontSize: 13,
-              color: "var(--text-secondary)",
-            }}
-          >
+        <div className="bg-card rounded-lg border border-border overflow-hidden">
+          <div className="py-3 px-6 border-b border-border-faint text-[13px] text-muted-foreground">
             You&apos;ll receive 3 emails
           </div>
 

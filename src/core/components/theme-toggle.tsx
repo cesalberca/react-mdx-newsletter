@@ -10,25 +10,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-      style={{
-        width: 40,
-        height: 40,
-        border: "none",
-        borderRadius: "50%",
-        background: "transparent",
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "var(--text-secondary)",
-        transition: "background-color 0.2s",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.backgroundColor = "var(--bg-hover)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.backgroundColor = "transparent";
-      }}
+      className="w-10 h-10 border-0 rounded-full bg-transparent cursor-pointer flex items-center justify-center text-muted-foreground transition-colors duration-200 hover:bg-surface-hover"
     >
       {theme === "light" ? (
         <svg

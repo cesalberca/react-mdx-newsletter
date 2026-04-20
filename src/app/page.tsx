@@ -1,26 +1,19 @@
 import { inboxSections } from "@/content/sections";
+import { cn } from "@/core/styles/cn";
 import { InboxRow } from "@/core/components/gmail/inbox-row";
 
 export default function InboxPage() {
   return (
-    <div style={{ backgroundColor: "var(--bg-primary)", minHeight: "100%" }}>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 16,
-          padding: "8px 16px",
-          borderBottom: "1px solid var(--border-primary)",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+    <div className="bg-background min-h-full">
+      <div className="flex items-center gap-4 py-2 px-4 border-b border-border">
+        <div className="flex items-center gap-2">
           <input
             type="checkbox"
-            style={{ width: 18, height: 18, accentColor: "var(--accent)" }}
+            className="w-[18px] h-[18px] accent-accent"
             readOnly
           />
         </div>
-        <div style={{ display: "flex", gap: 8 }}>
+        <div className="flex gap-2">
           <TabButton label="Primary" active />
           <TabButton label="Promotions" />
           <TabButton label="Social" />
@@ -33,25 +26,15 @@ export default function InboxPage() {
   );
 }
 
-function TabButton({
-  label,
-  active = false,
-}: {
-  label: string;
-  active?: boolean;
-}) {
+function TabButton({ label, active = false }: { label: string; active?: boolean }) {
   return (
     <div
-      style={{
-        padding: "8px 16px",
-        fontSize: 14,
-        fontWeight: active ? 700 : 400,
-        color: active ? "var(--accent)" : "var(--text-secondary)",
-        borderBottom: active
-          ? "3px solid var(--accent)"
-          : "3px solid transparent",
-        cursor: "default",
-      }}
+      className={cn(
+        "py-2 px-4 text-sm cursor-default border-b-[3px]",
+        active
+          ? "font-bold text-accent border-accent"
+          : "font-normal text-muted-foreground border-transparent",
+      )}
     >
       {label}
     </div>

@@ -49,25 +49,15 @@ export default async function NewsletterPage({
   const html = await render(<Component />);
 
   return (
-    <div style={{ backgroundColor: "var(--bg-primary)", minHeight: "100%" }}>
+    <div className="bg-background min-h-full">
       <NewsletterThreadHeader
         title={newsletter.title}
         prevSlug={prevSlug}
         nextSlug={nextSlug}
       />
-      <div
-        style={{
-          maxWidth: 680,
-          margin: "0 auto",
-          padding: "24px 16px",
-        }}
-      >
+      <div className="max-w-[680px] mx-auto py-6 px-4">
         <div
-          style={{
-            backgroundColor: "#ffffff",
-            borderRadius: 8,
-            overflow: "hidden",
-          }}
+          className="bg-white rounded-lg overflow-hidden"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted HTML rendered from React Email template
           dangerouslySetInnerHTML={{ __html: html }}
         />

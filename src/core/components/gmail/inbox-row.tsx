@@ -3,6 +3,7 @@
 import Link from "next/link";
 import type { Section } from "@/content/sections";
 import { useReadStatus } from "@/core/context/read-status-context";
+import { cn } from "@/core/styles/cn";
 import { Avatar } from "./avatar";
 
 export function InboxRow({ section }: { section: Section }) {
@@ -12,87 +13,47 @@ export function InboxRow({ section }: { section: Section }) {
   return (
     <Link
       href={`/emails/${section.slug}`}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 12,
-        padding: "8px 16px",
-        textDecoration: "none",
-        color: "inherit",
-        backgroundColor: unread
-          ? "var(--bg-inbox-row-unread)"
-          : "var(--bg-inbox-row-read)",
-        borderBottom: "1px solid var(--border-light)",
-        cursor: "pointer",
-        minHeight: 44,
-      }}
+      className={cn(
+        "flex items-center gap-3 py-2 px-4 no-underline text-inherit border-b border-[var(--border-light)] cursor-pointer min-h-[44px]",
+        unread ? "bg-row-unread" : "bg-row-read",
+      )}
     >
-      <div
-        style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: 8 }}
-      >
+      <div className="shrink-0 flex items-center gap-2">
         <svg
           aria-hidden="true"
           width="20"
           height="20"
           viewBox="0 0 24 24"
-          fill={section.starred ? "var(--yellow)" : "none"}
-          stroke={section.starred ? "var(--yellow)" : "var(--text-tertiary)"}
-          strokeWidth={2}
+          className={cn(
+            "stroke-2",
+            section.starred
+              ? "fill-warning stroke-warning"
+              : "fill-none stroke-subtle-foreground",
+          )}
         >
           <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
         </svg>
         <Avatar name={section.sender} size={28} />
       </div>
-      <div
-        style={{
-          width: 180,
-          flexShrink: 0,
-          fontWeight: unread ? 700 : 400,
-          fontSize: 14,
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-        }}
-      >
+
+      <div className={cn("w-[180px] shrink-0 text-sm overflow-hidden text-ellipsis whitespace-nowrap", unread ? "font-bold" : "font-normal")}>
         {section.sender}
       </div>
-      <div
-        style={{
-          flex: 1,
-          overflow: "hidden",
-          display: "flex",
-          gap: 4,
-          minWidth: 0,
-        }}
-      >
-        <span
-          style={{
-            fontWeight: unread ? 700 : 400,
-            fontSize: 14,
-            flexShrink: 0,
-          }}
-        >
+
+      <div className="flex-1 overflow-hidden flex gap-1 min-w-0">
+        <span className={cn("text-sm shrink-0", unread ? "font-bold" : "font-normal")}>
           {section.subject}
         </span>
-        <span
-          style={{
-            color: "var(--text-secondary)",
-            fontSize: 14,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-          }}
-        >
+        <span className="text-muted-foreground text-sm overflow-hidden text-ellipsis whitespace-nowrap">
           — {section.preview}
         </span>
       </div>
+
       <div
-        style={{
-          flexShrink: 0,
-          fontSize: 12,
-          color: unread ? "var(--text-primary)" : "var(--text-secondary)",
-          fontWeight: unread ? 700 : 400,
-        }}
+        className={cn(
+          "shrink-0 text-xs",
+          unread ? "text-foreground font-bold" : "text-muted-foreground font-normal",
+        )}
       >
         {section.date}
       </div>

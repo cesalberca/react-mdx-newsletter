@@ -3,10 +3,5 @@ import type { AnchorHTMLAttributes, PropsWithChildren } from "react";
 export function WebLink(
   props: AnchorHTMLAttributes<HTMLAnchorElement> & PropsWithChildren,
 ) {
-  return (
-    <a
-      style={{ color: "var(--text-link)", textDecoration: "none" }}
-      {...props}
-    />
-  );
+  return <a className="text-link no-underline" {...props} />;
 }

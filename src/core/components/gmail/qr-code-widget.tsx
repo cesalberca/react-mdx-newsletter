@@ -10,33 +10,13 @@ export function QrCodeWidget() {
   if (isComposeOpen) return null;
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        bottom: 16,
-        left: 16,
-        backgroundColor: "var(--bg-surface, #fff)",
-        borderRadius: 12,
-        padding: 12,
-        boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: 8,
-        zIndex: 900,
-      }}
-    >
-      <a href="/newsletter" style={{ display: "contents" }}>
+    <div className="fixed bottom-4 left-4 bg-card rounded-xl p-3 shadow-md flex flex-col items-center gap-2 z-[900]">
+      <a href="/newsletter" className="contents">
         <QRCodeSVG value={`${env.NEXT_PUBLIC_URL}/newsletter`} size={100} />
       </a>
       <a
         href="/newsletter"
-        style={{
-          fontSize: 11,
-          color: "var(--text-secondary, #666)",
-          fontWeight: 500,
-          textDecoration: "none",
-        }}
+        className="text-[11px] text-muted-foreground font-medium no-underline"
       >
         Scan or click to subscribe
       </a>

@@ -15,36 +15,32 @@ export default function NewsletterConfirmPage() {
   );
 }
 
-function ConfirmLoading() {
+function ConfirmCard({ children }: { children: React.ReactNode }) {
   return (
-    <div
-      style={{
-        backgroundColor: "var(--bg-primary)",
-        minHeight: "100%",
-        padding: 24,
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      <div style={{ maxWidth: 600, width: "100%" }}>
-        <div
-          style={{
-            backgroundColor: "var(--bg-card)",
-            borderRadius: 8,
-            border: "1px solid var(--border-primary)",
-            padding: 32,
-            textAlign: "center",
-          }}
-        >
-          <div style={{ fontSize: 48, marginBottom: 16 }}>&#9203;</div>
-          <h1 style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px 0" }}>
-            Loading...
-          </h1>
+    <div className="bg-background min-h-full p-6 flex justify-center">
+      <div className="max-w-[600px] w-full">
+        <div className="bg-card rounded-lg border border-border p-8 text-center">
+          {children}
         </div>
       </div>
     </div>
   );
 }
+
+function ConfirmLoading() {
+  return (
+    <ConfirmCard>
+      <div className="text-5xl mb-4">&#9203;</div>
+      <h1 className="text-2xl font-bold mt-0 mb-2">Loading...</h1>
+    </ConfirmCard>
+  );
+}
+
+const linkClass =
+  "inline-block mt-4 py-[10px] px-6 rounded bg-accent text-foreground-inverse no-underline text-sm font-medium";
+
+const outlineLinkClass =
+  "inline-block mt-4 py-[10px] px-6 rounded border border-border text-foreground no-underline text-sm font-medium";
 
 function ConfirmContent() {
   const searchParams = useSearchParams();
@@ -91,164 +87,65 @@ function ConfirmContent() {
   }, [searchParams]);
 
   return (
-    <div
-      style={{
-        backgroundColor: "var(--bg-primary)",
-        minHeight: "100%",
-        padding: 24,
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      <div style={{ maxWidth: 600, width: "100%" }}>
-        <div
-          style={{
-            backgroundColor: "var(--bg-card)",
-            borderRadius: 8,
-            border: "1px solid var(--border-primary)",
-            padding: 32,
-            textAlign: "center",
-          }}
-        >
-          {state === "loading" && (
-            <>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>&#9203;</div>
-              <h1
-                style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px 0" }}
-              >
-                Confirming your subscription...
-              </h1>
-              <p style={{ color: "var(--text-secondary)" }}>Please wait.</p>
-            </>
-          )}
+    <ConfirmCard>
+      {state === "loading" && (
+        <>
+          <div className="text-5xl mb-4">&#9203;</div>
+          <h1 className="text-2xl font-bold mt-0 mb-2">
+            Confirming your subscription...
+          </h1>
+          <p className="text-muted-foreground">Please wait.</p>
+        </>
+      )}
 
-          {state === "success" && (
-            <>
-              <div
-                style={{
-                  fontSize: 48,
-                  marginBottom: 16,
-                  color: "var(--green)",
-                }}
-              >
-                &#10003;
-              </div>
-              <h1
-                style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px 0" }}
-              >
-                Subscription Confirmed!
-              </h1>
-              <p style={{ color: "var(--text-secondary)", lineHeight: 1.6 }}>
-                Welcome aboard! You&apos;ll receive each issue of the Build Your
-                Own Newsletter series as it goes out.
-              </p>
-              <Link
-                href="/"
-                style={{
-                  display: "inline-block",
-                  marginTop: 16,
-                  padding: "10px 24px",
-                  borderRadius: 4,
-                  backgroundColor: "var(--accent)",
-                  color: "#fff",
-                  textDecoration: "none",
-                  fontSize: 14,
-                  fontWeight: 500,
-                }}
-              >
-                Back to Inbox
-              </Link>
-            </>
-          )}
+      {state === "success" && (
+        <>
+          <div className="text-5xl mb-4 text-success">&#10003;</div>
+          <h1 className="text-2xl font-bold mt-0 mb-2">
+            Subscription Confirmed!
+          </h1>
+          <p className="text-muted-foreground leading-relaxed">
+            Welcome aboard! You&apos;ll receive each issue of the Build Your Own
+            Newsletter series as it goes out.
+          </p>
+          <Link href="/" className={linkClass}>
+            Back to Inbox
+          </Link>
+        </>
+      )}
 
-          {state === "already" && (
-            <>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>&#9993;</div>
-              <h1
-                style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px 0" }}
-              >
-                Already Subscribed
-              </h1>
-              <p style={{ color: "var(--text-secondary)", lineHeight: 1.6 }}>
-                This email is already confirmed. You&apos;re all set!
-              </p>
-              <Link
-                href="/"
-                style={{
-                  display: "inline-block",
-                  marginTop: 16,
-                  padding: "10px 24px",
-                  borderRadius: 4,
-                  backgroundColor: "var(--accent)",
-                  color: "#fff",
-                  textDecoration: "none",
-                  fontSize: 14,
-                  fontWeight: 500,
-                }}
-              >
-                Back to Inbox
-              </Link>
-            </>
-          )}
+      {state === "already" && (
+        <>
+          <div className="text-5xl mb-4">&#9993;</div>
+          <h1 className="text-2xl font-bold mt-0 mb-2">Already Subscribed</h1>
+          <p className="text-muted-foreground leading-relaxed">
+            This email is already confirmed. You&apos;re all set!
+          </p>
+          <Link href="/" className={linkClass}>
+            Back to Inbox
+          </Link>
+        </>
+      )}
 
-          {state === "error" && (
-            <>
-              <div
-                style={{ fontSize: 48, marginBottom: 16, color: "var(--red)" }}
-              >
-                &#10007;
-              </div>
-              <h1
-                style={{ fontSize: 24, fontWeight: 700, margin: "0 0 8px 0" }}
-              >
-                Confirmation Failed
-              </h1>
-              <p style={{ color: "var(--text-secondary)", lineHeight: 1.6 }}>
-                {errorMessage || "The link may be expired or invalid."}
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  gap: 8,
-                  justifyContent: "center",
-                  marginTop: 16,
-                }}
-              >
-                <Link
-                  href="/newsletter"
-                  style={{
-                    display: "inline-block",
-                    padding: "10px 24px",
-                    borderRadius: 4,
-                    backgroundColor: "var(--accent)",
-                    color: "#fff",
-                    textDecoration: "none",
-                    fontSize: 14,
-                    fontWeight: 500,
-                  }}
-                >
-                  Try Again
-                </Link>
-                <Link
-                  href="/"
-                  style={{
-                    display: "inline-block",
-                    padding: "10px 24px",
-                    borderRadius: 4,
-                    border: "1px solid var(--border-primary)",
-                    color: "var(--text-primary)",
-                    textDecoration: "none",
-                    fontSize: 14,
-                    fontWeight: 500,
-                  }}
-                >
-                  Back to Inbox
-                </Link>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-    </div>
+      {state === "error" && (
+        <>
+          <div className="text-5xl mb-4 text-destructive">&#10007;</div>
+          <h1 className="text-2xl font-bold mt-0 mb-2">
+            Confirmation Failed
+          </h1>
+          <p className="text-muted-foreground leading-relaxed">
+            {errorMessage || "The link may be expired or invalid."}
+          </p>
+          <div className="flex gap-2 justify-center mt-4">
+            <Link href="/newsletter" className={linkClass}>
+              Try Again
+            </Link>
+            <Link href="/" className={outlineLinkClass}>
+              Back to Inbox
+            </Link>
+          </div>
+        </>
+      )}
+    </ConfirmCard>
   );
 }

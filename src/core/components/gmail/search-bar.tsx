@@ -6,28 +6,10 @@ import { Avatar } from "./avatar";
 
 export function SearchBar() {
   return (
-    <header
-      style={{
-        height: "var(--header-height)",
-        display: "flex",
-        alignItems: "center",
-        padding: "0 8px 0 8px",
-        gap: 8,
-        borderBottom: "1px solid var(--border-light)",
-        backgroundColor: "var(--bg-secondary)",
-        flexShrink: 0,
-      }}
-    >
+    <header className="h-[var(--header-height)] flex items-center px-2 gap-2 border-b border-border-faint bg-surface shrink-0">
       <Link
-        href="/public"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 4,
-          textDecoration: "none",
-          padding: "0 12px",
-          flexShrink: 0,
-        }}
+        href="/"
+        className="flex items-center gap-1 no-underline px-3 shrink-0"
       >
         <svg
           aria-hidden="true"
@@ -57,50 +39,25 @@ export function SearchBar() {
             fill="#C5221F"
           />
         </svg>
-        <span
-          style={{
-            fontSize: 22,
-            fontWeight: 400,
-            color: "var(--text-secondary)",
-          }}
-        >
+        <span className="text-[22px] font-normal text-muted-foreground">
           Mail
         </span>
       </Link>
-      <div
-        style={{
-          flex: 1,
-          maxWidth: 720,
-          height: 48,
-          borderRadius: 24,
-          backgroundColor: "var(--bg-tertiary)",
-          display: "flex",
-          alignItems: "center",
-          padding: "0 16px",
-          gap: 12,
-        }}
-      >
+
+      <div className="flex-1 max-w-[720px] h-12 rounded-3xl bg-surface-raised flex items-center px-4 gap-3">
         <svg
           aria-hidden="true"
           width="20"
           height="20"
           viewBox="0 0 24 24"
-          fill="var(--text-secondary)"
+          className="fill-muted-foreground"
         >
           <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
         </svg>
-        <span style={{ color: "var(--text-secondary)", fontSize: 16 }}>
-          Search in mail
-        </span>
+        <span className="text-muted-foreground text-base">Search in mail</span>
       </div>
-      <div
-        style={{
-          marginLeft: "auto",
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-        }}
-      >
+
+      <div className="ml-auto flex items-center gap-2">
         <ThemeToggle />
         <Avatar name="César Alberca" size={32} imageUrl="/me-squared.png" />
       </div>

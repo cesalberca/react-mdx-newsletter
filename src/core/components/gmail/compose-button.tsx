@@ -9,24 +9,7 @@ export function ComposeButton() {
     <button
       type="button"
       onClick={() => setComposeOpen(true)}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 12,
-        padding: "0 24px",
-        height: 56,
-        border: "none",
-        borderRadius: 16,
-        backgroundColor: "var(--bg-compose)",
-        color: "var(--text-on-compose)",
-        fontSize: 14,
-        fontWeight: 500,
-        fontFamily: "inherit",
-        cursor: "pointer",
-        boxShadow: "var(--shadow-sm)",
-        transition: "box-shadow 0.2s",
-        marginBottom: 16,
-      }}
+      className="flex items-center gap-3 px-6 h-14 border-0 rounded-2xl bg-compose text-compose-foreground text-sm font-medium cursor-pointer shadow-sm transition-shadow duration-200 mb-4"
     >
       <svg
         aria-hidden="true"

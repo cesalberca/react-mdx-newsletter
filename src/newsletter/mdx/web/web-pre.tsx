@@ -17,37 +17,13 @@ export function WebPre({ children }: { children: ReactNode }) {
   return (
     <pre
       ref={preRef}
-      style={{
-        padding: 0,
-        marginBottom: 16,
-        borderRadius: 8,
-        overflow: "hidden",
-        position: "relative",
-      }}
-      className="group not-prose"
+      className="group not-prose p-0 mb-4 rounded-lg overflow-hidden relative"
     >
       <button
         type="button"
         onClick={handleCopy}
         aria-label={copied ? "Copied!" : "Copy code"}
-        style={{
-          position: "absolute",
-          right: 8,
-          top: 8,
-          padding: "4px 6px",
-          borderRadius: 6,
-          border: "none",
-          background: "var(--bg-hover)",
-          color: "var(--text-secondary)",
-          cursor: "pointer",
-          opacity: 0,
-          transition: "opacity 0.15s",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 1,
-        }}
-        className="group-hover:!opacity-100"
+        className="absolute right-2 top-2 py-1 px-1.5 rounded-md border-0 bg-surface-hover text-muted-foreground cursor-pointer opacity-0 transition-opacity duration-150 flex items-center justify-center z-[1] group-hover:!opacity-100"
       >
         {copied ? <Check size={14} /> : <Copy size={14} />}
       </button>

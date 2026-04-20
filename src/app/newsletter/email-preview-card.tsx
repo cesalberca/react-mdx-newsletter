@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { cn } from "@/core/styles/cn";
 import { Avatar } from "@/core/components/gmail/avatar";
 
 interface EmailPreviewCardProps {
@@ -23,73 +24,49 @@ export function EmailPreviewCard({
   const [expanded, setExpanded] = useState(defaultExpanded);
 
   return (
-    <div style={{ borderBottom: "1px solid var(--border-light)" }}>
+    <div className="border-b border-border-faint">
       <button
         type="button"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 12,
-          padding: "16px 24px",
-          width: "100%",
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          textAlign: "left",
-          fontFamily: "inherit",
-          color: "inherit",
-        }}
+        className="flex items-center gap-3 py-4 px-6 w-full bg-transparent border-0 cursor-pointer text-left font-[inherit] text-inherit"
         onClick={() => setExpanded(!expanded)}
       >
         <Avatar name={from} size={40} imageUrl="/me-squared.png" />
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
-            <span style={{ fontWeight: 600, fontSize: 14 }}>{from}</span>
-            <span style={{ color: "var(--text-tertiary)", fontSize: 12 }}>
+
+        <div className="flex-1 min-w-0">
+          <div className="flex items-baseline gap-2">
+            <span className="font-semibold text-sm">{from}</span>
+            <span className="text-subtle-foreground text-xs">
               &lt;{fromEmail}&gt;
             </span>
           </div>
           {!expanded && (
-            <div
-              style={{
-                color: "var(--text-secondary)",
-                fontSize: 14,
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-              }}
-            >
-              <strong style={{ color: "var(--text-primary)" }}>
-                {subject}
-              </strong>
+            <div className="text-muted-foreground text-sm truncate">
+              <strong className="text-foreground">{subject}</strong>
               {" — "}
               {preview}
             </div>
           )}
           {expanded && (
-            <div style={{ fontSize: 14, color: "var(--text-primary)" }}>
-              {subject}
-            </div>
+            <div className="text-sm text-foreground">{subject}</div>
           )}
         </div>
+
         <svg
           aria-hidden="true"
           width="20"
           height="20"
           viewBox="0 0 24 24"
-          fill="var(--text-tertiary)"
-          style={{
-            transform: expanded ? "rotate(180deg)" : "rotate(0deg)",
-            transition: "transform 0.2s",
-            flexShrink: 0,
-          }}
+          className={cn(
+            "fill-subtle-foreground transition-transform duration-200 shrink-0",
+            expanded ? "rotate-180" : "rotate-0",
+          )}
         >
           <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
         </svg>
       </button>
 
       {expanded && (
-        <div style={{ borderTop: "1px solid var(--border-light)" }}>
+        <div className="border-t border-border-faint">
           {/* biome-ignore lint/security/noDangerouslySetInnerHtml: trusted HTML rendered from React Email template */}
           <div dangerouslySetInnerHTML={{ __html: html }} />
         </div>

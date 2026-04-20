@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const COLORS = [
   "#1a73e8",
   "#e8710a",
@@ -17,8 +19,6 @@ function hashCode(str: string) {
   return Math.abs(hash);
 }
 
-import Image from "next/image";
-
 const CESAR_IMAGE = "/me-squared.png";
 
 export function Avatar({
@@ -32,6 +32,7 @@ export function Avatar({
 }) {
   const resolvedImage =
     imageUrl ?? (name.startsWith("César") ? CESAR_IMAGE : undefined);
+
   if (resolvedImage) {
     return (
       <Image
@@ -39,11 +40,7 @@ export function Avatar({
         alt={name}
         width={size}
         height={size}
-        style={{
-          borderRadius: "50%",
-          objectFit: "cover",
-          flexShrink: 0,
-        }}
+        className="rounded-full object-cover shrink-0"
       />
     );
   }
@@ -58,20 +55,8 @@ export function Avatar({
 
   return (
     <div
-      style={{
-        width: size,
-        height: size,
-        borderRadius: "50%",
-        backgroundColor: bg,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "#fff",
-        fontSize: size * 0.4,
-        fontWeight: 500,
-        flexShrink: 0,
-        userSelect: "none",
-      }}
+      className="rounded-full flex items-center justify-center text-foreground-inverse font-medium shrink-0 select-none"
+      style={{ width: size, height: size, backgroundColor: bg, fontSize: size * 0.4 }}
     >
       {initials}
     </div>

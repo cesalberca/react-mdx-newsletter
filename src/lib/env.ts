@@ -19,6 +19,9 @@ export const env = {
   get RESEND_SEGMENT_ID() {
     return getEnvVar("RESEND_SEGMENT_ID");
   },
+  get RESEND_TOPIC_ID() {
+    return getEnvVar("RESEND_TOPIC_ID");
+  },
   get NEWSLETTER_BROADCAST_TOKEN() {
     return getEnvVar("NEWSLETTER_BROADCAST_TOKEN");
   },

@@ -36,21 +36,15 @@ export default function RootLayout({
         {/* biome-ignore lint/security/noDangerouslySetInnerHtml: inline script to prevent flash of unstyled content before hydration */}
         <script dangerouslySetInnerHTML={{ __html: ANTI_FOUC_SCRIPT }} />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <ThemeProvider>
           <ReadStatusProvider>
             <ComposeProvider>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "100vh",
-                }}
-              >
+              <div className="flex flex-col h-screen">
                 <SearchBar />
-                <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
+                <div className="flex flex-1 overflow-hidden">
                   <Sidebar />
-                  <main style={{ flex: 1, overflow: "auto" }}>{children}</main>
+                  <main className="flex-1 overflow-auto">{children}</main>
                 </div>
               </div>
               <ComposeDialog />

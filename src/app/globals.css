@@ -30,11 +30,11 @@
   --green: #188038;
   --yellow: #f9ab00;
 
-  --shadow-sm:
+  --app-shadow-sm:
     0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-  --shadow-md:
+  --app-shadow-md:
     0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
-  --shadow-lg:
+  --app-shadow-lg:
     0 4px 8px 0 rgba(60, 64, 67, 0.3), 0 8px 16px 4px rgba(60, 64, 67, 0.15);
 
   --sidebar-width: 256px;
@@ -72,17 +72,50 @@
   --green: #81c995;
   --yellow: #fdd663;
 
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5), 0 1px 3px 1px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 4px 8px 3px rgba(0, 0, 0, 0.3);
-  --shadow-lg:
+  --app-shadow-sm:
+    0 1px 2px 0 rgba(0, 0, 0, 0.5), 0 1px 3px 1px rgba(0, 0, 0, 0.3);
+  --app-shadow-md:
+    0 1px 3px 0 rgba(0, 0, 0, 0.5), 0 4px 8px 3px rgba(0, 0, 0, 0.3);
+  --app-shadow-lg:
     0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 8px 16px 4px rgba(0, 0, 0, 0.3);
 
   color-scheme: dark;
 }
 
 @theme inline {
+  /* Backgrounds */
   --color-background: var(--bg-primary);
+  --color-surface: var(--bg-secondary);
+  --color-surface-raised: var(--bg-tertiary);
+  --color-surface-hover: var(--bg-hover);
+  --color-surface-active: var(--bg-active);
+  --color-card: var(--bg-card);
+  --color-compose: var(--bg-compose);
+  --color-row-unread: var(--bg-inbox-row-unread);
+  --color-row-read: var(--bg-inbox-row-read);
+  --color-row-hover: var(--bg-inbox-row-hover);
+  /* Text */
   --color-foreground: var(--text-primary);
+  --color-muted-foreground: var(--text-secondary);
+  --color-subtle-foreground: var(--text-tertiary);
+  --color-link: var(--text-link);
+  --color-compose-foreground: var(--text-on-compose);
+  --color-foreground-inverse: var(--text-inverse);
+  /* Borders */
+  --color-border: var(--border-primary);
+  --color-border-subtle: var(--border-secondary);
+  --color-border-faint: var(--border-light);
+  /* Semantic */
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-destructive: var(--red);
+  --color-success: var(--green);
+  --color-warning: var(--yellow);
+  /* Shadows */
+  --shadow-sm: var(--app-shadow-sm);
+  --shadow-md: var(--app-shadow-md);
+  --shadow-lg: var(--app-shadow-lg);
+  /* Typography */
   --font-sans: "Google Sans", Roboto, Arial, sans-serif;
   --font-mono: "Roboto Mono", monospace;
 }

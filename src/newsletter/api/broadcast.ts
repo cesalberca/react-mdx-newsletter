@@ -26,6 +26,7 @@ export async function broadcast(
 
   const result = await resend.broadcasts.create({
     audienceId: env.RESEND_SEGMENT_ID,
+    topicId: env.RESEND_TOPIC_ID,
     from: env.RESEND_EMAIL_FROM,
     subject: title,
     html,
@@ -40,9 +41,7 @@ export async function broadcast(
     throw new Error("Failed to create broadcast");
   }
 
-  await resend.broadcasts.send(result.data.id, {
-    scheduledAt: "today 15:00 UTC",
-  });
+  await resend.broadcasts.send(result.data.id);
 
   return { broadcastId: result.data.id };
 }

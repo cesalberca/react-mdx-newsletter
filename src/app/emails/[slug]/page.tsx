@@ -37,11 +37,7 @@ export async function generateMetadata({
 }): Promise<{ title: string }> {
   const { slug } = await params;
   const section = sections.find((s) => s.slug === slug);
-  if (!section) {
-    return {
-      title: "",
-    };
-  }
+  if (!section) return { title: "" };
   return { title: section.subject };
 }
 
@@ -59,8 +55,7 @@ export default async function EmailThreadPage({
 
   const folderSections = sections.filter((s) => s.folder === section.folder);
   const currentIndex = folderSections.findIndex((s) => s.slug === slug);
-  const prevSlug =
-    currentIndex > 0 ? folderSections[currentIndex - 1].slug : null;
+  const prevSlug = currentIndex > 0 ? folderSections[currentIndex - 1].slug : null;
   const nextSlug =
     currentIndex < folderSections.length - 1
       ? folderSections[currentIndex + 1].slug
@@ -68,7 +63,7 @@ export default async function EmailThreadPage({
   const backHref = section.folder === "spam" ? "/spam" : "/";
 
   return (
-    <div style={{ backgroundColor: "var(--bg-primary)", minHeight: "100%" }}>
+    <div className="bg-background min-h-full">
       <MarkAsRead slug={slug} />
       <ThreadHeader
         section={section}

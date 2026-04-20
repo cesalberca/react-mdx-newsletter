@@ -33,16 +33,10 @@ export function WebCode({
     return (
       <code
         {...props}
-        style={{
-          display: "block",
-          padding: "16px",
-          backgroundColor: "var(--bg-tertiary, #f5f5f5)",
-          color: "var(--text-primary)",
-          fontSize: 13,
-          fontFamily: '"Roboto Mono", ui-monospace, monospace',
-          lineHeight: 1.6,
-          overflowX: "auto",
-        }}
+        className={cn(
+          className,
+          "block p-4 bg-surface-raised text-foreground text-[13px] font-mono leading-[1.6] overflow-x-auto",
+        )}
       >
         {children}
       </code>
@@ -55,14 +49,8 @@ export function WebCode({
       {...props}
       className={cn(
         className,
-        "bg-muted px-[4px] py-[2px] mx-[2px] rounded not-prose font-mono",
+        "bg-surface-raised px-1.5 py-0.5 mx-0.5 rounded text-[0.875em] font-mono not-prose",
       )}
-      style={{
-        borderRadius: 4,
-        padding: "2px 6px",
-        fontFamily: '"Roboto Mono", monospace',
-        fontSize: "0.875em",
-      }}
     >
       {children}
     </code>

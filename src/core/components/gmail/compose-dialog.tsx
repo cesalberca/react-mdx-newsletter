@@ -1,81 +1,56 @@
 "use client";
 
 import Image from "next/image";
-import { type CSSProperties, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { newsletters } from "@/app/newsletters/newsletters";
+import { cn } from "@/core/styles/cn";
 import { useCompose } from "@/core/context/compose-context";
 
 type Status = "idle" | "sending" | "success" | "error";
 
 function Signature() {
   return (
-    <div
-      style={{ fontSize: 12, lineHeight: 1.6, color: "var(--text-primary)" }}
-    >
-      <div style={{ color: "var(--text-secondary)", marginBottom: 8 }}>--</div>
-      <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+    <div className="text-xs leading-[1.6] text-foreground">
+      <div className="text-muted-foreground mb-2">--</div>
+      <div className="flex gap-3.5 items-start">
         {/* Avatar */}
         <Image
           src="/me-squared.png"
           alt="César Alberca Agelán"
           width={64}
           height={64}
-          style={{
-            borderRadius: "50%",
-            objectFit: "cover",
-            flexShrink: 0,
-          }}
+          className="rounded-full object-cover shrink-0"
         />
         {/* Info */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <div
-            style={{
-              fontWeight: 700,
-              fontSize: 14,
-              color: "var(--text-primary)",
-            }}
-          >
+        <div className="flex flex-col gap-0.5">
+          <div className="font-bold text-sm text-foreground">
             César Alberca Agelán
           </div>
-          <div
-            style={{ color: "var(--accent)", fontSize: 12, fontWeight: 500 }}
-          >
+          <div className="text-accent text-xs font-medium">
             Freelance Senior Frontend Architect
           </div>
-          <div
-            style={{
-              borderTop: "1px solid var(--border-secondary)",
-              margin: "4px 0",
-              width: 200,
-            }}
-          />
-          <div style={{ fontSize: 11, color: "var(--text-secondary)" }}>
+          <div className="border-t border-border-subtle my-1 w-[200px]" />
+          <div className="text-[11px] text-muted-foreground">
             <span>Web </span>
             <a
               href="https://cesalberca.com"
-              style={{ color: "var(--text-link)", textDecoration: "none" }}
+              className="text-link no-underline"
             >
               cesalberca.com
             </a>
             <span> Email </span>
             <a
               href="mailto:cesar@cesalberca.com"
-              style={{ color: "var(--text-link)", textDecoration: "none" }}
+              className="text-link no-underline"
             >
               cesar@cesalberca.com
             </a>
           </div>
-          <div
-            style={{
-              fontSize: 10,
-              color: "var(--text-tertiary)",
-              fontStyle: "italic",
-            }}
-          >
+          <div className="text-[10px] text-subtle-foreground italic">
             Helping You Build Scalable, AI-Ready Frontend Architecture
           </div>
           {/* Social icons */}
-          <div style={{ display: "flex", gap: 6, marginTop: 4 }}>
+          <div className="flex gap-1.5 mt-1">
             {/* LinkedIn */}
             <a
               href="https://linkedin.com/in/cesalberca"
@@ -106,7 +81,8 @@ function Signature() {
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
-                fill="var(--text-primary)"
+                fill="currentColor"
+                className="text-foreground"
                 role="img"
                 aria-label="X"
               >
@@ -140,28 +116,13 @@ function Signature() {
   );
 }
 
+const toolbarIconClass =
+  "bg-transparent border-0 p-1 cursor-default text-muted-foreground flex items-center";
+
 function FormattingToolbar() {
-  const iconStyle: CSSProperties = {
-    background: "none",
-    border: "none",
-    padding: 4,
-    cursor: "default",
-    color: "var(--text-secondary)",
-    display: "flex",
-    alignItems: "center",
-  };
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: 2,
-        padding: "4px 12px",
-        borderTop: "1px solid var(--border-secondary)",
-        backgroundColor: "var(--bg-card)",
-      }}
-    >
-      <button type="button" style={iconStyle} aria-label="Undo">
+    <div className="flex items-center gap-0.5 py-1 px-3 border-t border-border-subtle bg-card">
+      <button type="button" className={toolbarIconClass} aria-label="Undo">
         <svg
           aria-hidden="true"
           width="18"
@@ -172,7 +133,7 @@ function FormattingToolbar() {
           <path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" />
         </svg>
       </button>
-      <button type="button" style={iconStyle} aria-label="Redo">
+      <button type="button" className={toolbarIconClass} aria-label="Redo">
         <svg
           aria-hidden="true"
           width="18"
@@ -183,33 +144,12 @@ function FormattingToolbar() {
           <path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" />
         </svg>
       </button>
-      <div
-        style={{
-          width: 1,
-          height: 18,
-          backgroundColor: "var(--border-secondary)",
-          margin: "0 4px",
-        }}
-      />
-      <span
-        style={{
-          fontSize: 12,
-          color: "var(--text-secondary)",
-          padding: "0 6px",
-          cursor: "default",
-        }}
-      >
+      <div className="w-px h-[18px] bg-border-subtle mx-1" />
+      <span className="text-xs text-muted-foreground px-1.5 cursor-default">
         Sans Serif
       </span>
-      <div
-        style={{
-          width: 1,
-          height: 18,
-          backgroundColor: "var(--border-secondary)",
-          margin: "0 4px",
-        }}
-      />
-      <button type="button" style={iconStyle} aria-label="Bold">
+      <div className="w-px h-[18px] bg-border-subtle mx-1" />
+      <button type="button" className={toolbarIconClass} aria-label="Bold">
         <svg
           aria-hidden="true"
           width="18"
@@ -220,7 +160,7 @@ function FormattingToolbar() {
           <path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z" />
         </svg>
       </button>
-      <button type="button" style={iconStyle} aria-label="Italic">
+      <button type="button" className={toolbarIconClass} aria-label="Italic">
         <svg
           aria-hidden="true"
           width="18"
@@ -231,7 +171,7 @@ function FormattingToolbar() {
           <path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z" />
         </svg>
       </button>
-      <button type="button" style={iconStyle} aria-label="Underline">
+      <button type="button" className={toolbarIconClass} aria-label="Underline">
         <svg
           aria-hidden="true"
           width="18"
@@ -298,63 +238,19 @@ export function ComposeDialog() {
     }
   }
 
-  const headerIconStyle: CSSProperties = {
-    background: "none",
-    border: "none",
-    color: "#9aa0a6",
-    cursor: "pointer",
-    padding: 4,
-    fontSize: 16,
-    lineHeight: 1,
-    fontFamily: "inherit",
-    display: "flex",
-    alignItems: "center",
-  };
+  const headerIconClass =
+    "bg-transparent border-0 text-[#9aa0a6] cursor-pointer p-1 text-base leading-none font-[inherit] flex items-center";
 
-  const bottomIconStyle: CSSProperties = {
-    background: "none",
-    border: "none",
-    padding: 6,
-    cursor: "default",
-    color: "var(--text-secondary)",
-    display: "flex",
-    alignItems: "center",
-  };
+  const bottomIconClass =
+    "bg-transparent border-0 p-1.5 cursor-default text-muted-foreground flex items-center";
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        bottom: 0,
-        right: 72,
-        width: 540,
-        maxHeight: "80vh",
-        zIndex: 1000,
-        borderRadius: "8px 8px 0 0",
-        boxShadow: "var(--shadow-lg)",
-        display: "flex",
-        flexDirection: "column",
-        overflow: "hidden",
-        fontFamily: "inherit",
-      }}
-    >
+    <div className="fixed bottom-0 right-[72px] w-[540px] max-h-[80vh] z-[1000] rounded-t-lg shadow-lg flex flex-col overflow-hidden font-[inherit]">
       {/* Header */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "8px 12px",
-          backgroundColor: "#404040",
-          color: "#fff",
-          fontSize: 14,
-          fontWeight: 500,
-          cursor: "default",
-        }}
-      >
+      <div className="flex items-center justify-between py-2 px-3 bg-[#404040] text-white text-sm font-medium cursor-default">
         <span>New Message</span>
-        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-          <button type="button" style={headerIconStyle} aria-label="Minimize">
+        <div className="flex items-center gap-1">
+          <button type="button" className={headerIconClass} aria-label="Minimize">
             <svg
               aria-hidden="true"
               width="16"
@@ -365,7 +261,7 @@ export function ComposeDialog() {
               <path d="M6 19h12v2H6z" />
             </svg>
           </button>
-          <button type="button" style={headerIconStyle} aria-label="Pop out">
+          <button type="button" className={headerIconClass} aria-label="Pop out">
             <svg
               aria-hidden="true"
               width="16"
@@ -379,7 +275,7 @@ export function ComposeDialog() {
           <button
             type="button"
             onClick={close}
-            style={headerIconStyle}
+            className={headerIconClass}
             aria-label="Close"
           >
             <svg
@@ -396,30 +292,10 @@ export function ComposeDialog() {
       </div>
 
       {/* To field */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          padding: "8px 14px",
-          borderBottom: "1px solid var(--border-secondary)",
-          backgroundColor: "var(--bg-card)",
-          fontSize: 13,
-          color: "var(--text-primary)",
-        }}
-      >
-        <span style={{ color: "var(--text-secondary)", marginRight: 8 }}>
-          To
-        </span>
-        <span style={{ flex: 1, fontWeight: 400 }}>All subscribers</span>
-        <span
-          style={{
-            color: "var(--text-secondary)",
-            fontSize: 12,
-            display: "flex",
-            gap: 8,
-            alignItems: "center",
-          }}
-        >
+      <div className="flex items-center py-2 px-[14px] border-b border-border-subtle bg-card text-[13px] text-foreground">
+        <span className="text-muted-foreground mr-2">To</span>
+        <span className="flex-1 font-normal">All subscribers</span>
+        <span className="text-muted-foreground text-xs flex gap-2 items-center">
           Cc Bcc
           <svg
             aria-hidden="true"
@@ -434,34 +310,12 @@ export function ComposeDialog() {
       </div>
 
       {/* Subject field */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          padding: "8px 14px",
-          borderBottom: "1px solid var(--border-secondary)",
-          backgroundColor: "var(--bg-card)",
-          fontSize: 13,
-          color: "var(--text-primary)",
-        }}
-      >
-        <span style={{ color: "var(--text-secondary)", marginRight: 8 }}>
-          Subject
-        </span>
+      <div className="flex items-center py-2 px-[14px] border-b border-border-subtle bg-card text-[13px] text-foreground">
+        <span className="text-muted-foreground mr-2">Subject</span>
         <select
           value={selectedIndex}
           onChange={(e) => setSelectedIndex(Number(e.target.value))}
-          style={{
-            flex: 1,
-            padding: "2px 4px",
-            border: "none",
-            outline: "none",
-            fontSize: 13,
-            fontFamily: "inherit",
-            backgroundColor: "transparent",
-            color: "var(--text-primary)",
-            cursor: "pointer",
-          }}
+          className="flex-1 py-0.5 px-1 border-0 outline-none text-[13px] font-[inherit] bg-transparent text-foreground cursor-pointer"
         >
           {newsletters.map((nl, i) => (
             <option key={nl.slug} value={i}>
@@ -472,43 +326,29 @@ export function ComposeDialog() {
       </div>
 
       {/* Body area */}
-      <div
-        style={{
-          flex: 1,
-          backgroundColor: "var(--bg-card)",
-          color: "var(--text-primary)",
-          padding: "12px 14px",
-          minHeight: 240,
-          overflowY: "auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: 16,
-          fontSize: 13,
-          lineHeight: 1.6,
-        }}
-      >
+      <div className="flex-1 bg-card text-foreground py-3 px-[14px] min-h-[240px] overflow-y-auto flex flex-col gap-4 text-[13px] leading-[1.6]">
         {/* Newsletter preview */}
         <div>
           <strong>{selected.title}</strong>
-          <p style={{ margin: "6px 0 0", color: "var(--text-secondary)" }}>
+          <p className="mt-1.5 mb-0 text-muted-foreground">
             {selected.description}
           </p>
         </div>
 
         {/* Status messages */}
         {status === "success" && (
-          <div style={{ color: "var(--green)", fontSize: 13, fontWeight: 500 }}>
+          <div className="text-success text-[13px] font-medium">
             Broadcast sent successfully!
           </div>
         )}
         {status === "error" && (
-          <div style={{ color: "var(--red)", fontSize: 13 }}>
+          <div className="text-destructive text-[13px]">
             Error: {errorMsg}
           </div>
         )}
 
         {/* Spacer pushes signature to bottom */}
-        <div style={{ flex: 1 }} />
+        <div className="flex-1" />
 
         {/* Signature */}
         <Signature />
@@ -518,37 +358,20 @@ export function ComposeDialog() {
       <FormattingToolbar />
 
       {/* Bottom action bar */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          padding: "8px 12px",
-          backgroundColor: "var(--bg-card)",
-          borderTop: "1px solid var(--border-secondary)",
-        }}
-      >
+      <div className="flex items-center py-2 px-3 bg-card border-t border-border-subtle">
         {/* Send button */}
-        <div style={{ display: "flex", alignItems: "stretch" }}>
+        <div className="flex items-stretch">
           <button
             type="button"
             onClick={handleSend}
             disabled={status === "sending" || status === "success"}
-            style={{
-              padding: "8px 20px",
-              backgroundColor:
-                status === "success" ? "var(--green)" : "#1a73e8",
-              color: "#fff",
-              border: "none",
-              borderRadius: "18px 0 0 18px",
-              fontSize: 14,
-              fontWeight: 500,
-              cursor:
-                status === "sending" || status === "success"
-                  ? "default"
-                  : "pointer",
-              opacity: status === "sending" ? 0.7 : 1,
-              fontFamily: "inherit",
-            }}
+            className={cn(
+              "py-2 px-5 text-white border-0 rounded-l-[18px] text-sm font-medium font-[inherit]",
+              status === "success" ? "bg-success" : "bg-[#1a73e8]",
+              status === "sending" || status === "success"
+                ? "cursor-default opacity-70"
+                : "cursor-pointer",
+            )}
           >
             {status === "sending"
               ? "Sending..."
@@ -558,18 +381,10 @@ export function ComposeDialog() {
           </button>
           <button
             type="button"
-            style={{
-              padding: "8px 8px",
-              backgroundColor:
-                status === "success" ? "var(--green)" : "#1565c0",
-              color: "#fff",
-              border: "none",
-              borderLeft: "1px solid rgba(255,255,255,0.3)",
-              borderRadius: "0 18px 18px 0",
-              cursor: "default",
-              display: "flex",
-              alignItems: "center",
-            }}
+            className={cn(
+              "py-2 px-2 text-white border-0 border-l border-white/30 rounded-r-[18px] cursor-default flex items-center",
+              status === "success" ? "bg-success" : "bg-[#1565c0]",
+            )}
           >
             <svg
               aria-hidden="true"
@@ -584,17 +399,10 @@ export function ComposeDialog() {
         </div>
 
         {/* Action icons */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginLeft: 8,
-            gap: 0,
-          }}
-        >
+        <div className="flex items-center ml-2">
           <button
             type="button"
-            style={bottomIconStyle}
+            className={bottomIconClass}
             aria-label="Formatting options"
           >
             <svg
@@ -609,7 +417,7 @@ export function ComposeDialog() {
           </button>
           <button
             type="button"
-            style={bottomIconStyle}
+            className={bottomIconClass}
             aria-label="Attach files"
           >
             <svg
@@ -624,7 +432,7 @@ export function ComposeDialog() {
           </button>
           <button
             type="button"
-            style={bottomIconStyle}
+            className={bottomIconClass}
             aria-label="Insert link"
           >
             <svg
@@ -639,7 +447,7 @@ export function ComposeDialog() {
           </button>
           <button
             type="button"
-            style={bottomIconStyle}
+            className={bottomIconClass}
             aria-label="Insert emoji"
           >
             <svg
@@ -654,7 +462,7 @@ export function ComposeDialog() {
           </button>
           <button
             type="button"
-            style={bottomIconStyle}
+            className={bottomIconClass}
             aria-label="Insert photo"
           >
             <svg
@@ -669,7 +477,7 @@ export function ComposeDialog() {
           </button>
           <button
             type="button"
-            style={bottomIconStyle}
+            className={bottomIconClass}
             aria-label="More options"
           >
             <svg
@@ -685,10 +493,10 @@ export function ComposeDialog() {
         </div>
 
         {/* Delete (far right) */}
-        <div style={{ marginLeft: "auto" }}>
+        <div className="ml-auto">
           <button
             type="button"
-            style={bottomIconStyle}
+            className={bottomIconClass}
             aria-label="Discard draft"
             onClick={close}
           >

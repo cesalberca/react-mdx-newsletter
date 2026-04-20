@@ -28,32 +28,16 @@ export function getWebMdxComponents(): MdxComponentsMap {
     code: WebCode,
     blockquote: WebAlert,
     p: (props: HTMLAttributes<HTMLParagraphElement>) => (
-      <p
-        style={{
-          margin: "0 0 12px 0",
-          lineHeight: 1.7,
-          color: "var(--text-primary)",
-        }}
-        {...props}
-      />
+      <p className="mb-3 leading-[1.7] text-foreground" {...props} />
     ),
     ul: (props: HTMLAttributes<HTMLUListElement>) => (
-      <ul
-        style={{ margin: "0 0 12px 0", paddingLeft: 24, lineHeight: 1.7 }}
-        {...props}
-      />
+      <ul className="mb-3 pl-6 leading-[1.7]" {...props} />
     ),
     ol: (props: HTMLAttributes<HTMLOListElement>) => (
-      <ol
-        style={{ margin: "0 0 12px 0", paddingLeft: 24, lineHeight: 1.7 }}
-        {...props}
-      />
+      <ol className="mb-3 pl-6 leading-[1.7]" {...props} />
     ),
     strong: (props: HTMLAttributes<HTMLElement> & PropsWithChildren) => (
-      <strong
-        style={{ fontWeight: 700, color: "var(--text-primary)" }}
-        {...props}
-      />
+      <strong className="font-bold text-foreground" {...props} />
     ),
     pre: WebPre,
     table: WebTable,
@@ -63,16 +47,8 @@ export function getWebMdxComponents(): MdxComponentsMap {
     th: WebTableHeader,
     td: WebTableCell,
     li: (props: HTMLAttributes<HTMLLIElement>) => (
-      <li style={{ marginBottom: 4 }} {...props} />
+      <li className="mb-1" {...props} />
     ),
-    hr: () => (
-      <hr
-        style={{
-          border: "none",
-          borderTop: "1px solid var(--border-primary)",
-          margin: "16px 0",
-        }}
-      />
-    ),
+    hr: () => <hr className="border-0 border-t border-border my-4" />,
   };
 }

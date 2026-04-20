@@ -1,34 +1,21 @@
 import { createElement, type FC } from "react";
 import { slugify } from "@/newsletter/mdx/web/slugify";
 
-const SIZES: Record<number, { fontSize: number; margin: string }> = {
-  1: { fontSize: 28, margin: "0 0 16px 0" },
-  2: { fontSize: 22, margin: "24px 0 12px 0" },
-  3: { fontSize: 18, margin: "20px 0 8px 0" },
-  4: { fontSize: 16, margin: "16px 0 8px 0" },
-  5: { fontSize: 14, margin: "16px 0 8px 0" },
-  6: { fontSize: 13, margin: "16px 0 8px 0" },
+const CLASSES: Record<number, string> = {
+  1: "text-[28px] font-bold mb-4 mt-0 text-foreground leading-tight",
+  2: "text-[22px] font-bold mt-6 mb-3 text-foreground leading-tight",
+  3: "text-lg font-bold mt-5 mb-2 text-foreground leading-tight",
+  4: "text-base font-semibold mt-4 mb-2 text-foreground leading-tight",
+  5: "text-sm font-semibold mt-4 mb-2 text-foreground leading-tight",
+  6: "text-[13px] font-semibold mt-4 mb-2 text-foreground leading-tight",
 };
 
 export function createWebHeading(level: number): FC<{ children: string }> {
-  const { fontSize, margin } = SIZES[level] ?? SIZES[6];
+  const className = CLASSES[level] ?? CLASSES[6];
 
   const Heading: FC<{ children: string }> = ({ children }) => {
     const slug = slugify(children);
-    return createElement(
-      `h${level}`,
-      {
-        id: slug,
-        style: {
-          fontSize,
-          fontWeight: level <= 3 ? 700 : 600,
-          margin,
-          color: "var(--text-primary)",
-          lineHeight: 1.3,
-        },
-      },
-      children,
-    );
+    return createElement(`h${level}`, { id: slug, className }, children);
   };
 
   Heading.displayName = `Heading${level}`;
