@@ -15,10 +15,10 @@ export function ThreadHeader({
   backHref?: string;
 }) {
   return (
-    <div className="flex items-center gap-2 py-2 px-4 border-b border-border-faint">
+    <div className="flex items-center gap-1 sm:gap-2 py-2 px-2 sm:px-4 border-b border-border-faint">
       <Link
         href={backHref}
-        className="flex items-center justify-center w-10 h-10 rounded-full no-underline text-foreground"
+        className="flex items-center justify-center w-10 h-10 rounded-full no-underline text-foreground shrink-0"
         aria-label="Back to inbox"
       >
         <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -26,7 +26,7 @@ export function ThreadHeader({
         </svg>
       </Link>
 
-      <h1 className="text-xl font-normal m-0 flex-1 truncate">
+      <h1 className="text-base sm:text-xl font-normal m-0 flex-1 truncate">
         {section.subject}
       </h1>
 

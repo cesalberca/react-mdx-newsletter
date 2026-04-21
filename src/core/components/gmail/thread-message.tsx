@@ -26,20 +26,25 @@ export function ThreadMessage({
   const toggle = onToggle ?? (() => setInternalExpanded((v) => !v));
 
   return (
-    <div className="border-b border-border-faint py-4 px-6">
+    <div className="border-b border-border-faint py-4 px-4 sm:px-6">
       <button
         type="button"
-        className="flex items-center gap-3 cursor-pointer w-full bg-transparent border-0 p-0 text-left font-[inherit] text-inherit"
+        className="flex items-start gap-3 cursor-pointer w-full bg-transparent border-0 p-0 text-left font-[inherit] text-inherit"
         onClick={toggle}
       >
-        <Avatar name={sender} size={40} />
+        <div className="shrink-0 mt-0.5">
+          <Avatar name={sender} size={40} />
+        </div>
 
         <div className="flex-1 min-w-0">
           <div className="flex items-baseline gap-2">
             <span className="font-semibold text-sm">{sender}</span>
-            <span className="text-subtle-foreground text-xs">
+            {/* email address hidden on mobile — too cramped */}
+            <span className="hidden sm:inline text-subtle-foreground text-xs truncate">
               &lt;{senderEmail}&gt;
             </span>
+            {/* timestamp inline on mobile */}
+            <span className="sm:hidden text-subtle-foreground text-xs ml-auto shrink-0">{timestamp}</span>
           </div>
           {!expanded && (
             <div className="text-muted-foreground text-sm truncate">
@@ -48,7 +53,8 @@ export function ThreadMessage({
           )}
         </div>
 
-        <div className="text-subtle-foreground text-xs shrink-0">{timestamp}</div>
+        {/* timestamp floating right on desktop */}
+        <div className="hidden sm:block text-subtle-foreground text-xs shrink-0">{timestamp}</div>
 
         <svg
           aria-hidden="true"
@@ -56,7 +62,7 @@ export function ThreadMessage({
           height="20"
           viewBox="0 0 24 24"
           className={cn(
-            "fill-subtle-foreground transition-transform duration-200 shrink-0",
+            "fill-subtle-foreground transition-transform duration-200 shrink-0 mt-1",
             expanded ? "rotate-180" : "rotate-0",
           )}
         >
@@ -65,7 +71,7 @@ export function ThreadMessage({
       </button>
 
       {expanded && (
-        <div className="prose prose-sm max-w-none mt-4 ml-[52px] text-foreground">
+        <div className="prose prose-sm max-w-none mt-4 sm:ml-[52px] text-foreground">
           {children}
         </div>
       )}
