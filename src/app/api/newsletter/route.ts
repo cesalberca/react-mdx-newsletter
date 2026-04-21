@@ -11,10 +11,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       message: "Confirmation email sent successfully",
     });
-  } catch {
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 },
-    );
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Internal server error";
+    console.error("[newsletter/subscribe]", message);
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

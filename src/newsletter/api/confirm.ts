@@ -4,8 +4,6 @@ import { Resend } from "resend";
 import { env } from "@/lib/env";
 import { NewsletterWelcomeEmail } from "@/newsletter/emails/transactional/newsletter-welcome-email";
 
-const resend = new Resend(env.RESEND_API_KEY);
-
 interface ConfirmationTokenPayload {
   email: string;
 }
@@ -44,6 +42,8 @@ export async function confirm(
   if (email !== emailParam) {
     throw new Error("Email mismatch between token and URL parameter");
   }
+
+  const resend = new Resend(env.RESEND_API_KEY);
 
   const contactResult = await resend.contacts.create({
     email,

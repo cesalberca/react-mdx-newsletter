@@ -3,8 +3,6 @@ import type { ReactElement } from "react";
 import { Resend } from "resend";
 import { env } from "@/lib/env";
 
-const resend = new Resend(env.RESEND_API_KEY);
-
 export interface BroadcastResult {
   broadcastId: string;
 }
@@ -12,6 +10,7 @@ export interface BroadcastResult {
 export async function broadcast(
   newsletterSlug: string,
 ): Promise<BroadcastResult> {
+  const resend = new Resend(env.RESEND_API_KEY);
   const newsletterModule = await import(
     `@/newsletter/emails/newsletter/${newsletterSlug}.tsx`
   );

@@ -12,7 +12,7 @@ export default function NewsletterConfirmationEmail({
   confirmationToken,
   email,
 }: ConfirmationEmailProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_URL ?? "https://react-mdx-newsletter.vercel.app";
   const confirmationUrl = `${baseUrl}/newsletter/confirm?token=${confirmationToken}&email=${encodeURIComponent(email)}`;
 
   return (

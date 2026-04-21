@@ -5,9 +5,8 @@ import { v4 as uuid } from "uuid";
 import { env } from "@/lib/env";
 import NewsletterConfirmationEmail from "@/newsletter/emails/transactional/newsletter-confirmation-email";
 
-const resend = new Resend(env.RESEND_API_KEY);
-
 export async function subscribe(email: string): Promise<void> {
+  const resend = new Resend(env.RESEND_API_KEY);
   const confirmationToken = sign({ email }, env.JWT_SECRET, {
     expiresIn: "24h",
   });

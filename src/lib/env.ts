@@ -29,6 +29,6 @@ export const env = {
     return getEnvVar("JWT_SECRET");
   },
   get NEXT_PUBLIC_URL() {
-    return process.env.NEXT_PUBLIC_URL ?? "http://localhost:3000";
+    return process.env.NEXT_PUBLIC_URL ?? "https://react-mdx-newsletter.vercel.app";
   },
 };
