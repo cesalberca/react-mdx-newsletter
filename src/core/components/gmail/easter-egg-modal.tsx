@@ -2,6 +2,7 @@
 
 import confetti from "canvas-confetti";
 import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 
 export function EasterEggModal({ onClose }: { onClose: () => void }) {
   const hasRun = useRef(false);
@@ -41,7 +42,7 @@ export function EasterEggModal({ onClose }: { onClose: () => void }) {
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/40"
       onClick={onClose}
@@ -80,6 +81,7 @@ export function EasterEggModal({ onClose }: { onClose: () => void }) {
           Close
         </button>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

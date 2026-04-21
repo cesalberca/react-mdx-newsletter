@@ -1,5 +1,5 @@
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import dark from "react-syntax-highlighter/dist/esm/styles/prism/synthwave84";
+import dark from "react-syntax-highlighter/dist/esm/styles/prism/ghcolors";
 import { cn } from "@/core/styles/cn";
 
 export function WebCode({
