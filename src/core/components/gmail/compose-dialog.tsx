@@ -221,7 +221,12 @@ export function ComposeDialog() {
     try {
       const res = await fetch("/api/newsletter/send", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(process.env.NEXT_PUBLIC_NEWSLETTER_ADMIN_TOKEN
+            ? { Authorization: `Bearer ${process.env.NEXT_PUBLIC_NEWSLETTER_ADMIN_TOKEN}` }
+            : {}),
+        },
         body: JSON.stringify({ newsletterSlug: selected.filename }),
       });
       if (!res.ok) {

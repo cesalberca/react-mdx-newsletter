@@ -6,6 +6,7 @@ import { QrCodeWidget } from "@/core/components/gmail/qr-code-widget";
 import { SearchBar } from "@/core/components/gmail/search-bar";
 import { Sidebar } from "@/core/components/gmail/sidebar";
 import { ComposeProvider } from "@/core/context/compose-context";
+import { NavProvider } from "@/core/context/nav-context";
 import { ReadStatusProvider } from "@/core/context/read-status-context";
 import { ThemeProvider } from "@/core/context/theme-context";
 
@@ -40,15 +41,17 @@ export default function RootLayout({
         <ThemeProvider>
           <ReadStatusProvider>
             <ComposeProvider>
-              <div className="flex flex-col h-screen">
-                <SearchBar />
-                <div className="flex flex-1 overflow-hidden">
-                  <Sidebar />
-                  <main className="flex-1 overflow-auto">{children}</main>
+              <NavProvider>
+                <div className="flex flex-col h-screen">
+                  <SearchBar />
+                  <div className="flex flex-1 overflow-hidden">
+                    <Sidebar />
+                    <main className="flex-1 overflow-auto">{children}</main>
+                  </div>
                 </div>
-              </div>
-              {process.env.NEXT_PUBLIC_COMPOSE_ENABLED === "true" && <ComposeDialog />}
-              <QrCodeWidget />
+                {process.env.NEXT_PUBLIC_COMPOSE_ENABLED === "true" && <ComposeDialog />}
+                <QrCodeWidget />
+              </NavProvider>
             </ComposeProvider>
           </ReadStatusProvider>
         </ThemeProvider>

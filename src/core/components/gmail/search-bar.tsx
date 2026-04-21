@@ -2,11 +2,26 @@
 
 import Link from "next/link";
 import { ThemeToggle } from "@/core/components/theme-toggle";
+import { useNav } from "@/core/context/nav-context";
 import { Avatar } from "./avatar";
 
 export function SearchBar() {
+  const { toggleSidebar } = useNav();
+
   return (
     <header className="h-[var(--header-height)] flex items-center px-2 gap-2 border-b border-border-faint bg-surface shrink-0">
+      {/* Hamburger — mobile only */}
+      <button
+        type="button"
+        onClick={toggleSidebar}
+        aria-label="Open navigation menu"
+        className="md:hidden p-2 rounded-full hover:bg-surface-raised text-muted-foreground flex items-center justify-center shrink-0"
+      >
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+        </svg>
+      </button>
+
       <Link
         href="/"
         className="flex items-center gap-1 no-underline px-3 shrink-0"

@@ -10,7 +10,7 @@ export function QrCodeWidget() {
   if (isComposeOpen) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 bg-card rounded-xl p-3 shadow-md flex flex-col items-center gap-2 z-[900]">
+    <div className="hidden md:flex fixed bottom-4 left-4 bg-card rounded-xl p-3 shadow-md flex-col items-center gap-2 z-[900]">
       <a href="/newsletter" className="contents">
         <QRCodeSVG value={`${env.NEXT_PUBLIC_URL}/newsletter`} size={100} />
       </a>

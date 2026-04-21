@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import { inboxSections, spamSections } from "@/content/sections";
 import { cn } from "@/core/styles/cn";
 import { useReadStatus } from "@/core/context/read-status-context";
+import { useNav } from "@/core/context/nav-context";
 import { ComposeButton } from "./compose-button";
 import { EasterEggModal } from "./easter-egg-modal";
 
@@ -66,6 +67,7 @@ const navItemClass = (active: boolean, clickable: boolean) =>
 export function Sidebar() {
   const pathname = usePathname();
   const { unreadSlugs } = useReadStatus();
+  const { isSidebarOpen, closeSidebar } = useNav();
   const [moreOpen, setMoreOpen] = useState(false);
   const [easterEggOpen, setEasterEggOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
@@ -83,91 +85,111 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="w-[var(--sidebar-width)] py-2 px-3 overflow-y-auto shrink-0">
-      <ComposeButton />
-      <nav>
-        {NAV_ITEMS.map((item) => {
-          const active =
-            (item.label === "Inbox" && pathname === "/") ||
-            (item.href !== undefined && item.href !== "/" && pathname === item.href);
-          const content = (
-            <>
-              <NavIcon icon={item.icon} />
-              <span className="flex-1">{item.label}</span>
-              {item.count != null && (
-                <span className="text-xs font-bold">{item.count}</span>
-              )}
-            </>
-          );
-          if (item.href) {
-            return (
-              <Link key={item.label} href={item.href} className={navItemClass(active, true)}>
-                {content}
-              </Link>
+    <>
+      {/* Mobile backdrop */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 md:hidden"
+          onClick={closeSidebar}
+          aria-hidden="true"
+        />
+      )}
+
+      <aside
+        className={cn(
+          "py-2 px-3 overflow-y-auto bg-surface",
+          // Mobile: fixed drawer (out of flow), slides in/out
+          "max-md:fixed max-md:top-[var(--header-height)] max-md:left-0 max-md:bottom-0 max-md:z-50 max-md:w-[var(--sidebar-width)] max-md:transition-transform max-md:duration-200",
+          isSidebarOpen ? "max-md:translate-x-0" : "max-md:-translate-x-full",
+          // Desktop: in-flow, always visible
+          "md:w-[var(--sidebar-width)] md:shrink-0 md:relative md:translate-x-0",
+        )}
+      >
+        <ComposeButton />
+        <nav>
+          {NAV_ITEMS.map((item) => {
+            const active =
+              (item.label === "Inbox" && pathname === "/") ||
+              (item.href !== undefined && item.href !== "/" && pathname === item.href);
+            const content = (
+              <>
+                <NavIcon icon={item.icon} />
+                <span className="flex-1">{item.label}</span>
+                {item.count != null && (
+                  <span className="text-xs font-bold">{item.count}</span>
+                )}
+              </>
             );
-          }
-          return (
-            <div key={item.label} className={navItemClass(active, false)}>
-              {content}
-            </div>
-          );
-        })}
+            if (item.href) {
+              return (
+                <Link key={item.label} href={item.href} className={navItemClass(active, true)} onClick={closeSidebar}>
+                  {content}
+                </Link>
+              );
+            }
+            return (
+              <div key={item.label} className={navItemClass(active, false)}>
+                {content}
+              </div>
+            );
+          })}
 
-        {/* More — with inline dropdown */}
-        <div ref={moreRef}>
-          <button
-            type="button"
-            onClick={() => setMoreOpen((v) => !v)}
-            className={cn(navItemClass(false, true), "w-full text-left border-0 bg-transparent")}
-          >
-            <NavIcon icon="label" />
-            <span className="flex-1">More</span>
-          </button>
-
-          {moreOpen && (
+          {/* More — with inline dropdown */}
+          <div ref={moreRef}>
             <button
               type="button"
-              onClick={() => { setMoreOpen(false); setEasterEggOpen(true); }}
-              className={cn(navItemClass(false, true), "w-full text-left border-0 bg-transparent pl-9")}
+              onClick={() => setMoreOpen((v) => !v)}
+              className={cn(navItemClass(false, true), "w-full text-left border-0 bg-transparent")}
             >
-              <span>🥚</span>
-              <span>Secret Easter Egg</span>
+              <NavIcon icon="label" />
+              <span className="flex-1">More</span>
             </button>
-          )}
+
+            {moreOpen && (
+              <button
+                type="button"
+                onClick={() => { setMoreOpen(false); setEasterEggOpen(true); }}
+                className={cn(navItemClass(false, true), "w-full text-left border-0 bg-transparent pl-9")}
+              >
+                <span>🥚</span>
+                <span>Secret Easter Egg</span>
+              </button>
+            )}
+          </div>
+        </nav>
+
+        <div className="flex items-center justify-between py-4 px-3 pt-4 pb-1 text-[13px] font-medium text-muted-foreground">
+          <span>Labels</span>
+          <svg
+            aria-hidden="true"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="cursor-default"
+          >
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+          </svg>
         </div>
-      </nav>
 
-      <div className="flex items-center justify-between py-4 px-3 pt-4 pb-1 text-[13px] font-medium text-muted-foreground">
-        <span>Labels</span>
-        <svg
-          aria-hidden="true"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="cursor-default"
-        >
-          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-        </svg>
-      </div>
+        <nav>
+          {(() => {
+            const active = pathname.startsWith("/newsletters");
+            return (
+              <Link href="/newsletters" className={navItemClass(active, true)} onClick={closeSidebar}>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 6H12l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" />
+                </svg>
+                <span className="flex-1">Newsletter</span>
+              </Link>
+            );
+          })()}
+        </nav>
 
-      <nav>
-        {(() => {
-          const active = pathname.startsWith("/newsletters");
-          return (
-            <Link href="/newsletters" className={navItemClass(active, true)}>
-              <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 6H12l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" />
-              </svg>
-              <span className="flex-1">Newsletter</span>
-            </Link>
-          );
-        })()}
-      </nav>
-
-      {easterEggOpen && (
-        <EasterEggModal onClose={() => setEasterEggOpen(false)} />
-      )}
-    </aside>
+        {easterEggOpen && (
+          <EasterEggModal onClose={() => setEasterEggOpen(false)} />
+        )}
+      </aside>
+    </>
   );
 }
