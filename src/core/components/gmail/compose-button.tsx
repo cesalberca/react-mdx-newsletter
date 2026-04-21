@@ -8,7 +8,9 @@ export function ComposeButton() {
   return (
     <button
       type="button"
-      onClick={() => setComposeOpen(true)}
+      onClick={() => {
+        if (process.env.NEXT_PUBLIC_COMPOSE_ENABLED === "true") setComposeOpen(true);
+      }}
       className="flex items-center gap-3 px-6 h-14 border-0 rounded-2xl bg-compose text-compose-foreground text-base font-medium cursor-pointer shadow-md hover:shadow-lg transition-shadow duration-200 mb-4"
     >
       <svg
