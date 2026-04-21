@@ -61,6 +61,7 @@ cp .env.example .env
 RESEND_API_KEY=re_...
 RESEND_EMAIL_FROM=you@yourdomain.com
 RESEND_SEGMENT_ID=...
+RESEND_TOPIC_ID=...
 RESEND_TEST_EMAIL=you@yourdomain.com
 
 # Auth
@@ -71,6 +72,11 @@ NEWSLETTER_BROADCAST_TOKEN=...      # openssl rand -hex 32
 
 # App
 NEXT_PUBLIC_URL=http://localhost:3000
+
+# Send emails to audience through UI. If it's enable you can send them in production
+NEXT_PUBLIC_COMPOSE_ENABLED=true|false
+NEWSLETTER_ADMIN_TOKEN=
+NEXT_PUBLIC_NEWSLETTER_ADMIN_TOKEN=
 ```
 
 Where to find the Resend values:
