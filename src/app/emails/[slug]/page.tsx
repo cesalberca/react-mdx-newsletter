@@ -63,7 +63,7 @@ export default async function EmailThreadPage({
   const backHref = section.folder === "spam" ? "/spam" : "/";
 
   return (
-    <div className="bg-background min-h-full">
+    <div className="bg-background min-h-full pb-48">
       <MarkAsRead slug={slug} />
       <ThreadHeader
         section={section}

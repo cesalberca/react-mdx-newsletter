@@ -134,34 +134,35 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Code blocks */
-pre {
-  border: 1px solid var(--border-primary);
-  border-radius: 8px;
-  padding: 16px;
-  overflow-x: auto;
-  font-size: 14px;
-  line-height: 1.6;
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  font-family: "Roboto Mono", ui-monospace, monospace;
-}
+/* Code blocks — in @layer base so Tailwind utilities can override */
+@layer base {
+  pre {
+    border: 1px solid var(--border-primary);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.6;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-family: "Roboto Mono", ui-monospace, monospace;
+  }
 
-pre code {
-  font-family: inherit;
-  font-size: inherit;
-  background: none;
-  padding: 0;
-  border-radius: 0;
-}
+  pre code {
+    font-family: inherit;
+    font-size: inherit;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+  }
 
-/* Inline code */
-:not(pre) > code {
-  background: var(--bg-tertiary);
-  border-radius: 4px;
-  padding: 2px 6px;
-  font-family: "Roboto Mono", monospace;
-  font-size: 0.875em;
+  :not(pre) > code {
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.875em;
+  }
 }
 
 /* Scrollbar styling */

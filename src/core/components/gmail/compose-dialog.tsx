@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { newsletters } from "@/app/newsletters/newsletters";
-import { cn } from "@/core/styles/cn";
 import { useCompose } from "@/core/context/compose-context";
+import { cn } from "@/core/styles/cn";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -32,10 +32,7 @@ function Signature() {
           <div className="border-t border-border-subtle my-1 w-[200px]" />
           <div className="text-[11px] text-muted-foreground">
             <span>Web </span>
-            <a
-              href="https://cesalberca.com"
-              className="text-link no-underline"
-            >
+            <a href="https://cesalberca.com" className="text-link no-underline">
               cesalberca.com
             </a>
             <span> Email </span>
@@ -250,7 +247,11 @@ export function ComposeDialog() {
       <div className="flex items-center justify-between py-2 px-3 bg-[#404040] text-white text-sm font-medium cursor-default">
         <span>New Message</span>
         <div className="flex items-center gap-1">
-          <button type="button" className={headerIconClass} aria-label="Minimize">
+          <button
+            type="button"
+            className={headerIconClass}
+            aria-label="Minimize"
+          >
             <svg
               aria-hidden="true"
               width="16"
@@ -261,7 +262,11 @@ export function ComposeDialog() {
               <path d="M6 19h12v2H6z" />
             </svg>
           </button>
-          <button type="button" className={headerIconClass} aria-label="Pop out">
+          <button
+            type="button"
+            className={headerIconClass}
+            aria-label="Pop out"
+          >
             <svg
               aria-hidden="true"
               width="16"
@@ -342,9 +347,7 @@ export function ComposeDialog() {
           </div>
         )}
         {status === "error" && (
-          <div className="text-destructive text-[13px]">
-            Error: {errorMsg}
-          </div>
+          <div className="text-destructive text-[13px]">Error: {errorMsg}</div>
         )}
 
         {/* Spacer pushes signature to bottom */}
@@ -368,7 +371,9 @@ export function ComposeDialog() {
             className={cn(
               "py-2 px-5 text-white border-0 rounded-l-[18px] text-sm font-medium font-[inherit]",
               status === "success" ? "bg-success" : "bg-[#1a73e8]",
-              status === "sending" || status === "success" ? "cursor-default" : "cursor-pointer",
+              status === "sending" || status === "success"
+                ? "cursor-default"
+                : "cursor-pointer",
               status === "sending" ? "opacity-70" : "opacity-100",
             )}
           >
