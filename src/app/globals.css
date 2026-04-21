@@ -136,6 +136,14 @@ body {
 
 /* Code blocks — in @layer base so Tailwind utilities can override */
 @layer base {
+  ul,
+  ol,
+  menu {
+    list-style: revert;
+    padding-left: 16px;
+    margin-bottom: 16px;
+  }
+
   pre {
     border: 1px solid var(--border-primary);
     border-radius: 8px;

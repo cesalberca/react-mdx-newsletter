@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRef, useState } from "react";
 import { inboxSections, spamSections } from "@/content/sections";
 import { cn } from "@/core/styles/cn";
 import { useReadStatus } from "@/core/context/read-status-context";
 import { ComposeButton } from "./compose-button";
+import { EasterEggModal } from "./easter-egg-modal";
 
 function NavIcon({ icon }: { icon: string }) {
   switch (icon) {
@@ -64,6 +66,9 @@ const navItemClass = (active: boolean, clickable: boolean) =>
 export function Sidebar() {
   const pathname = usePathname();
   const { unreadSlugs } = useReadStatus();
+  const [moreOpen, setMoreOpen] = useState(false);
+  const [easterEggOpen, setEasterEggOpen] = useState(false);
+  const moreRef = useRef<HTMLDivElement>(null);
 
   const inboxUnread = unreadSlugs(inboxSections.map((s) => s.slug));
   const spamUnread = unreadSlugs(spamSections.map((s) => s.slug));
@@ -75,7 +80,6 @@ export function Sidebar() {
     { icon: "send", label: "Sent" },
     { icon: "draft", label: "Drafts" },
     { icon: "spam", label: "Spam", count: spamUnread || undefined, href: "/spam" },
-    { icon: "label", label: "More" },
   ];
 
   return (
@@ -108,6 +112,29 @@ export function Sidebar() {
             </div>
           );
         })}
+
+        {/* More — with inline dropdown */}
+        <div ref={moreRef}>
+          <button
+            type="button"
+            onClick={() => setMoreOpen((v) => !v)}
+            className={cn(navItemClass(false, true), "w-full text-left border-0 bg-transparent")}
+          >
+            <NavIcon icon="label" />
+            <span className="flex-1">More</span>
+          </button>
+
+          {moreOpen && (
+            <button
+              type="button"
+              onClick={() => { setMoreOpen(false); setEasterEggOpen(true); }}
+              className={cn(navItemClass(false, true), "w-full text-left border-0 bg-transparent pl-9")}
+            >
+              <span>🥚</span>
+              <span>Secret Easter Egg</span>
+            </button>
+          )}
+        </div>
       </nav>
 
       <div className="flex items-center justify-between py-4 px-3 pt-4 pb-1 text-[13px] font-medium text-muted-foreground">
@@ -137,6 +164,10 @@ export function Sidebar() {
           );
         })()}
       </nav>
+
+      {easterEggOpen && (
+        <EasterEggModal onClose={() => setEasterEggOpen(false)} />
+      )}
     </aside>
   );
 }
