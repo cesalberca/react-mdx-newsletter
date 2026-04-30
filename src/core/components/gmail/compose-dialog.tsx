@@ -1,12 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { newsletters } from "@/app/newsletters/newsletters";
 import { useCompose } from "@/core/context/compose-context";
 import { cn } from "@/core/styles/cn";
 
 type Status = "idle" | "sending" | "success" | "error";
+type Corner = "bottom-right" | "bottom-left" | "top-right" | "top-left";
+
+const CORNER_CLASSES: Record<Corner, string> = {
+  "bottom-right": "bottom-0 right-4",
+  "bottom-left": "bottom-0 left-4",
+  "top-right": "top-[var(--header-height)] right-4",
+  "top-left": "top-[var(--header-height)] left-4",
+};
 
 function Signature() {
   return (
@@ -183,17 +191,55 @@ function FormattingToolbar() {
   );
 }
 
+interface DragState {
+  startX: number;
+  startY: number;
+  dx: number;
+  dy: number;
+}
+
 export function ComposeDialog() {
   const { isComposeOpen, setComposeOpen } = useCompose();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [corner, setCorner] = useState<Corner>("bottom-right");
+  const [maximized, setMaximized] = useState(false);
+  const [drag, setDrag] = useState<DragState | null>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
 
   const close = useCallback(() => {
     setComposeOpen(false);
     setStatus("idle");
     setErrorMsg("");
+    setMaximized(false);
+    setDrag(null);
   }, [setComposeOpen]);
+
+  function handleHeaderPointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    if (maximized) return;
+    // Ignore clicks on buttons inside the header
+    if ((e.target as HTMLElement).closest("button")) return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setDrag({ startX: e.clientX, startY: e.clientY, dx: 0, dy: 0 });
+  }
+
+  function handleHeaderPointerMove(e: React.PointerEvent<HTMLDivElement>) {
+    if (!drag) return;
+    setDrag((d) => d ? { ...d, dx: e.clientX - d.startX, dy: e.clientY - d.startY } : null);
+  }
+
+  function handleHeaderPointerUp(e: React.PointerEvent<HTMLDivElement>) {
+    if (!drag) return;
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    const newCorner: Corner =
+      e.clientY < cy
+        ? e.clientX < cx ? "top-left" : "top-right"
+        : e.clientX < cx ? "bottom-left" : "bottom-right";
+    setCorner(newCorner);
+    setDrag(null);
+  }
 
   useEffect(() => {
     if (!isComposeOpen) return;
@@ -247,9 +293,32 @@ export function ComposeDialog() {
     "bg-transparent border-0 p-1.5 cursor-default text-muted-foreground flex items-center";
 
   return (
-    <div className="fixed bottom-0 right-[72px] w-[540px] max-h-[80vh] z-[1000] rounded-t-lg shadow-lg flex flex-col overflow-hidden font-[inherit]">
+    <div
+      className={cn(
+        "fixed z-[1000] flex flex-col overflow-hidden font-[inherit] shadow-xl",
+        maximized
+          ? "inset-0 rounded-none"
+          : cn("w-[540px] max-h-[80vh] rounded-lg", CORNER_CLASSES[corner]),
+        drag && "select-none",
+      )}
+      style={
+        drag
+          ? { transform: `translate(${drag.dx}px, ${drag.dy}px)`, transition: "none" }
+          : { transition: "transform 0.15s ease" }
+      }
+    >
       {/* Header */}
-      <div className="flex items-center justify-between py-2 px-3 bg-[#404040] text-white text-sm font-medium cursor-default">
+      <div
+        ref={headerRef}
+        className={cn(
+          "flex items-center justify-between py-2 px-3 bg-[#404040] text-white text-sm font-medium",
+          !maximized && "cursor-grab",
+          drag && "cursor-grabbing",
+        )}
+        onPointerDown={handleHeaderPointerDown}
+        onPointerMove={handleHeaderPointerMove}
+        onPointerUp={handleHeaderPointerUp}
+      >
         <span>New Message</span>
         <div className="flex items-center gap-1">
           <button
@@ -269,18 +338,19 @@ export function ComposeDialog() {
           </button>
           <button
             type="button"
+            onClick={() => setMaximized((v) => !v)}
             className={headerIconClass}
-            aria-label="Pop out"
+            aria-label={maximized ? "Restore" : "Maximize"}
           >
-            <svg
-              aria-hidden="true"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" />
-            </svg>
+            {maximized ? (
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z" />
+              </svg>
+            ) : (
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
+              </svg>
+            )}
           </button>
           <button
             type="button"
