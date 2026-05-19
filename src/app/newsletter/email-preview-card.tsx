@@ -46,9 +46,7 @@ export function EmailPreviewCard({
               {preview}
             </div>
           )}
-          {expanded && (
-            <div className="text-sm text-foreground">{subject}</div>
-          )}
+          {expanded && <div className="text-sm text-foreground">{subject}</div>}
         </div>
 
         <svg

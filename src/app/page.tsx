@@ -26,7 +26,13 @@ export default function InboxPage() {
   );
 }
 
-function TabButton({ label, active = false }: { label: string; active?: boolean }) {
+function TabButton({
+  label,
+  active = false,
+}: {
+  label: string;
+  active?: boolean;
+}) {
   return (
     <div
       className={cn(

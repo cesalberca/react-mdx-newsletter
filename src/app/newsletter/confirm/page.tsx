@@ -130,9 +130,7 @@ function ConfirmContent() {
       {state === "error" && (
         <>
           <div className="text-5xl mb-4 text-destructive">&#10007;</div>
-          <h1 className="text-2xl font-bold mt-0 mb-2">
-            Confirmation Failed
-          </h1>
+          <h1 className="text-2xl font-bold mt-0 mb-2">Confirmation Failed</h1>
           <p className="text-muted-foreground leading-relaxed">
             {errorMessage || "The link may be expired or invalid."}
           </p>

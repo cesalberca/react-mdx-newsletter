@@ -14,7 +14,13 @@ export default function NewslettersPage() {
           />
         </div>
         <div className="inline-flex items-center gap-[6px] py-1 px-2 rounded bg-surface-active text-compose-foreground text-[13px] font-medium">
-          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+          <svg
+            aria-hidden="true"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
             <path d="M20 6H12l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z" />
           </svg>
           Newsletter
@@ -45,7 +51,9 @@ export default function NewslettersPage() {
           </div>
 
           <div className="flex-1 overflow-hidden flex gap-1 min-w-0">
-            <span className="font-bold text-sm shrink-0">{newsletter.title}</span>
+            <span className="font-bold text-sm shrink-0">
+              {newsletter.title}
+            </span>
             <span className="text-muted-foreground text-sm truncate">
               — {newsletter.description}
             </span>

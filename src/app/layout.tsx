@@ -49,7 +49,9 @@ export default function RootLayout({
                     <main className="flex-1 overflow-auto">{children}</main>
                   </div>
                 </div>
-                {process.env.NEXT_PUBLIC_COMPOSE_ENABLED === "true" && <ComposeDialog />}
+                {process.env.NEXT_PUBLIC_COMPOSE_ENABLED === "true" && (
+                  <ComposeDialog />
+                )}
                 <QrCodeWidget />
               </NavProvider>
             </ComposeProvider>

@@ -53,7 +53,8 @@ export default async function EmailThreadPage({
 
   const folderSections = sections.filter((s) => s.folder === section.folder);
   const currentIndex = folderSections.findIndex((s) => s.slug === slug);
-  const prevSlug = currentIndex > 0 ? folderSections[currentIndex - 1].slug : null;
+  const prevSlug =
+    currentIndex > 0 ? folderSections[currentIndex - 1].slug : null;
   const nextSlug =
     currentIndex < folderSections.length - 1
       ? folderSections[currentIndex + 1].slug

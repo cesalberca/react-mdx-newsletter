@@ -5,7 +5,9 @@ import { type SubmitEvent, useState } from "react";
 
 export function SubscribeForm() {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [message, setMessage] = useState("");
 
   async function handleSubmit(e: SubmitEvent) {
@@ -101,7 +103,8 @@ export function SubscribeForm() {
         )}
 
         <p className="text-subtle-foreground text-xs mt-4 mb-0">
-          You&apos;ll receive a confirmation email. No spam, unsubscribe anytime.
+          You&apos;ll receive a confirmation email. No spam, unsubscribe
+          anytime.
         </p>
       </div>
     </div>

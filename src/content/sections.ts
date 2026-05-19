@@ -18,7 +18,7 @@ export const sections: Section[] = [
     subject: "URGENT: You Have Been Selected to Inherit MDX Newsletter Fortune",
     preview:
       "Dear Beloved Developer, I am Prince MDX, son of the late King Markdown...",
-    date: "Apr 14",
+    date: "9:07 AM",
     unread: true,
     starred: true,
     folder: "inbox",
@@ -30,7 +30,7 @@ export const sections: Section[] = [
     subject: "RE: Your Newsletter Blueprint Is Ready for Review",
     preview:
       "I have completed the architectural analysis of your newsletter system...",
-    date: "Apr 15",
+    date: "10:02 AM",
     unread: true,
     starred: false,
     folder: "inbox",
@@ -42,7 +42,7 @@ export const sections: Section[] = [
     subject: "Your Email Rendering Report Is Ready",
     preview:
       "Your rendering diagnostics are complete. We found several compatibility...",
-    date: "Apr 16",
+    date: "11:04 AM",
     unread: true,
     starred: false,
     folder: "inbox",
@@ -54,7 +54,7 @@ export const sections: Section[] = [
     subject: "Your Workflow Run Has Completed Successfully",
     preview:
       "newsletter-pipeline (main) - All jobs passed. Build, preview, send...",
-    date: "Apr 18",
+    date: "1:13 PM",
     unread: false,
     starred: false,
     folder: "inbox",
@@ -66,7 +66,7 @@ export const sections: Section[] = [
     subject: "URGENT: Critical Issues Found in Your Email System",
     preview:
       "Our analysis has revealed critical issues that may cause total system...",
-    date: "Apr 19",
+    date: "2:06 PM",
     unread: true,
     starred: true,
     folder: "inbox",
@@ -78,7 +78,7 @@ export const sections: Section[] = [
     subject: "My Newsletter + Thank You",
     preview:
       "Thanks for attending! Here's where to find my newsletter and resources...",
-    date: "Apr 21",
+    date: "3:08 PM",
     unread: false,
     starred: false,
     folder: "inbox",
@@ -91,7 +91,7 @@ export const sections: Section[] = [
       "🔥 YOU WON'T BELIEVE These Frontend Architecture Secrets — Subscribe NOW!!!",
     preview:
       "CONGRATULATIONS! You've been selected to receive EXCLUSIVE frontend tips...",
-    date: "Apr 12",
+    date: "11:47 AM",
     unread: true,
     starred: false,
     folder: "spam",
@@ -104,7 +104,7 @@ export const sections: Section[] = [
       "⚡ LIMITED TIME: 10x Your Frontend Architecture — ACT FAST Before Offer Expires!!!",
     preview:
       "Dear Lucky Developer, for a LIMITED TIME ONLY, world-renowned consultant...",
-    date: "Mar 24",
+    date: "11:53 AM",
     unread: true,
     starred: false,
     folder: "spam",

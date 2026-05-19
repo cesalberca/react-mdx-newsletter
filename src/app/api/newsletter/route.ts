@@ -12,7 +12,8 @@ export async function POST(request: NextRequest) {
       message: "Confirmation email sent successfully",
     });
   } catch (error) {
-    const message = error instanceof Error ? error.message : "Internal server error";
+    const message =
+      error instanceof Error ? error.message : "Internal server error";
     console.error("[newsletter/subscribe]", message);
     return NextResponse.json({ error: message }, { status: 500 });
   }

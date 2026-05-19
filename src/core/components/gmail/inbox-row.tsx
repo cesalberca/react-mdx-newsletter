@@ -36,12 +36,22 @@ export function InboxRow({ section }: { section: Section }) {
         <Avatar name={section.sender} size={28} />
       </div>
 
-      <div className={cn("w-[180px] shrink-0 text-[15px] overflow-hidden text-ellipsis whitespace-nowrap", unread ? "font-bold" : "font-normal")}>
+      <div
+        className={cn(
+          "w-[180px] shrink-0 text-[15px] overflow-hidden text-ellipsis whitespace-nowrap",
+          unread ? "font-bold" : "font-normal",
+        )}
+      >
         {section.sender}
       </div>
 
       <div className="flex-1 overflow-hidden flex gap-1 min-w-0">
-        <span className={cn("text-[15px] shrink-0", unread ? "font-bold" : "font-normal")}>
+        <span
+          className={cn(
+            "text-[15px] shrink-0",
+            unread ? "font-bold" : "font-normal",
+          )}
+        >
           {section.subject}
         </span>
         <span className="text-muted-foreground text-[15px] overflow-hidden text-ellipsis whitespace-nowrap">
@@ -52,7 +62,9 @@ export function InboxRow({ section }: { section: Section }) {
       <div
         className={cn(
           "shrink-0 text-sm",
-          unread ? "text-foreground font-bold" : "text-muted-foreground font-normal",
+          unread
+            ? "text-foreground font-bold"
+            : "text-muted-foreground font-normal",
         )}
       >
         {section.date}

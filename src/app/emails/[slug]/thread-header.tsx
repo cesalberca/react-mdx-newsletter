@@ -21,7 +21,13 @@ export function ThreadHeader({
         className="flex items-center justify-center w-10 h-10 rounded-full no-underline text-foreground shrink-0"
         aria-label="Back to inbox"
       >
-        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <svg
+          aria-hidden="true"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
           <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
         </svg>
       </Link>
@@ -37,7 +43,13 @@ export function ThreadHeader({
             className="flex items-center justify-center w-9 h-9 rounded-full text-muted-foreground no-underline"
             aria-label="Previous email"
           >
-            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <svg
+              aria-hidden="true"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
               <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
             </svg>
           </Link>
@@ -50,7 +62,13 @@ export function ThreadHeader({
             className="flex items-center justify-center w-9 h-9 rounded-full text-muted-foreground no-underline"
             aria-label="Next email"
           >
-            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <svg
+              aria-hidden="true"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
               <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
             </svg>
           </Link>

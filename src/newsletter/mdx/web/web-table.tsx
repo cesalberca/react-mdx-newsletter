@@ -47,7 +47,10 @@ export const WebTableHeader: FC<
 export const WebTableCell: FC<
   PropsWithChildren<TdHTMLAttributes<HTMLTableCellElement>>
 > = ({ children, ...props }) => (
-  <td className="py-2 px-3 border-b border-border-faint text-foreground" {...props}>
+  <td
+    className="py-2 px-3 border-b border-border-faint text-foreground"
+    {...props}
+  >
     {children}
   </td>
 );

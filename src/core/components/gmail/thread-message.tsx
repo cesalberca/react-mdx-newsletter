@@ -44,7 +44,9 @@ export function ThreadMessage({
               &lt;{senderEmail}&gt;
             </span>
             {/* timestamp inline on mobile */}
-            <span className="sm:hidden text-subtle-foreground text-xs ml-auto shrink-0">{timestamp}</span>
+            <span className="sm:hidden text-subtle-foreground text-xs ml-auto shrink-0">
+              {timestamp}
+            </span>
           </div>
           {!expanded && (
             <div className="text-muted-foreground text-sm truncate">
@@ -54,7 +56,9 @@ export function ThreadMessage({
         </div>
 
         {/* timestamp floating right on desktop */}
-        <div className="hidden sm:block text-subtle-foreground text-xs shrink-0">{timestamp}</div>
+        <div className="hidden sm:block text-subtle-foreground text-xs shrink-0">
+          {timestamp}
+        </div>
 
         <svg
           aria-hidden="true"

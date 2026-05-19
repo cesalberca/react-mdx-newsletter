@@ -56,7 +56,12 @@ export function Avatar({
   return (
     <div
       className="rounded-full flex items-center justify-center text-foreground-inverse font-medium shrink-0 select-none"
-      style={{ width: size, height: size, backgroundColor: bg, fontSize: size * 0.4 }}
+      style={{
+        width: size,
+        height: size,
+        backgroundColor: bg,
+        fontSize: size * 0.4,
+      }}
     >
       {initials}
     </div>
