@@ -69,7 +69,7 @@ export const EmailTemplate: FC<PropsWithChildren<EmailTemplateProps>> = ({
             <Section className="py-4 px-6 pb-0 text-center">
               <Link href={baseUrl} className="no-underline">
                 <Img
-                  src={emailImageBaseUrl("logo.png")}
+                  src={emailImageBaseUrl("/email-static/logo.png")}
                   width="45"
                   height="30"
                   alt="Logo"
@@ -96,7 +96,7 @@ export const EmailTemplate: FC<PropsWithChildren<EmailTemplateProps>> = ({
 
               <Section className="mt-4">
                 <Img
-                  src={emailImageBaseUrl("signature.png")}
+                  src={emailImageBaseUrl("/email-static/signature.png")}
                   width="501"
                   height="161"
                   alt="Handwritten César Alberca"

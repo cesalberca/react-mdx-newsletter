@@ -1,4 +1,9 @@
-import type { HTMLAttributes, PropsWithChildren } from "react";
+import { Img } from "@react-email/components";
+import type {
+  HTMLAttributes,
+  ImgHTMLAttributes,
+  PropsWithChildren,
+} from "react";
 import { Slide } from "@/core/components/slides/slide";
 import type { MdxComponentsMap } from "@/newsletter/mdx/components";
 import { WebAlert } from "@/newsletter/mdx/web/web-alert";
@@ -43,6 +48,21 @@ export function getWebMdxComponents(): MdxComponentsMap {
     table: WebTable,
     thead: WebTableHead,
     tbody: WebTableBody,
+    img: (props: ImgHTMLAttributes<HTMLImageElement>) => {
+      return (
+        <Img
+          src={props?.src?.toString() ?? ""}
+          alt={props.alt}
+          width={props.width}
+          height={props.height}
+          style={{
+            maxWidth: "100%",
+            height: "auto",
+            ...(props.style as object),
+          }}
+        />
+      );
+    },
     tr: WebTableRow,
     th: WebTableHeader,
     td: WebTableCell,

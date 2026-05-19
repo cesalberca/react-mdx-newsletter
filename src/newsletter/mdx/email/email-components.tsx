@@ -1,11 +1,13 @@
 import type { PrismLanguage } from "@react-email/code-block";
-import { CodeInline, Text } from "@react-email/components";
+import { CodeInline, Img, Text } from "@react-email/components";
 import type {
   HTMLAttributes,
+  ImgHTMLAttributes,
   JSX,
   LinkHTMLAttributes,
   PropsWithChildren,
 } from "react";
+import { emailImageBaseUrl } from "@/newsletter/email-image-base-url";
 import type { MdxComponentsMap } from "@/newsletter/mdx/components";
 import { EmailAlert } from "@/newsletter/mdx/email/email-alert";
 import { EmailCodeBlock } from "@/newsletter/mdx/email/email-code-block/email-code-block";
@@ -47,6 +49,19 @@ export function getEmailMdxComponents(): MdxComponentsMap {
       }
       return <EmailLink href={href}>{props.children}</EmailLink>;
     },
+    img: (props: ImgHTMLAttributes<HTMLImageElement>) => (
+      <Img
+        src={emailImageBaseUrl(props?.src?.toString() ?? "")}
+        alt={props.alt}
+        width={props.width}
+        height={props.height}
+        style={{
+          maxWidth: "100%",
+          height: "auto",
+          ...(props.style as object),
+        }}
+      />
+    ),
     blockquote: EmailAlert,
     p: (props: HTMLAttributes<HTMLParagraphElement> & PropsWithChildren) => (
       <Text style={{ fontSize: 16, lineHeight: 1.6 }} {...props} />

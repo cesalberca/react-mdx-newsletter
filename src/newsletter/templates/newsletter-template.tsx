@@ -29,22 +29,22 @@ export const NewsletterTemplate: FC<
     {
       href: `https://x.com/intent/tweet?text=${encodedTitle} ${encodedUrl} by @cesalberca`,
       name: "X/Twitter",
-      icon: "x.png",
+      icon: "/email-static/x.png",
     },
     {
       href: `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}`,
       name: "LinkedIn",
-      icon: "linkedin.png",
+      icon: "/email-static/linkedin.png",
     },
     {
       href: `https://bsky.app/intent/compose?text=${encodedTitle} ${encodedUrl} by @cesalberca.com`,
       name: "Bluesky",
-      icon: "bluesky.png",
+      icon: "/email-static/bluesky.png",
     },
     {
       href: `mailto:?subject=${encodedTitle}&body=Check out this newsletter: ${encodedUrl}`,
       name: "Email",
-      icon: "email.png",
+      icon: "/email-static/email.png",
     },
   ];
 
