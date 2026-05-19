@@ -48,18 +48,6 @@ export const sections: Section[] = [
     folder: "inbox",
   },
   {
-    slug: "layout-traps",
-    sender: "CSS Crimes Division",
-    senderEmail: "alerts@css-crimes.gov",
-    subject: "ALERT: Layout Violations Detected in Your Email",
-    preview:
-      "Our automated scan has detected multiple layout violations in your...",
-    date: "Apr 17",
-    unread: true,
-    starred: false,
-    folder: "inbox",
-  },
-  {
     slug: "cicd",
     sender: "GitHub Actions Bot",
     senderEmail: "noreply@github.com",

@@ -3,12 +3,11 @@ import type { ComponentType } from "react";
 import Welcome from "@/content/01-welcome.mdx";
 import Architecture from "@/content/02-architecture.mdx";
 import Rendering from "@/content/03-rendering.mdx";
-import LayoutTraps from "@/content/04-layout-traps.mdx";
-import Cicd from "@/content/05-cicd.mdx";
-import Gotchas from "@/content/06-gotchas.mdx";
-import Closing from "@/content/07-closing.mdx";
-import NewsletterPromo from "@/content/08-newsletter-promo.mdx";
-import ServicesPromo from "@/content/09-services-promo.mdx";
+import Cicd from "@/content/04-cicd.mdx";
+import Gotchas from "@/content/05-gotchas.mdx";
+import Closing from "@/content/06-closing.mdx";
+import NewsletterPromo from "@/content/07-newsletter-promo.mdx";
+import ServicesPromo from "@/content/08-services-promo.mdx";
 import { sections } from "@/content/sections";
 import { MarkAsRead } from "@/core/components/gmail/mark-as-read";
 import { ThreadHeader } from "./thread-header";
@@ -18,7 +17,6 @@ const mdxMap: Record<string, ComponentType> = {
   welcome: Welcome,
   architecture: Architecture,
   rendering: Rendering,
-  "layout-traps": LayoutTraps,
   cicd: Cicd,
   gotchas: Gotchas,
   closing: Closing,

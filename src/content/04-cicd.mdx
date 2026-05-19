@@ -86,7 +86,8 @@ const { title } = NewsletterComponent;
 const html = await render(NewsletterComponent() as ReactElement);
 
 const broadcast = await resend.broadcasts.create({
-  audienceId: NEWSLETTER_CONFIG.SEGMENT_ID,
+  segmentId: NEWSLETTER_CONFIG.SEGMENT_ID,
+  topicId: NEWSLETTER_CONFIG.RESEND_TOPIC_ID,
   from: env.RESEND_EMAIL_FROM,
   subject: title,
   html,
