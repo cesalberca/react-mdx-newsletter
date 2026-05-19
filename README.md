@@ -39,7 +39,7 @@ src/newsletter/
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 24+
 - A [Resend](https://resend.com) account
 
 ### Install dependencies
