@@ -133,11 +133,14 @@ export function QrCodeWidget() {
         <a
           href="/newsletter"
           data-link-trigger
-          className="text-[11px] text-muted-foreground font-medium underline"
+          className="text-[10px] text-muted-foreground font-medium underline"
           draggable={false}
         >
           Scan or click to subscribe
         </a>
+        <span className="text-[6.5px] font-mono">
+          react-mdx-newsletter.vercel.app
+        </span>
       </div>
       {isModalOpen &&
         createPortal(
@@ -155,10 +158,13 @@ export function QrCodeWidget() {
               />
               <a
                 href="/newsletter"
-                className="text-sm text-muted-foreground font-medium no-underline hover:underline"
+                className="text-sm text-muted-foreground font-medium underline"
               >
                 Scan or click to subscribe
               </a>
+              <span className="text-xs text-muted-foreground font-mono">
+                https://react-mdx-newsletter.vercel.app/
+              </span>
             </div>
           </div>,
           document.body,
