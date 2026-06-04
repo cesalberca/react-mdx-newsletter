@@ -1,15 +1,11 @@
-const PROD_URL =
+const BASE_URL =
   process.env.NEXT_PUBLIC_URL ?? "https://react-mdx-newsletter.vercel.app";
 
+// Email HTML may be rendered locally and sent to real inboxes, so image
+// URLs must always be absolute. Set NEXT_PUBLIC_URL=http://localhost:3000
+// in .env.local for local previews that load from public/email-static.
 export const emailImageBaseUrl = (url: string) => {
   const path = url.startsWith("/") ? url : `/${url}`;
 
-  // Dev: Next (port 3000) serves public/email-static at the same path,
-  // so a root-relative URL loads the local committed file directly.
-  if (process.env.NODE_ENV === "development") {
-    return path;
-  }
-
-  // Production: absolute URL so sent emails resolve in real inboxes.
-  return `${PROD_URL}${path}`;
+  return `${BASE_URL}${path}`;
 };
